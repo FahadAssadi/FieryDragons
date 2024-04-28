@@ -15,6 +15,10 @@ public class Creature {
         this.creatureRepeat = creatureRepeat;
     }
 
+    public boolean equals(Creature other) {
+        return this.creatureID == other.getCreatureID();
+    }
+
     public int getCreatureID() {
         return creatureID;
     }
