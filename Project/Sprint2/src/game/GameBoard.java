@@ -11,7 +11,9 @@ public class GameBoard {
     public static void main(String[] args) {
         List<Creature> creatures = CreatureFactory.createCreatures();
 
-        DragonCardManager dM = new DragonCardManager(creatures);
+        DragonCardManager dM = new DragonCardManager();
+        dM.setDragonCards(creatures);
+
         System.out.println();
     }
 }

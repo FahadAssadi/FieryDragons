@@ -11,24 +11,25 @@ import java.util.List;
 public class DragonCardManager {
     private final List<DragonCard> dragonCards;
 
-    public DragonCardManager(List<Creature> creatures) {
+    public DragonCardManager() {
         this.dragonCards = new ArrayList<>();
-
-        createCreatureDragonCardList(creatures);
     }
 
-    private void createCreatureDragonCardList(List<Creature> creatures){
-        int currID = 0;
+    public void setDragonCards(List<Creature> creatures) {
+        // Create all dragon cards that require creatures
+        createCreatureRelatedCards(creatures);
+    }
 
+    private void createCreatureRelatedCards(List<Creature> creatures) {
         // Loop through all creatures
         for (Creature creature : creatures) {
             // 1 most of the time except for pirate dragon
-            int creatureRepeatTimes = creature.getCreatureRepeat();
+            int creatureTimes = creature.getCreatureRepeat();
             int creatureQuantity = creature.getCreatureQuantity();
             String creatureImagePath = "Project/Sprint2/src/resources/assets/pngs/creatures/" + creature.getCreatureName() + "_";
 
             // Multiple of the same creature and quantity
-            for (int j = 0; j < creatureRepeatTimes; j++) {
+            for (int j = 0; j < creatureTimes; j++) {
                 // Multiple creatures with different quantities
                 for (int k = 1; k <= creatureQuantity; k++) {
                     String dragonCardImagePath = creatureImagePath + k + ".png";
@@ -39,9 +40,10 @@ public class DragonCardManager {
                     } else {
                         this.dragonCards.add(new PirateDragonCard(dragonCardImage, creature, k));
                     }
-
                 }
             }
+
         }
     }
+
 }
