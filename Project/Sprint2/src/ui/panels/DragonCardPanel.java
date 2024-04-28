@@ -5,7 +5,7 @@ import game.GameBoard;
 import game.chit.DragonCard;
 import game.chit.DragonCardManager;
 import game.event.EventListener;
-import game.event.type.EventType;
+import game.event.EventType;
 import ui.buttons.DragonCardButton;
 
 import javax.swing.*;

@@ -1,4 +1,4 @@
-package game.event.type;
+package game.event;
 
 public enum EventType {
     PLAYER_MOVED,
