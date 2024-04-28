@@ -1,5 +1,6 @@
 package game.event.type;
 
-public abstract class EventType {
-
+public enum EventType {
+    PLAYER_MOVED,
+    GAME_OVER
 }
