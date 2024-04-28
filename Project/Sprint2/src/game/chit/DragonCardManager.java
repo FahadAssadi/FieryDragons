@@ -46,4 +46,7 @@ public class DragonCardManager {
         }
     }
 
+    public List<DragonCard> getDragonCards() {
+        return dragonCards;
+    }
 }

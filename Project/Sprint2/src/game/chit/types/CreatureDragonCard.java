@@ -1,7 +1,8 @@
 package game.chit.types;
 
 import game.chit.DragonCard;
-import game.chit.DragonCardCommand;
+import game.chit.command.MovePlayerCommand;
+import game.chit.command.DragonCardCommand;
 import game.creature.Creature;
 
 import javax.swing.*;
@@ -18,6 +19,6 @@ public class CreatureDragonCard extends DragonCard {
 
     @Override
     public DragonCardCommand getDragonCardCommand() {
-        return null;
+        return new MovePlayerCommand(this);
     }
 }
