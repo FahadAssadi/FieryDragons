@@ -1,11 +1,7 @@
-package ui;
+package ui.panels;
 
-
-import game.GameBoard;
 import game.chit.DragonCard;
 import game.chit.DragonCardManager;
-import game.event.EventListener;
-import game.event.EventType;
 import ui.buttons.DragonCardButton;
 
 import javax.swing.*;
@@ -40,7 +36,7 @@ public class DragonCardPanel extends JPanel {
         // Add images to the buttons
         for (DragonCard dragonCard : dragonCardList) {
             // Create a button with the image
-            DragonCardButton dragonCardButton = new DragonCardButton(dragonCard);
+            DragonCardButton dragonCardButton = new DragonCardButton(dragonCardManager, dragonCard);
             this.add(dragonCardButton);
         }
     }

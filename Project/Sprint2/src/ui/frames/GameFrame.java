@@ -1,8 +1,7 @@
 package ui.frames;
 
-import game.GameBoard;
 import game.chit.DragonCardManager;
-import ui.DragonCardPanel;
+import ui.panels.DragonCardPanel;
 
 import javax.swing.*;
 import java.awt.*;

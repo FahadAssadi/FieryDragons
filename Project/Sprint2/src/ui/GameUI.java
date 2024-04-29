@@ -4,7 +4,7 @@ import game.GameBoard;
 import ui.frames.GameFrame;
 
 public class GameUI {
-    private GameFrame gameFrame;
+    private final GameFrame gameFrame;
 
     public GameUI(GameBoard gameBoard) {
         this.gameFrame = new GameFrame();

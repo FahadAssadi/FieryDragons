@@ -23,13 +23,19 @@ public class EventManager {
     public void unsubscribe(EventType eventType, EventListener eventListener){
         List<EventListener> subscribers = listeners.get(eventType);
 
-        if (subscribers != null) {
-            subscribers.remove(eventListener);
+        if (subscribers == null) {
+            return;
         }
+
+        subscribers.remove(eventListener);
     }
 
     public void notify(EventType eventType){
         List<EventListener> subscribers = listeners.get(eventType);
+
+        if (subscribers == null){
+            return;
+        }
 
         for (EventListener eventListener: subscribers){
             eventListener.update(eventType);

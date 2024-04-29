@@ -1,6 +1,8 @@
 package game.chit.command;
 
 import game.chit.types.CreatureRelatedDragonCard;
+import game.event.EventManager;
+import game.event.EventType;
 import game.player.Player;
 
 public class MovePlayerCommand extends DragonCardCommand{
@@ -18,6 +20,13 @@ public class MovePlayerCommand extends DragonCardCommand{
         int numberOfSteps = this.dragonCard.getAmount();
 
         int moveSteps = this.isForward ? numberOfSteps : (-1 * numberOfSteps);
+
+        boolean hasTurnCompleted = true;
+
+        // Only done if the current player has picked a chit with the wrong creature.
+        if (hasTurnCompleted){
+            EventManager.getInstance().notify(EventType.PLAYER_TURN_END);
+        }
 
         // TODO: NEXT SPRINT
     }

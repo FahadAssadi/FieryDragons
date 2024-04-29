@@ -3,18 +3,23 @@ package game.chit;
 import game.chit.types.CreatureDragonCard;
 import game.chit.types.PirateDragonCard;
 import game.creature.Creature;
+import game.event.EventListener;
+import game.event.EventManager;
+import game.event.EventType;
 
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class DragonCardManager {
+public class DragonCardManager implements EventListener {
     private final List<DragonCard> dragonCards;
     private DragonCard currDragonCard;
 
     public DragonCardManager() {
         this.dragonCards = new ArrayList<>();
+
+        EventManager.getInstance().subscribe(EventType.SHUFFLE_CARDS, this);
     }
 
     public void setCurrDragonCard(DragonCard dragonCard){
@@ -52,6 +57,11 @@ public class DragonCardManager {
         }
     }
 
+    @Override
+    public void update(EventType eventType) {
+        this.shuffleDragonCards();
+    }
+
     public void shuffleDragonCards(){
         Collections.shuffle(this.dragonCards);
     }
@@ -63,4 +73,6 @@ public class DragonCardManager {
     public DragonCard getCurrDragonCard() {
         return currDragonCard;
     }
+
+
 }

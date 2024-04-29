@@ -1,6 +1,5 @@
 package ui.buttons;
 
-import game.GameBoard;
 import game.chit.DragonCard;
 import game.chit.DragonCardManager;
 import game.event.EventManager;
