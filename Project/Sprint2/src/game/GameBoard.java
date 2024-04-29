@@ -22,6 +22,12 @@ public class GameBoard implements EventListener {
         // Create the Creatures list
         List<Creature> creatures = CreatureFactory.createCreatures();
 
+        // Create the Players and the Player Queue
+        this.playerManager = new PlayerManager();
+
+        // Create the tiles
+        this.tileManager = new TileManager();
+
         // Create the Dragon Cards
         this.dragonCardManager = new DragonCardManager();
         this.dragonCardManager.setDragonCards(creatures);
@@ -29,20 +35,12 @@ public class GameBoard implements EventListener {
         //Shuffle the Dragon Cards
         this.dragonCardManager.shuffleDragonCards();
 
-        // Create the Players and the Player Queue
-        this.playerManager = new PlayerManager();
-
-        // Create the tiles
-        this.tileManager = new TileManager();
-
         EventManager.getInstance().subscribe(EventType.PLAYER_TURN_START, this);
     }
 
     public void nextPlayerTurn(){
         Player player = this.playerManager.getCurrPlayer();
         DragonCard dragonCard = this.dragonCardManager.getCurrDragonCard();
-
-        System.out.println(player + " " + dragonCard);
 
         dragonCard.getDragonCardCommand().execute(player);
     }
