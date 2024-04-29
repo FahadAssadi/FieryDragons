@@ -15,15 +15,13 @@ public class DragonCardButton extends JButton implements ActionListener {
     private static final String DRAGONCARD_IMG_PATH = "Project/Sprint2/src/resources/assets/pngs/dragoncard/DragonCard.png";
     private static final int BUTTON_WIDTH = 70;
     private static final int BUTTON_HEIGHT = 70;
-    private static final int FLIP_DELAY = 2000;
+    private static final int FLIP_DELAY = 500;
 
     public DragonCardButton(DragonCard dragonCard) {
         super();
         this.dragonCard = dragonCard;
 
-//        setFocusPainted(false);
-//        setRolloverEnabled(false);
-//        setBorderPainted(false);
+        setRolloverEnabled(false);
 
         ImageIcon dragonCardImage = new ImageIcon(DRAGONCARD_IMG_PATH);
         this.dragonCardUnflippedImage = Utility.getScaledImage(dragonCardImage, BUTTON_WIDTH, BUTTON_HEIGHT);
@@ -36,10 +34,24 @@ public class DragonCardButton extends JButton implements ActionListener {
         setSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
     }
 
+    private void flipDragonCardImage(){
+        // Set the flipped image
+        setIcon(dragonCardFlippedImage);
+
+        // Wait for FLIP_DELAY seconds before unflipping the image
+        Timer timer = new Timer(FLIP_DELAY, e -> {
+            // Set the unflipped image after the delay
+            setIcon(dragonCardUnflippedImage);
+        });
+
+        timer.setRepeats(false);
+        timer.start();
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        // This method will be called when the button is clicked
-        System.out.println("Clicked Dragon Card: " + dragonCard);
-        // You can add more code here to perform other actions with the DragonCard
+        flipDragonCardImage();
+
+
     }
 }

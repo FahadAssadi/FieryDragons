@@ -21,6 +21,9 @@ public class GameBoard {
         this.dragonCardManager = new DragonCardManager();
         this.dragonCardManager.setDragonCards(creatures);
 
+        //Shuffle the Dragon Cards
+        this.dragonCardManager.shuffleDragonCards();
+
         // Create the Players and the Player Queue
         this.playerManager = new PlayerManager();
 
