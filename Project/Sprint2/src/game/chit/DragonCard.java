@@ -16,5 +16,4 @@ public abstract class DragonCard {
     public ImageIcon getDragonCardImage() {
         return dragonCardImage;
     }
-
 }

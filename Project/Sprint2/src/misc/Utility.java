@@ -5,6 +5,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Dictionary;
@@ -47,4 +49,9 @@ public class Utility {
         return Utility.getDictionaryFromObj(jsonObject);
     }
 
+    public static ImageIcon getScaledImage(ImageIcon imageIcon, int width, int height){
+        Image scaledImage = imageIcon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+
+        return new ImageIcon(scaledImage);
+    }
 }

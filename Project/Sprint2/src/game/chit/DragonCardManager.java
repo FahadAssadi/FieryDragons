@@ -6,6 +6,7 @@ import game.creature.Creature;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DragonCardManager {
@@ -46,7 +47,12 @@ public class DragonCardManager {
         }
     }
 
+    public void shuffleDragonCards(){
+        Collections.shuffle(this.dragonCards);
+    }
+
     public List<DragonCard> getDragonCards() {
         return dragonCards;
     }
+
 }
