@@ -8,12 +8,28 @@ import misc.Utility;
 import java.util.*;
 
 public class PlayerManager {
-    private final List<Player> playerList = new ArrayList<>();
-    private final Queue<Player> playerQueue = new LinkedList<>();
+    private final List<Player> playerList;
+    private final Queue<Player> turnQueue;
+    private Player currPlayer;
+    
     private static final String DEFAULT_PLAYER_CONFIG_PATH = "Project/Sprint2/src/resources/data/players.json";
 
     public PlayerManager(){
+        this.playerList = new ArrayList<>();
+        this.turnQueue = new LinkedList<>();
 
+        this.createPlayerList();
+
+        for (Player player : this.playerList) {
+            this.turnQueue.offer(player);
+        }
+        
+        queueNextPlayer();
+    }
+
+    public void queueNextPlayer(){
+        this.currPlayer = this.turnQueue.poll();
+        this.turnQueue.offer(this.currPlayer);
     }
 
     private void createPlayerList(){
@@ -43,5 +59,9 @@ public class PlayerManager {
             this.playerList.add(newPlayer);
         }
 
+    }
+
+    public Player getCurrPlayer() {
+        return this.currPlayer;
     }
 }
