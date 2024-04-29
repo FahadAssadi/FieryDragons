@@ -1,5 +1,8 @@
 package game.player;
 
+import game.event.EventListener;
+import game.event.EventManager;
+import game.event.EventType;
 import game.player.behaviour.AIBehaviour;
 import game.player.behaviour.HumanBehaviour;
 import misc.Settings;
@@ -7,7 +10,7 @@ import misc.Utility;
 
 import java.util.*;
 
-public class PlayerManager {
+public class PlayerManager implements EventListener {
     private final List<Player> playerList;
     private final Queue<Player> turnQueue;
     private Player currPlayer;
@@ -25,6 +28,8 @@ public class PlayerManager {
         }
         
         queueNextPlayer();
+
+        EventManager.getInstance().subscribe(EventType.PLAYER_TURN_END, this);
     }
 
     public void queueNextPlayer(){
@@ -63,5 +68,10 @@ public class PlayerManager {
 
     public Player getCurrPlayer() {
         return this.currPlayer;
+    }
+
+    @Override
+    public void update(EventType eventType) {
+        queueNextPlayer();
     }
 }

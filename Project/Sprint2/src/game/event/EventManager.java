@@ -1,5 +1,6 @@
 package game.event;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,13 +14,18 @@ public class EventManager {
     }
 
     public void subscribe(EventType eventType, EventListener eventListener){
-        List<EventListener> subscribers = listeners.get(eventType);
+        // Checks if the array exists, if not create the array of subscribers
+        List<EventListener> subscribers = listeners.computeIfAbsent(eventType, k -> new ArrayList<>());
+
         subscribers.add(eventListener);
     }
 
     public void unsubscribe(EventType eventType, EventListener eventListener){
         List<EventListener> subscribers = listeners.get(eventType);
-        subscribers.remove(eventListener);
+
+        if (subscribers != null) {
+            subscribers.remove(eventListener);
+        }
     }
 
     public void notify(EventType eventType){
