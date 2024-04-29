@@ -1,6 +1,7 @@
 package ui.frames;
 
 import game.GameBoard;
+import game.chit.DragonCardManager;
 import ui.DragonCardPanel;
 
 import javax.swing.*;
@@ -26,8 +27,8 @@ public class GameFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void createDragonCardPanel(GameBoard gameBoard){
-        DragonCardPanel dragonCardPanel = new DragonCardPanel(gameBoard, DEFAULT_FRAME_WIDTH, DEFAULT_FRAME_HEIGHT);
+    public void createDragonCardPanel(DragonCardManager dragonCardManager){
+        DragonCardPanel dragonCardPanel = new DragonCardPanel(dragonCardManager, DEFAULT_FRAME_WIDTH, DEFAULT_FRAME_HEIGHT);
         this.add(dragonCardPanel);
     }
 }

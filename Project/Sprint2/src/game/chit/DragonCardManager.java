@@ -11,9 +11,14 @@ import java.util.List;
 
 public class DragonCardManager {
     private final List<DragonCard> dragonCards;
+    private DragonCard currDragonCard;
 
     public DragonCardManager() {
         this.dragonCards = new ArrayList<>();
+    }
+
+    public void setCurrDragonCard(DragonCard dragonCard){
+        this.currDragonCard = dragonCard;
     }
 
     public void setDragonCards(List<Creature> creatures) {
@@ -55,4 +60,7 @@ public class DragonCardManager {
         return dragonCards;
     }
 
+    public DragonCard getCurrDragonCard() {
+        return currDragonCard;
+    }
 }

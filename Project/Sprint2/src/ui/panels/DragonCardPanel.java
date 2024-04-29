@@ -12,19 +12,19 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-public class DragonCardPanel extends JPanel implements EventListener {
+public class DragonCardPanel extends JPanel {
     private static final int DEFAULT_PANEL_WIDTH = 250;
     private static final int DEFAULT_PANEL_HEIGHT = 250;
     private static final int GRID_ROWS = 4;
     private static final int GRID_COLUMNS = 4;
 
-    public DragonCardPanel(GameBoard gameBoard, int parentWidth, int parentHeight) {
+    public DragonCardPanel(DragonCardManager dragonCardManager, int parentWidth, int parentHeight) {
         super();
 
         setBackground(Color.white);
         setPanelBounds(parentWidth, parentHeight);
         setLayout(new GridLayout(GRID_ROWS, GRID_COLUMNS, 5, 5));
-        createDragonCards(gameBoard.getDragonCardManager());
+        createDragonCards(dragonCardManager);
     }
 
     private void setPanelBounds(int parentWidth, int parentHeight){
@@ -45,8 +45,4 @@ public class DragonCardPanel extends JPanel implements EventListener {
         }
     }
 
-    @Override
-    public void update(EventType eventType) {
-
-    }
 }
