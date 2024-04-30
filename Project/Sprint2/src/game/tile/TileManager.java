@@ -13,9 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TileManager implements EventListener {
-    private final List<CaveTile> caveTileList;
+    private final List<Tile> caveTileList;
     private final List<Tile> volcanoTileList;
     private final List<Tile> gameTileList;
+
+    private static final String volcanoTilePath = "Project/Sprint2/src/resources/assets/pngs/creatures/";
 
     public TileManager() {
         caveTileList = new ArrayList<>();
@@ -51,14 +53,13 @@ public class TileManager implements EventListener {
     public void createVolcanoTileList(List<Creature> creatureList) {
         long boardSize = (long) Settings.getSetting("VolcanoTile");
 
-        String volcanoTilePath = "Project/Sprint2/src/resources/assets/pngs/tiles/Volcano.png";
-
         for (int i = 0; i < boardSize; i++){
-            ImageIcon volcanoTileImage = new ImageIcon(volcanoTilePath);
-            int currIndex = i;
             Creature currCreature = this.getTileableCreature(creatureList, i);
 
-            VolcanoTile volcanoTile = new VolcanoTile(volcanoTileImage, currIndex, currCreature);
+            String imagePath = volcanoTilePath + currCreature.getCreatureName() + "_1.png";
+            ImageIcon volcanoTileImage = new ImageIcon(imagePath);
+
+            VolcanoTile volcanoTile = new VolcanoTile(volcanoTileImage, i, currCreature);
 
             this.volcanoTileList.add(volcanoTile);
             this.gameTileList.add(volcanoTile);
@@ -79,7 +80,7 @@ public class TileManager implements EventListener {
         return currCreature;
     }
 
-    public List<CaveTile> getCaveTileList() {
+    public List<Tile> getCaveTileList() {
         return caveTileList;
     }
 
