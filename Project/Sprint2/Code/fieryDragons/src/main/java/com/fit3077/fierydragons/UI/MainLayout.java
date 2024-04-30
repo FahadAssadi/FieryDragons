@@ -1,11 +1,23 @@
 package com.fit3077.fierydragons.UI;
 
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
+import com.fit3077.fierydragons.Application;
+import com.fit3077.fierydragons.models.board.BoardManager;
+import com.fit3077.fierydragons.models.board.Tile;
+import javafx.geometry.Pos;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
+import java.util.List;
+import java.util.Objects;
 
 public class MainLayout {
+    private final BoardManager boardManager;
+
+    public MainLayout(BoardManager boardManager) {
+        this.boardManager = boardManager;
+    }
 
     public AnchorPane getLayout(int tiles) {
         int x = (tiles - 4) / 4; // The largest integer smaller than or equal to the exact number of inner tiles
@@ -16,22 +28,27 @@ public class MainLayout {
 
         BorderPane borderPane = new BorderPane();
 
-        // Top and Bottom GridPane
+        // Create GridPanes
         GridPane topGrid = GridPaneFactory.createGridPane(topAndBottom, 1);
         GridPane bottomGrid = GridPaneFactory.createGridPane(topAndBottom, 1);
-        borderPane.setTop(topGrid);
-        borderPane.setBottom(bottomGrid);
-
-        // Left and Right GridPane
         GridPane leftGrid = GridPaneFactory.createGridPane(1, x);
         GridPane rightGrid = GridPaneFactory.createGridPane(1, x);
+
+        // Populating GridPanes with Volcano Tiles
+        populateGridPane(topGrid, 0, topAndBottom, true, false);
+        populateGridPane(rightGrid, topAndBottom, topAndBottom + x, false, false);
+        populateGridPane(bottomGrid, topAndBottom + x, 2 * topAndBottom + x, true, true);
+        populateGridPane(leftGrid, 2 * topAndBottom + x, 2 * topAndBottom + 2 * x, false, true);
+
+        // Set positions in Borderpane
+        borderPane.setTop(topGrid);
+        borderPane.setBottom(bottomGrid);
         borderPane.setLeft(leftGrid);
         borderPane.setRight(rightGrid);
 
         // adding center grid pane
         StackPane centerGrid = CenterGrid.createCenterGrid();
         borderPane.setCenter(centerGrid);
-
 
         AnchorPane anchorPane = new AnchorPane();
         anchorPane.setMinHeight(1000);
@@ -40,9 +57,89 @@ public class MainLayout {
         anchorPane.getChildren().add(borderPane);
 
         AnchorPane.setLeftAnchor(borderPane, 200.0);
-        AnchorPane.setTopAnchor(borderPane, 120.0);
+        AnchorPane.setTopAnchor(borderPane, 200.0);
 
+        setupCaveTiles(anchorPane);
 
         return anchorPane;
+    }
+
+    private void populateGridPane(GridPane gridPane, int start, int end, boolean isHorizontal, boolean reverse) {
+        List<Tile> volcanoTiles = boardManager.getVolcanoTiles();
+        int index = 0;
+
+        if (reverse) {
+            for (int i = end - 1; i >= start; i--) {
+                Tile tile = volcanoTiles.get(i);
+                if (isHorizontal) {
+                    gridPane.add(createTilePane(tile), end - 1 - i, 0); // Reversed index for horizontal
+                } else {
+                    gridPane.add(createTilePane(tile), 0, end - 1 - i); // Reversed index for vertical
+                }
+            }
+        } else {
+            for (int i = start; i < end; i++) {
+                Tile tile = volcanoTiles.get(i);
+                if (isHorizontal) {
+                    gridPane.add(createTilePane(tile), index++, 0);  // Only one row, multiple columns
+                } else {
+                    gridPane.add(createTilePane(tile), 0, index++);  // Only one column, multiple rows
+                }
+            }
+        }
+    }
+
+    private StackPane createTilePane(Tile tile) {
+        StackPane pane = new StackPane();
+        pane.setPrefSize(100, 100); // Set the visible area to 100x100 pixels
+
+        String imagePath = tile.getCreature().getImagePath();
+
+        ImageView imageView = new ImageView(new Image(Objects.requireNonNull(Application.class.getResourceAsStream(imagePath))));
+        imageView.setFitWidth(98);
+        imageView.setFitHeight(98);
+
+        pane.getChildren().addAll(imageView);
+
+        StackPane.setAlignment(imageView, Pos.CENTER);
+
+        return pane;
+    }
+
+    public void setupCaveTiles(AnchorPane anchorPane) {
+        // Define the positions for each cave tile
+        double[][] positions = {
+                {300.0, 100.0},
+                {900.0, 300.0},
+                {700.0, 900.0},
+                {100.0, 700.0}
+        };
+
+        List<Tile> caveTiles = boardManager.getCaveTiles();
+
+        for (int i = 0; i < positions.length; i++) {
+            if (i < caveTiles.size()) {
+                createCave(positions[i][0], positions[i][1], caveTiles.get(i), anchorPane);
+            }
+        }
+    }
+    private void createCave(Double x, Double y, Tile caveTile, AnchorPane anchorPane) {
+        StackPane cavePane = new StackPane();
+        cavePane.setPrefSize(100, 100);
+
+        String imagePath = caveTile.getCreature().getImagePath();
+
+        ImageView imageView = new ImageView(new Image(Objects.requireNonNull(Application.class.getResourceAsStream(imagePath))));
+        imageView.setFitWidth(98);
+        imageView.setFitHeight(98);
+
+        BorderStroke borderStroke = new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(3));
+        cavePane.setBorder(new Border(borderStroke));
+
+        cavePane.getChildren().addAll(imageView);
+
+        AnchorPane.setLeftAnchor(cavePane, x);
+        AnchorPane.setTopAnchor(cavePane, y);
+        anchorPane.getChildren().add(cavePane);
     }
 }

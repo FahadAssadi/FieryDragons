@@ -100,7 +100,7 @@ public class BoardLayoutBackup extends javafx.application.Application {
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("imgs/Bat_1.png")));
+                Image image = new Image(Objects.requireNonNull(Application.class.getResourceAsStream("imgs/Bat.png")));
 
                 ImageView imageView = new ImageView(image);
                 imageView.setFitWidth(200);

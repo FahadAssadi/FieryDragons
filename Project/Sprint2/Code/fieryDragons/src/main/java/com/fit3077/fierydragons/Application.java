@@ -9,17 +9,20 @@ import javafx.stage.Stage;
 public class Application extends javafx.application.Application {
     @Override
     public void start(Stage primaryStage) {
-        // Initialize main layout
-        MainLayout mainLayout = new MainLayout();
+        CreatureFactory creatureFactory = new CreatureFactory();
+        BoardManager boardManager = new BoardManager(creatureFactory);
+
+        MainLayout mainLayout = new MainLayout(boardManager);
+
         Scene scene = new Scene(mainLayout.getLayout(24), 1100, 1100);
 
         // Set up stage
         primaryStage.setScene(scene);
         primaryStage.setTitle("Fiery Dragons");
+        primaryStage.setResizable(false);
         primaryStage.show();
 
-        CreatureFactory creatureFactory = new CreatureFactory();
-        BoardManager boardManager = new BoardManager(creatureFactory);
+
     }
 
     public static void main(String[] args) {
