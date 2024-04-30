@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="com.fit3077.fierydragongame.fierydragongame.GameController">
+  <padding>
+    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+  </padding>
+  <BorderPane fx:id="borderPaneOut">
+    <center>
+      <BorderPane fx:id="borderPane">
+        <center>
+          <GridPane fx:id="innerGridPane" hgap="10.0" vgap="10.0" />
+        </center>
+        <top>
+          <FlowPane fx:id="topPane" alignment="BOTTOM_CENTER" prefHeight="43.0" prefWidth="502.0" BorderPane.alignment="CENTER" />
+        </top>
+        <bottom>
+          <FlowPane fx:id="bottomPane" alignment="TOP_CENTER" prefHeight="41.0" prefWidth="502.0" BorderPane.alignment="CENTER" />
+        </bottom>
+        <left>
+          <FlowPane fx:id="leftPane" alignment="CENTER_RIGHT" orientation="VERTICAL" prefHeight="115.0" prefWidth="65.0" BorderPane.alignment="CENTER" />
+        </left>
+        <right>
+          <FlowPane fx:id="rightPane" alignment="CENTER_LEFT" orientation="VERTICAL" prefHeight="115.0" prefWidth="49.0" BorderPane.alignment="CENTER" />
+        </right>
+      </BorderPane>
+    </center>
+    <top>
+      <FlowPane fx:id="topPaneOut" alignment="BOTTOM_CENTER" prefHeight="43.0" prefWidth="502.0" BorderPane.alignment="CENTER" />
+    </top>
+    <bottom>
+      <FlowPane fx:id="bottomPaneOut" alignment="TOP_CENTER" prefHeight="41.0" prefWidth="502.0" BorderPane.alignment="CENTER" />
+    </bottom>
+    <left>
+      <FlowPane fx:id="leftPaneOut" alignment="CENTER_RIGHT" orientation="VERTICAL" prefHeight="115.0" prefWidth="65.0" BorderPane.alignment="CENTER" />
+    </left>
+    <right>
+      <FlowPane fx:id="rightPaneOut" alignment="CENTER_LEFT" orientation="VERTICAL" prefHeight="115.0" prefWidth="49.0" BorderPane.alignment="CENTER" />
+    </right>
+  </BorderPane>
+</VBox>
