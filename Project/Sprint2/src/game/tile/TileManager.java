@@ -1,16 +1,22 @@
 package game.tile;
 
 import game.creature.Creature;
+import game.event.EventListener;
+import game.event.EventType;
+import game.player.Player;
+import game.tile.types.CaveTile;
 import game.tile.types.VolcanoTile;
 import misc.Settings;
+import misc.Utility;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TileManager {
-    private List<Tile> caveTileList;
-    private List<Tile> volcanoTileList;
-    private List<Tile> gameTileList;
+public class TileManager implements EventListener {
+    private final List<CaveTile> caveTileList;
+    private final List<VolcanoTile> volcanoTileList;
+    private final List<Tile> gameTileList;
 
     public TileManager() {
         caveTileList = new ArrayList<>();
@@ -18,18 +24,64 @@ public class TileManager {
         gameTileList = new ArrayList<>();
     }
 
-    public void setCreatureTileList(List<Creature> creatureList){
+    public void createCaveTileList(List<Creature> creatureList, List<Player> playerList) {
+        // Used to calculate the cave tile indices.
         long boardSize = (long) Settings.getSetting("VolcanoTile");
         long humanPlayers = (long) Settings.getSetting("HumanPlayers");
         long AIPlayers = (long) Settings.getSetting("AIPlayers");
 
         int totalPlayers = (int) (humanPlayers + AIPlayers);
-
         int playerDistance = (int) (boardSize / totalPlayers);
 
-        for (int i = 0; i < totalPlayers; i++){
+        String caveFilePath = "Project/Sprint2/src/resources/assets/pngs/tiles/Cave.png";
 
+        // Create as many caves as the number of players
+        for (int i = 0; i < playerList.size(); i++){
+            ImageIcon caveTileImage = new ImageIcon(caveFilePath);
+            int currTileIndex = -1 * ((i * playerDistance) + 1);
+            Creature currCreature = this.getTileableCreature(creatureList, i);
+            Player currPlayer = playerList.get(i);
+
+            CaveTile caveTile = new CaveTile(caveTileImage, currTileIndex, currCreature, currPlayer);
+
+            this.caveTileList.add(caveTile);
+            this.gameTileList.add(caveTile);
         }
+    }
+
+    public void createVolcanoTileList(List<Creature> creatureList) {
+        long boardSize = (long) Settings.getSetting("VolcanoTile");
+
+        String volcanoTilePath = "Project/Sprint2/src/resources/assets/pngs/tiles/Volcano.png";
+
+        for (int i = 0; i < boardSize; i++){
+            ImageIcon volcanoTileImage = new ImageIcon(volcanoTilePath);
+            int currIndex = i;
+            Creature currCreature = this.getTileableCreature(creatureList, i);
+
+            VolcanoTile volcanoTile = new VolcanoTile(volcanoTileImage, currIndex, currCreature);
+
+            this.volcanoTileList.add(volcanoTile);
+            this.gameTileList.add(volcanoTile);
+        }
+    }
+
+    private Creature getTileableCreature(List<Creature> creatureList, int currIteration){
+        // Keep looping until we get a creature that is tileable.
+        Creature currCreature;
+        int j = 0;
+
+        do {
+            currCreature = creatureList.get((currIteration + j) % creatureList.size());
+            j++;
+
+        } while (!currCreature.isTileable());
+
+        return currCreature;
+    }
+
+    @Override
+    public void update(EventType eventType) {
 
     }
 }

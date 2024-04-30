@@ -27,6 +27,8 @@ public class GameBoard implements EventListener {
 
         // Create the tiles
         this.tileManager = new TileManager();
+        this.tileManager.createCaveTileList(creatures, this.playerManager.getPlayerList());
+        this.tileManager.createVolcanoTileList(creatures);
 
         // Create the Dragon Cards
         this.dragonCardManager = new DragonCardManager();
@@ -39,10 +41,10 @@ public class GameBoard implements EventListener {
     }
 
     public void nextPlayerTurn(){
-        Player player = this.playerManager.getCurrPlayer();
-        DragonCard dragonCard = this.dragonCardManager.getCurrDragonCard();
+        Player currPlayer = this.playerManager.getCurrPlayer();
+        DragonCard currDragonCard = this.dragonCardManager.getCurrDragonCard();
 
-        dragonCard.getDragonCardCommand().execute(player);
+        currDragonCard.getDragonCardCommand().execute(currPlayer);
     }
 
     @Override

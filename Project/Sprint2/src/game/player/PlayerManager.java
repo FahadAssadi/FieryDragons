@@ -70,6 +70,10 @@ public class PlayerManager implements EventListener {
         return this.currPlayer;
     }
 
+    public List<Player> getPlayerList() {
+        return playerList;
+    }
+
     @Override
     public void update(EventType eventType) {
         queueNextPlayer();
