@@ -12,19 +12,19 @@ import java.util.*;
 
 public class PlayerManager implements EventListener {
     private final List<Player> playerList;
-    private final Queue<Player> turnQueue;
+    private final Queue<Player> playerQueue;
     private Player currPlayer;
     
     private static final String DEFAULT_PLAYER_CONFIG_PATH = "Project/Sprint2/src/resources/data/players.json";
 
     public PlayerManager(){
         this.playerList = new ArrayList<>();
-        this.turnQueue = new LinkedList<>();
+        this.playerQueue = new LinkedList<>();
 
         this.createPlayerList();
 
         for (Player player : this.playerList) {
-            this.turnQueue.offer(player);
+            this.playerQueue.offer(player);
         }
         
         queueNextPlayer();
@@ -33,8 +33,8 @@ public class PlayerManager implements EventListener {
     }
 
     public void queueNextPlayer(){
-        this.currPlayer = this.turnQueue.poll();
-        this.turnQueue.offer(this.currPlayer);
+        this.currPlayer = this.playerQueue.poll();
+        this.playerQueue.offer(this.currPlayer);
     }
 
     private void createPlayerList(){
