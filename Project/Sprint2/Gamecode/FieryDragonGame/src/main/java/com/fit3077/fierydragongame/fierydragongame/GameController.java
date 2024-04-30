@@ -76,7 +76,7 @@ public class GameController implements Initializable {
         // Populate inner grid with images
         for (int row = 0; row < 4; row++) {
             for (int col = 0; col < 4; col++) {
-                ImageView imageView = new ImageView(new Image("file:images/unflipped.png"));
+                ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("/images/unflipped.png")));
                 imageView.setFitWidth(CELL_SIZE);
                 imageView.setFitHeight(CELL_SIZE);
                 Pane pane = new Pane(imageView);
@@ -91,14 +91,14 @@ public class GameController implements Initializable {
 
                     // Flipping the chit
                     ImageView chitImage = (ImageView) pane.getChildren().get(0);
-                    Image fetchedImage = new Image("file:images/" + shuffledChits[finalRow * 4 + finalCol] + ".png");
+                    Image fetchedImage = new Image(getClass().getResourceAsStream("/images/" + shuffledChits[finalRow * 4 + finalCol] + ".png"));
                     chitImage.setImage(fetchedImage);
 
                     // Adding a delay before flipping the chit again
                     PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1));
                     pauseTransition.setOnFinished(e -> {
                         // Flipping the chit back
-                        chitImage.setImage(new Image("file:images/unflipped.png"));
+                        chitImage.setImage(new Image(getClass().getResourceAsStream("/images/unflipped.png")));
                     });
                     pauseTransition.play();
                 });
@@ -111,7 +111,7 @@ public class GameController implements Initializable {
     private void populateTiles() {
         // Populate tiles around inner grid with images
         for (int tileNum = 0; tileNum < 24; tileNum++) {
-            ImageView tileImage = new ImageView(new Image("file:images/" + ANIMAL_ORDER[tileNum] + "tile.png"));
+            ImageView tileImage = new ImageView(new Image(getClass().getResourceAsStream("/images/" + ANIMAL_ORDER[tileNum] + "tile.png")));
             tileImage.setFitWidth(TILE_SIZE);
             tileImage.setFitHeight(TILE_SIZE);
             if (tileNum < 7) {
@@ -125,16 +125,16 @@ public class GameController implements Initializable {
             }
         }
         // Populate Caves
-        ImageView topCave = new ImageView(new Image("file:images/spidercave.png"));
+        ImageView topCave = new ImageView(new Image(getClass().getResourceAsStream("/images/spidercave.png")));
         topCave.setFitWidth(CAVE_SIZE);
         topCave.setFitHeight(CAVE_SIZE);
-        ImageView rightCave = new ImageView(new Image("file:images/salamandercave.png"));
+        ImageView rightCave = new ImageView(new Image(getClass().getResourceAsStream("/images/salamandercave.png")));
         rightCave.setFitWidth(CAVE_SIZE);
         rightCave.setFitHeight(CAVE_SIZE);
-        ImageView bottomCave = new ImageView(new Image("file:images/batcave.png"));
+        ImageView bottomCave = new ImageView(new Image(getClass().getResourceAsStream("/images/batcave.png")));
         bottomCave.setFitWidth(CAVE_SIZE);
         bottomCave.setFitHeight(CAVE_SIZE);
-        ImageView leftCave = new ImageView(new Image("file:images/babydragoncave.png"));
+        ImageView leftCave = new ImageView(new Image(getClass().getResourceAsStream("/images/babydragoncave.png")));
         leftCave.setFitWidth(CAVE_SIZE);
         leftCave.setFitHeight(CAVE_SIZE);
 

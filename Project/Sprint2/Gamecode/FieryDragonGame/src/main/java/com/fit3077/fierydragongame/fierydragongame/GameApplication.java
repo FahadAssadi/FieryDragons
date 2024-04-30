@@ -11,7 +11,7 @@ public class GameApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(GameApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 500, 500);
+        Scene scene = new Scene(fxmlLoader.load(), 520, 500);
         stage.setTitle("Fiery Dragons");
         stage.setScene(scene);
         stage.setResizable(false);
