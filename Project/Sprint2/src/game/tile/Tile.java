@@ -20,4 +20,8 @@ public abstract class Tile {
     public void setPlayer(Player player) {
         this.player = player;
     }
+
+    public ImageIcon getImageIcon() {
+        return imageIcon;
+    }
 }

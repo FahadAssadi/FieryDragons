@@ -7,7 +7,6 @@ import game.player.Player;
 import game.tile.types.CaveTile;
 import game.tile.types.VolcanoTile;
 import misc.Settings;
-import misc.Utility;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ import java.util.List;
 
 public class TileManager implements EventListener {
     private final List<CaveTile> caveTileList;
-    private final List<VolcanoTile> volcanoTileList;
+    private final List<Tile> volcanoTileList;
     private final List<Tile> gameTileList;
 
     public TileManager() {
@@ -78,6 +77,18 @@ public class TileManager implements EventListener {
         } while (!currCreature.isTileable());
 
         return currCreature;
+    }
+
+    public List<CaveTile> getCaveTileList() {
+        return caveTileList;
+    }
+
+    public List<Tile> getVolcanoTileList() {
+        return volcanoTileList;
+    }
+
+    public List<Tile> getGameTileList() {
+        return gameTileList;
     }
 
     @Override

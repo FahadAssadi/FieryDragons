@@ -18,8 +18,8 @@ public class DragonCardButton extends JButton implements ActionListener {
     private final ImageIcon dragonCardFlippedImage;
 
     private static final String DRAGONCARD_IMG_PATH = "Project/Sprint2/src/resources/assets/pngs/dragoncard/DragonCard.png";
-    private static final int BUTTON_WIDTH = 70;
-    private static final int BUTTON_HEIGHT = 70;
+    private static final int BUTTON_WIDTH = 90;
+    private static final int BUTTON_HEIGHT = 90;
     private static final int FLIP_DELAY = 500;
 
     public DragonCardButton(DragonCardManager dragonCardManager, DragonCard dragonCard) {

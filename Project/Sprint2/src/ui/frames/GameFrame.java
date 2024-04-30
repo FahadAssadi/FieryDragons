@@ -1,7 +1,9 @@
 package ui.frames;
 
 import game.chit.DragonCardManager;
+import game.tile.TileManager;
 import ui.panels.DragonCardPanel;
+import ui.panels.TilePanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +20,7 @@ public class GameFrame extends JFrame {
         setSize(DEFAULT_FRAME_WIDTH, DEFAULT_FRAME_HEIGHT);
         setIconImage(new ImageIcon(GAME_LOGO_PATH).getImage());
 
-        getContentPane().setBackground(Color.DARK_GRAY);
+        getContentPane().setBackground(Color.white);
 
         setLayout(null);
         setResizable(false);
@@ -28,6 +30,13 @@ public class GameFrame extends JFrame {
 
     public void createDragonCardPanel(DragonCardManager dragonCardManager){
         DragonCardPanel dragonCardPanel = new DragonCardPanel(dragonCardManager, DEFAULT_FRAME_WIDTH, DEFAULT_FRAME_HEIGHT);
+
         this.add(dragonCardPanel);
+    }
+
+    public void createTilePanel(TileManager tileManager) {
+        TilePanel tilePanel = new TilePanel(tileManager, DEFAULT_FRAME_WIDTH, DEFAULT_FRAME_HEIGHT);
+
+        this.add(tilePanel);
     }
 }

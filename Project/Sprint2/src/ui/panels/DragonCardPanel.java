@@ -2,6 +2,7 @@ package ui.panels;
 
 import game.chit.DragonCard;
 import game.chit.DragonCardManager;
+import misc.Settings;
 import ui.buttons.DragonCardButton;
 
 import javax.swing.*;
@@ -9,17 +10,20 @@ import java.awt.*;
 import java.util.List;
 
 public class DragonCardPanel extends JPanel {
-    private static final int DEFAULT_PANEL_WIDTH = 250;
-    private static final int DEFAULT_PANEL_HEIGHT = 250;
-    private static final int GRID_ROWS = 4;
-    private static final int GRID_COLUMNS = 4;
+    private static final int DEFAULT_PANEL_WIDTH = 300;
+    private static final int DEFAULT_PANEL_HEIGHT = 300;
+    private static final int DEFAULT_BUTTON_GAP = 2;
 
     public DragonCardPanel(DragonCardManager dragonCardManager, int parentWidth, int parentHeight) {
         super();
 
+        long numberOfDragonCards = (long) Settings.getSetting("DragonCard");
+        int gridLength = (int) Math.ceil(Math.sqrt(numberOfDragonCards));
+
         setBackground(Color.white);
         setPanelBounds(parentWidth, parentHeight);
-        setLayout(new GridLayout(GRID_ROWS, GRID_COLUMNS, 5, 5));
+        setLayout(new GridLayout(gridLength, gridLength, DEFAULT_BUTTON_GAP, DEFAULT_BUTTON_GAP));
+
         createDragonCards(dragonCardManager);
     }
 
