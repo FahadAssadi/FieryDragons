@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Salamander",
+    "image_path": "imgs/Salamander.png"
+  },
+  {
+    "name": "Bat",
+    "image_path": "imgs/Bat.png"
+  },
+  {
+    "name": "Spider",
+    "image_path": "imgs/Spider.png"
+  },
+  {
+    "name": "BabyDragon",
+    "image_path": "imgs/BabyDragon.png"
+  },
+  {
+    "name": "PirateDragon",
+    "image_path": "imgs/PirateDragon.png"
+  }
+]

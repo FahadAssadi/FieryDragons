@@ -1,0 +1,11 @@
+[
+  ["Baby Dragon", "Bat", "Spider"],
+  ["Spider", "Bat", "Salamander"],
+  ["Salamander", "Spider", "Bat"],
+  ["Baby Dragon", "Salamander", "Bat"],
+  ["Spider", "Salamander", "Baby Dragon"],
+  ["Bat", "Baby Dragon", "Salamander"],
+  ["Bat", "Spider", "Baby Dragon"],
+  ["Salamander", "Baby Dragon", "Spider"]
+]
+

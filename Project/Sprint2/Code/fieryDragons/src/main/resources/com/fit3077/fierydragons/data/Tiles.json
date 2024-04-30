@@ -1,0 +1,36 @@
+{
+  "caves": ["Salamander", "Bat", "Spider", "BabyDragon"],
+  "volcanoTiles": [
+    "BabyDragon",
+    "Bat",
+    "Spider",
+
+    "Salamander",
+    "BabyDragon",
+    "Spider",
+
+    "Salamander",
+    "Spider",
+    "Bat",
+
+    "BabyDragon",
+    "Bat",
+    "Salamander",
+
+    "Spider",
+    "Salamander",
+    "BabyDragon",
+
+    "Bat",
+    "BabyDragon",
+    "Salamander",
+
+    "Bat",
+    "Spider",
+    "BabyDragon",
+
+    "Spider",
+    "Bat",
+    "Salamander"
+  ]
+}

@@ -1,19 +1,25 @@
 package com.fit3077.fierydragons;
 
-import javafx.fxml.FXMLLoader;
+import com.fit3077.fierydragons.UI.MainLayout;
+import com.fit3077.fierydragons.models.board.BoardManager;
+import com.fit3077.fierydragons.models.creatures.CreatureFactory;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 public class Application extends javafx.application.Application {
     @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Fiery Dragons!");
-        stage.setScene(scene);
-        stage.show();
+    public void start(Stage primaryStage) {
+        // Initialize main layout
+        MainLayout mainLayout = new MainLayout();
+        Scene scene = new Scene(mainLayout.getLayout(24), 1100, 1100);
+
+        // Set up stage
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Fiery Dragons");
+        primaryStage.show();
+
+        CreatureFactory creatureFactory = new CreatureFactory();
+        BoardManager boardManager = new BoardManager(creatureFactory);
     }
 
     public static void main(String[] args) {
