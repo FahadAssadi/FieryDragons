@@ -14,7 +14,7 @@ import main.game.tile.TileManager;
 import java.util.List;
 
 /**
- * The GameBoard class represents the main.game board and manages main.game-related entities.
+ * The GameBoard class represents the game board and manages game-related entities.
  * It initializes players, tiles, and dragon cards, and handles player turns.
  */
 public class GameBoard implements EventListener {
@@ -28,7 +28,7 @@ public class GameBoard implements EventListener {
     private final TileManager tileManager;
 
     /**
-     * Constructs a GameBoard object and initializes main.game-related entities.
+     * Constructs a GameBoard object and initializes game-related entities.
      */
     public GameBoard() {
         // Create the Creatures list
