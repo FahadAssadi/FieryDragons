@@ -3,6 +3,7 @@ package com.fit3077.fierydragons.UI;
 import com.fit3077.fierydragons.Application;
 import com.fit3077.fierydragons.models.board.BoardManager;
 import com.fit3077.fierydragons.models.board.Tile;
+import com.fit3077.fierydragons.models.dragonCards.DragonCardsManager;
 import javafx.geometry.Pos;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -14,9 +15,12 @@ import java.util.Objects;
 
 public class MainLayout {
     private final BoardManager boardManager;
+    private final DragonCardsManager dragonCardsManager;
+    private static final int tileSize = 100;
 
-    public MainLayout(BoardManager boardManager) {
+    public MainLayout(BoardManager boardManager, DragonCardsManager dragonCardsManager) {
         this.boardManager = boardManager;
+        this.dragonCardsManager = dragonCardsManager;
     }
 
     public AnchorPane getLayout(int tiles) {
@@ -47,7 +51,7 @@ public class MainLayout {
         borderPane.setRight(rightGrid);
 
         // adding center grid pane
-        StackPane centerGrid = CenterGrid.createCenterGrid();
+        StackPane centerGrid = CenterGrid.createCenterGrid(dragonCardsManager);
         borderPane.setCenter(centerGrid);
 
         AnchorPane anchorPane = new AnchorPane();
@@ -91,13 +95,13 @@ public class MainLayout {
 
     private StackPane createTilePane(Tile tile) {
         StackPane pane = new StackPane();
-        pane.setPrefSize(100, 100); // Set the visible area to 100x100 pixels
+        pane.setPrefSize(tileSize, tileSize);
 
         String imagePath = tile.getCreature().getImagePath();
 
         ImageView imageView = new ImageView(new Image(Objects.requireNonNull(Application.class.getResourceAsStream(imagePath))));
-        imageView.setFitWidth(98);
-        imageView.setFitHeight(98);
+        imageView.setFitWidth(tileSize - 2);
+        imageView.setFitHeight(tileSize - 2);
 
         pane.getChildren().addAll(imageView);
 
@@ -125,13 +129,13 @@ public class MainLayout {
     }
     private void createCave(Double x, Double y, Tile caveTile, AnchorPane anchorPane) {
         StackPane cavePane = new StackPane();
-        cavePane.setPrefSize(100, 100);
+        cavePane.setPrefSize(tileSize, tileSize);
 
         String imagePath = caveTile.getCreature().getImagePath();
 
         ImageView imageView = new ImageView(new Image(Objects.requireNonNull(Application.class.getResourceAsStream(imagePath))));
-        imageView.setFitWidth(98);
-        imageView.setFitHeight(98);
+        imageView.setFitWidth(tileSize - 2);
+        imageView.setFitHeight(tileSize - 2);
 
         BorderStroke borderStroke = new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(3));
         cavePane.setBorder(new Border(borderStroke));
