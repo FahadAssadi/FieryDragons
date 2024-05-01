@@ -1,0 +1,66 @@
+[
+  {
+    "name": "Salamander",
+    "moves": 1
+  },
+  {
+    "name": "Salamander",
+    "moves": 2
+  },
+  {
+    "name": "Salamander",
+    "moves": 3
+  },
+  {
+    "name": "Bat",
+    "moves": 1
+  },
+  {
+    "name": "Bat",
+    "moves": 2
+  },
+  {
+    "name": "Bat",
+    "moves": 3
+  },
+  {
+    "name": "Spider",
+    "moves": 1
+  },
+  {
+    "name": "Spider",
+    "moves": 2
+  },
+  {
+    "name": "Spider",
+    "moves": 3
+  },
+  {
+    "name": "BabyDragon",
+    "moves": 1
+  },
+  {
+    "name": "BabyDragon",
+    "moves": 2
+  },
+  {
+    "name": "BabyDragon",
+    "moves": 3
+  },
+  {
+    "name": "PirateDragon",
+    "moves": -1
+  },
+  {
+    "name": "PirateDragon",
+    "moves": -1
+  },
+  {
+    "name": "PirateDragon",
+    "moves": -2
+  },
+  {
+    "name": "PirateDragon",
+    "moves": -2
+  }
+]
