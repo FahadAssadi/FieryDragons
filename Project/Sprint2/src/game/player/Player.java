@@ -16,6 +16,10 @@ public class Player {
         this.totalMoves = DEFAULT_TOTAL_MOVES;
     }
 
+    public String getColour() {
+        return colour;
+    }
+
     @Override
     public String toString() {
         return colour + " " + position;

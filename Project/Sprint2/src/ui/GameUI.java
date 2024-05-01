@@ -8,7 +8,9 @@ public class GameUI {
 
     public GameUI(GameBoard gameBoard) {
         this.gameFrame = new GameFrame();
+
         this.gameFrame.createDragonCardPanel(gameBoard.getDragonCardManager());
+        this.gameFrame.createPlayerTurnPanel(gameBoard.getPlayerManager());
         this.gameFrame.createTilePanel(gameBoard.getTileManager());
     }
 

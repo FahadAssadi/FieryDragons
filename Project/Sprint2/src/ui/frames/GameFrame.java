@@ -1,8 +1,10 @@
 package ui.frames;
 
 import game.chit.DragonCardManager;
+import game.player.PlayerManager;
 import game.tile.TileManager;
 import ui.panels.DragonCardPanel;
+import ui.panels.PlayerTurnPanel;
 import ui.panels.TilePanel;
 
 import javax.swing.*;
@@ -32,6 +34,12 @@ public class GameFrame extends JFrame {
         DragonCardPanel dragonCardPanel = new DragonCardPanel(dragonCardManager, DEFAULT_FRAME_WIDTH, DEFAULT_FRAME_HEIGHT);
 
         this.add(dragonCardPanel);
+    }
+
+    public void createPlayerTurnPanel(PlayerManager playerManager) {
+        PlayerTurnPanel playerTurnPanel = new PlayerTurnPanel(playerManager, DEFAULT_FRAME_WIDTH, DEFAULT_FRAME_HEIGHT);
+
+        this.add(playerTurnPanel);
     }
 
     public void createTilePanel(TileManager tileManager) {
