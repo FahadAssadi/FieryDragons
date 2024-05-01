@@ -4,7 +4,7 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="GsDGSJiI5NfOqgojjjiV-1" value="DragonTokens" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+        <mxCell id="GsDGSJiI5NfOqgojjjiV-1" value="DragonToken" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
           <mxGeometry x="30" y="180" width="110" height="50" as="geometry" />
         </mxCell>
         <mxCell id="GsDGSJiI5NfOqgojjjiV-3" value="Caves" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
@@ -195,7 +195,7 @@
             <mxPoint x="695" y="360" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="_j2H7pfuLPVvZi__WqnH-14" value="DragonTokens" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="_j2H7pfuLPVvZi__WqnH-14" value="DragonToken" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="145" y="210" width="260" height="140" as="geometry" />
         </mxCell>
         <mxCell id="_j2H7pfuLPVvZi__WqnH-15" value="+ color: String&lt;br&gt;+ position: BoardTile" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="_j2H7pfuLPVvZi__WqnH-14">
