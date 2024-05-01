@@ -1,6 +1,5 @@
 package ui.shapes;
 
-import game.player.Player;
 import game.tile.Tile;
 
 import java.awt.*;

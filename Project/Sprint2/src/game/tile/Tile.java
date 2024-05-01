@@ -24,4 +24,8 @@ public abstract class Tile {
     public ImageIcon getImageIcon() {
         return imageIcon;
     }
+
+    public Player getPlayer() {
+        return player;
+    }
 }

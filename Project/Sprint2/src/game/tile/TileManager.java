@@ -12,19 +12,33 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The TileManager class manages the creation and management of different types of tiles in the game.
+ */
 public class TileManager implements EventListener {
+    // Lists to store different types of tiles
     private final List<Tile> caveTileList;
     private final List<Tile> volcanoTileList;
     private final List<Tile> gameTileList;
 
+    // Path to the directory containing creature images
     private static final String CREATURE_FILE_PATH = "Project/Sprint2/src/resources/assets/pngs/creatures/";
 
+    /**
+     * Constructs a TileManager object.
+     */
     public TileManager() {
         caveTileList = new ArrayList<>();
         volcanoTileList = new ArrayList<>();
         gameTileList = new ArrayList<>();
     }
 
+    /**
+     * Creates cave tiles based on the given creature list and player list.
+     *
+     * @param creatureList The list of creatures.
+     * @param playerList   The list of players.
+     */
     public void createCaveTileList(List<Creature> creatureList, List<Player> playerList) {
         // Used to calculate the cave tile indices.
         long boardSize = (long) Settings.getSetting("VolcanoTile");
@@ -51,6 +65,11 @@ public class TileManager implements EventListener {
         }
     }
 
+    /**
+     * Creates volcano tiles based on the given creature list.
+     *
+     * @param creatureList The list of creatures.
+     */
     public void createVolcanoTileList(List<Creature> creatureList) {
         long boardSize = (long) Settings.getSetting("VolcanoTile");
 
@@ -67,6 +86,13 @@ public class TileManager implements EventListener {
         }
     }
 
+    /**
+     * Helper method to get a tileable creature from the creature list.
+     *
+     * @param creatureList    The list of creatures.
+     * @param currIteration  The current iteration.
+     * @return               A tileable creature.
+     */
     private Creature getTileableCreature(List<Creature> creatureList, int currIteration){
         // Keep looping until we get a creature that is tileable.
         Creature currCreature;
@@ -81,20 +107,35 @@ public class TileManager implements EventListener {
         return currCreature;
     }
 
+    /**
+     * Retrieves the list of cave tiles.
+     *
+     * @return The list of cave tiles.
+     */
     public List<Tile> getCaveTileList() {
         return caveTileList;
     }
 
+    /**
+     * Retrieves the list of volcano tiles.
+     *
+     * @return The list of volcano tiles.
+     */
     public List<Tile> getVolcanoTileList() {
         return volcanoTileList;
     }
 
+    /**
+     * Retrieves the list of all game tiles.
+     *
+     * @return The list of all game tiles.
+     */
     public List<Tile> getGameTileList() {
         return gameTileList;
     }
 
     @Override
     public void update(EventType eventType) {
-
+        // Placeholder for event handling logic
     }
 }
