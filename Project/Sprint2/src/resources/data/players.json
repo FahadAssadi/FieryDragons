@@ -1,11 +1,11 @@
 [
   {
     "id": 0,
-    "colour": "#FF0000"
+    "colour": "#0000FF"
   },
   {
     "id": 1,
-    "colour": "#0000FF"
+    "colour": "#00FF00"
   },
   {
     "id": 2,
@@ -13,11 +13,11 @@
   },
   {
     "id": 3,
-    "colour": "#FF00FF"
+    "colour": "#FF0000"
   },
   {
     "id": 4,
-    "colour": "#00FF00"
+    "colour": "#FFFFFF"
   },
   {
     "id": 5,
@@ -37,6 +37,6 @@
   },
   {
     "id": 9,
-    "colour": "#FFFFFF"
+    "colour": "#0FFFFF"
   }
 ]

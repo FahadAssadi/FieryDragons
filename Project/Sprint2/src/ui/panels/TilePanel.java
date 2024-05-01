@@ -1,5 +1,8 @@
 package ui.panels;
 
+import game.event.EventListener;
+import game.event.EventManager;
+import game.event.EventType;
 import game.tile.Tile;
 import game.tile.TileManager;
 import ui.shapes.TileHexagon;
@@ -22,6 +25,7 @@ public class TilePanel extends JPanel {
 
         setBounds(xOffset, yOffset, parentWidth, parentHeight);
         setBackground(Color.WHITE);
+
     }
 
     @Override
@@ -33,6 +37,13 @@ public class TilePanel extends JPanel {
         int centerY = getHeight() / 2;
 
         List<Tile> volcanoTiles = this.tileManager.getVolcanoTileList();
+        drawVolcanoTiles(g, centerX, centerY, volcanoTiles);
+
+        List<Tile> caveTiles = this.tileManager.getCaveTileList();
+        drawCaveTiles(g, centerX, centerY, caveTiles);
+    }
+
+    private void drawVolcanoTiles(Graphics g, int centerX, int centerY, List<Tile> volcanoTiles) {
         int numTiles = volcanoTiles.size();
         double angleIncrement = 2 * Math.PI / numTiles;
 
@@ -48,11 +59,26 @@ public class TilePanel extends JPanel {
             TileHexagon tileHexagon = new TileHexagon(volcanoTiles.get(i), tileX, tileY);
             tileHexagon.drawTile(g);
         }
+    }
 
-        List<Tile> caveTiles = this.tileManager.getCaveTileList();
+    private void drawCaveTiles(Graphics g, int centerX, int centerY, List<Tile> caveTiles) {
+        int numTiles = caveTiles.size();
+        double angleIncrement = 2 * Math.PI / numTiles;
 
-        for (int j = 0; j < caveTiles.size(); j++) {
+        // Start drawing tiles from 12 o'clock (270 degrees)
+        double startAngle = Math.PI * 1.5;
 
+        // Set the larger radius for the cave tiles
+        int caveRingRadius = RING_RADIUS + TILE_SIZE + 20;
+
+        for (int i = 0; i < numTiles; i++) {
+            double angle = startAngle + i * angleIncrement;
+
+            int tileX = (int) (centerX + (caveRingRadius - TILE_SIZE / 2) * Math.cos(angle));
+            int tileY = (int) (centerY + (caveRingRadius - TILE_SIZE / 2) * Math.sin(angle));
+
+            TileHexagon tileHexagon = new TileHexagon(caveTiles.get(i), tileX, tileY);
+            tileHexagon.drawTile(g);
         }
     }
 

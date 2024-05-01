@@ -11,8 +11,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GameFrame extends JFrame {
-    private static final int DEFAULT_FRAME_WIDTH = 750;
-    private static final int DEFAULT_FRAME_HEIGHT = 750;
+    private static final int DEFAULT_FRAME_WIDTH = 800;
+    private static final int DEFAULT_FRAME_HEIGHT = 800;
     private static final String GAME_TITLE = "Fiery Dragons";
     private static final String GAME_LOGO_PATH = "Project/Sprint2/src/resources/assets/pngs/logo/FieryDragonsLogo.png";
 

@@ -17,7 +17,7 @@ public class TileManager implements EventListener {
     private final List<Tile> volcanoTileList;
     private final List<Tile> gameTileList;
 
-    private static final String volcanoTilePath = "Project/Sprint2/src/resources/assets/pngs/creatures/";
+    private static final String CREATURE_FILE_PATH = "Project/Sprint2/src/resources/assets/pngs/creatures/";
 
     public TileManager() {
         caveTileList = new ArrayList<>();
@@ -34,13 +34,14 @@ public class TileManager implements EventListener {
         int totalPlayers = (int) (humanPlayers + AIPlayers);
         int playerDistance = (int) (boardSize / totalPlayers);
 
-        String caveFilePath = "Project/Sprint2/src/resources/assets/pngs/tiles/Cave.png";
-
         // Create as many caves as the number of players
         for (int i = 0; i < playerList.size(); i++){
-            ImageIcon caveTileImage = new ImageIcon(caveFilePath);
-            int currTileIndex = -1 * ((i * playerDistance) + 1);
             Creature currCreature = this.getTileableCreature(creatureList, i);
+
+            String imagePath = CREATURE_FILE_PATH + currCreature.getCreatureName() + "_1.png";
+            ImageIcon caveTileImage = new ImageIcon(imagePath);
+
+            int currTileIndex = -1 * ((i * playerDistance) + 1);
             Player currPlayer = playerList.get(i);
 
             CaveTile caveTile = new CaveTile(caveTileImage, currTileIndex, currCreature, currPlayer);
@@ -56,7 +57,7 @@ public class TileManager implements EventListener {
         for (int i = 0; i < boardSize; i++){
             Creature currCreature = this.getTileableCreature(creatureList, i);
 
-            String imagePath = volcanoTilePath + currCreature.getCreatureName() + "_1.png";
+            String imagePath = CREATURE_FILE_PATH + currCreature.getCreatureName() + "_1.png";
             ImageIcon volcanoTileImage = new ImageIcon(imagePath);
 
             VolcanoTile volcanoTile = new VolcanoTile(volcanoTileImage, i, currCreature);

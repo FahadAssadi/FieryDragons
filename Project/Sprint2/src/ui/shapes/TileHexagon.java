@@ -1,5 +1,6 @@
 package ui.shapes;
 
+import game.player.Player;
 import game.tile.Tile;
 
 import java.awt.*;
@@ -37,6 +38,18 @@ public class TileHexagon extends Polygon {
         int imageY = centerY - TILE_SIZE / 2;
 
         g.drawImage(this.tile.getImageIcon().getImage(), imageX - 10, imageY, TILE_SIZE, TILE_SIZE, null);
+
+        // Draw the player indicator
+        if (this.tile.getPlayer() != null) {
+            Color playerColor = Color.decode(this.tile.getPlayer().getColour());
+            drawPlayerIndicator(g, centerX, centerY, playerColor);
+        }
+    }
+
+    private void drawPlayerIndicator(Graphics g, int centerX, int centerY, Color playerColor) {
+        g.setColor(playerColor);
+        int indicatorSize = TILE_SIZE / 2;
+        g.fillOval(centerX - indicatorSize / 2, centerY - indicatorSize / 2, indicatorSize, indicatorSize);
     }
 
 }
