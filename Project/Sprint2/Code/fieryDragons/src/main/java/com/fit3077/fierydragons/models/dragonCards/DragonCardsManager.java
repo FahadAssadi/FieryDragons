@@ -3,6 +3,8 @@ package com.fit3077.fierydragons.models.dragonCards;
 import com.fit3077.fierydragons.Application;
 import com.fit3077.fierydragons.models.creatures.Creature;
 import com.fit3077.fierydragons.models.creatures.CreatureFactory;
+import com.fit3077.fierydragons.models.event.EventType;
+import com.fit3077.fierydragons.models.event.Subscriber;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,8 +17,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class DragonCardsManager {
+public class DragonCardsManager implements Subscriber {
     List<DragonCard> dragonCards;
+    DragonCard currentDragonCard;
     public DragonCardsManager(CreatureFactory creatureFactory){
         createDragonCards(creatureFactory);
     }
@@ -58,9 +61,28 @@ public class DragonCardsManager {
     }
     public void shuffleCards() {
         Collections.shuffle(dragonCards);
+        System.out.println("Dragon cards shuffled");
     }
 
     public List<DragonCard> getDragonCards() {
         return dragonCards;
+    }
+
+    public void setDragonCards(List<DragonCard> dragonCards) {
+        this.dragonCards = dragonCards;
+    }
+
+    public DragonCard getDragonCard() {
+        return currentDragonCard;
+    }
+
+    public void setDragonCard(DragonCard dragonCard) {
+        this.currentDragonCard = dragonCard;
+        System.out.println("Dragon changed to " + dragonCard.getName());
+    }
+
+    @Override
+    public void update() {
+        this.shuffleCards();
     }
 }

@@ -8,7 +8,7 @@ public class StandardDragonCard extends DragonCard {
     private Creature creature;
     private final Action action;
     StandardDragonCard(Action action, int moves, Creature creature, String imagePath) {
-        super(imagePath);
+        super(creature.getName(), imagePath);
         this.action = action;
         this.moves = moves;
         this.creature = creature;
@@ -32,5 +32,10 @@ public class StandardDragonCard extends DragonCard {
     @Override
     public Action getAction() {
         return action;
+    }
+
+    @Override
+    public void execute() {
+        action.execute();
     }
 }
