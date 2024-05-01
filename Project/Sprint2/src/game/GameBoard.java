@@ -44,12 +44,15 @@ public class GameBoard implements EventListener {
         Player currPlayer = this.playerManager.getCurrPlayer();
         DragonCard currDragonCard = this.dragonCardManager.getCurrDragonCard();
 
-        currDragonCard.getDragonCardCommand().execute(currPlayer);
+        currDragonCard.getDragonCardCommand().execute(this, currPlayer);
     }
 
     @Override
     public void update(EventType eventType) {
-        this.nextPlayerTurn();
+        if (eventType == EventType.PLAYER_TURN_START){
+            this.nextPlayerTurn();
+        }
+
     }
 
     // ----------- GETTERS only used by UI elements -----------

@@ -1,9 +1,11 @@
 package game.chit.command;
 
+import game.GameBoard;
 import game.chit.types.CreatureRelatedDragonCard;
 import game.event.EventManager;
 import game.event.EventType;
 import game.player.Player;
+import game.tile.TileManager;
 
 public class MovePlayerCommand extends DragonCardCommand{
     private final CreatureRelatedDragonCard dragonCard;
@@ -16,7 +18,7 @@ public class MovePlayerCommand extends DragonCardCommand{
     }
 
     @Override
-    public void execute(Player player) {
+    public void execute(GameBoard gameBoard, Player player) {
         int numberOfSteps = this.dragonCard.getAmount();
 
         int moveSteps = this.isForward ? numberOfSteps : (-1 * numberOfSteps);
@@ -29,5 +31,6 @@ public class MovePlayerCommand extends DragonCardCommand{
         }
 
         // TODO: NEXT SPRINT
+        TileManager tileManager = gameBoard.getTileManager();
     }
 }
