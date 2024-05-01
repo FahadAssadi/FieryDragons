@@ -25,7 +25,7 @@ public class PlayerManager implements Subscriber {
 
     void createPlayersList() {
         players = new ArrayList<>();
-        String fileName = "data/Players.json";
+        String fileName = "data/players.json";
         try (InputStream is = Application.class.getResourceAsStream(fileName)) {
             if (is == null) {
                 throw new IOException("Cannot find resource file " + fileName);
