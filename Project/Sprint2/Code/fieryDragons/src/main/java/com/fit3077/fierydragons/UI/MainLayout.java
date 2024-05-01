@@ -4,11 +4,14 @@ import com.fit3077.fierydragons.Application;
 import com.fit3077.fierydragons.models.board.BoardManager;
 import com.fit3077.fierydragons.models.board.Tile;
 import com.fit3077.fierydragons.models.dragonCards.DragonCardsManager;
+import com.fit3077.fierydragons.models.player.Player;
+import com.fit3077.fierydragons.models.player.PlayerManager;
 import javafx.geometry.Pos;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Rectangle;
 
 import java.util.List;
 import java.util.Objects;
@@ -16,11 +19,13 @@ import java.util.Objects;
 public class MainLayout {
     private final BoardManager boardManager;
     private final DragonCardsManager dragonCardsManager;
-    private static final int tileSize = 100;
+    private final PlayerManager playerManager;
+    private final int tileSize = 100;
 
-    public MainLayout(BoardManager boardManager, DragonCardsManager dragonCardsManager) {
+    public MainLayout(BoardManager boardManager, DragonCardsManager dragonCardsManager, PlayerManager playerManager) {
         this.boardManager = boardManager;
         this.dragonCardsManager = dragonCardsManager;
+        this.playerManager = playerManager;
     }
 
     public AnchorPane getLayout(int tiles) {
@@ -51,7 +56,8 @@ public class MainLayout {
         borderPane.setRight(rightGrid);
 
         // adding center grid pane
-        StackPane centerGrid = CenterGrid.createCenterGrid(dragonCardsManager);
+        CenterGrid centerGridGenerator = new CenterGrid();
+        StackPane centerGrid = centerGridGenerator.createCenterGrid(dragonCardsManager);
         borderPane.setCenter(centerGrid);
 
         AnchorPane anchorPane = new AnchorPane();
@@ -111,7 +117,7 @@ public class MainLayout {
     }
 
     public void setupCaveTiles(AnchorPane anchorPane) {
-        // Define the positions for each cave tile
+        // Define the positions for each cave tile, TODO: IMPLEMENT CALCULATION IN NEXT SPRINT.
         double[][] positions = {
                 {300.0, 100.0},
                 {900.0, 300.0},
@@ -123,27 +129,39 @@ public class MainLayout {
 
         for (int i = 0; i < positions.length; i++) {
             if (i < caveTiles.size()) {
-                createCave(positions[i][0], positions[i][1], caveTiles.get(i), anchorPane);
+                createCave(positions[i][0], positions[i][1], caveTiles.get(i), anchorPane, playerManager.getPlayers().get(i));
             }
         }
     }
-    private void createCave(Double x, Double y, Tile caveTile, AnchorPane anchorPane) {
+
+    private void createCave(Double x, Double y, Tile caveTile, AnchorPane anchorPane, Player player) {
         StackPane cavePane = new StackPane();
         cavePane.setPrefSize(tileSize, tileSize);
 
-        String imagePath = caveTile.getCreature().getImagePath();
+        String caveImagePath = caveTile.getCreature().getImagePath();
+        ImageView caveImageView = new ImageView(new Image(Objects.requireNonNull(Application.class.getResourceAsStream(caveImagePath))));
+        caveImageView.setOpacity(0.4);
+        caveImageView.setFitWidth(tileSize - 2);
+        caveImageView.setFitHeight(tileSize - 2);
 
-        ImageView imageView = new ImageView(new Image(Objects.requireNonNull(Application.class.getResourceAsStream(imagePath))));
-        imageView.setFitWidth(tileSize - 2);
-        imageView.setFitHeight(tileSize - 2);
+        String playerImagePath = player.getPlayerImage();
+
+        ImageView playerImageView = new ImageView(new Image(Objects.requireNonNull(Application.class.getResourceAsStream(playerImagePath))));
+        playerImageView.setFitWidth(tileSize / 2);
+        playerImageView.setFitHeight(tileSize / 2);
+
+        Color colorOverlay = Color.rgb((int)(Math.random() * 256), (int)(Math.random() * 256), (int)(Math.random() * 256));
+        Rectangle overlay = new Rectangle(tileSize, tileSize, colorOverlay);
+        overlay.setOpacity(0.5);
 
         BorderStroke borderStroke = new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(3));
         cavePane.setBorder(new Border(borderStroke));
 
-        cavePane.getChildren().addAll(imageView);
+        cavePane.getChildren().addAll(caveImageView, playerImageView, overlay);
 
         AnchorPane.setLeftAnchor(cavePane, x);
         AnchorPane.setTopAnchor(cavePane, y);
         anchorPane.getChildren().add(cavePane);
     }
+
 }

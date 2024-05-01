@@ -19,8 +19,8 @@ import java.util.Objects;
 Class responsible for creating the grid for the dragon cards
 */
 public class CenterGrid {
-    private final static int size = 70;
-    public static StackPane createCenterGrid(DragonCardsManager dragonCardsManager) {
+    private final int size = 70;
+    public StackPane createCenterGrid(DragonCardsManager dragonCardsManager) {
         StackPane stackPane = new StackPane();
         stackPane.setAlignment(Pos.CENTER);
 
@@ -62,6 +62,8 @@ public class CenterGrid {
 
                 StackPane cellStack = new StackPane(imageView);
                 cellStack.setOnMouseClicked(event -> {
+                    dragonCardsManager.setDragonCard(currentCard);
+
                     Image currentImage = imageView.getImage();
                     imageView.setImage(currentImage.equals(hiddenCard) ? cardImage : hiddenCard);
                     PauseTransition pause = new PauseTransition(Duration.seconds(0.4));
