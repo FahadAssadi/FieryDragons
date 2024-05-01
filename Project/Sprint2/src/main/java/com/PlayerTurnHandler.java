@@ -1,17 +1,24 @@
 package main.java.com;
 
 public class PlayerTurnHandler {
+    // Class used to generate players, and handle turns and turn outcomes and also flipping chits
     private int currentPlayer;
-    private DragonToken[] players;
+    private int noOfPlayers;
     private int currentTurn;
 
-    public PlayerTurnHandler(int currentPlayer, DragonToken[] players, int currentTurn) {
-        this.currentPlayer = currentPlayer;
-        this.players = players;
-        this.currentTurn = currentTurn;
+    public PlayerTurnHandler(int noOfPlayers) {
+        this.noOfPlayers = noOfPlayers;
     }
 
     // Methods
+    public DragonToken[] generatePlayers() {
+        // Generating players
+        String[] colors = {"red", "blue", "yellow", "white"};
+        DragonToken[] players = new DragonToken[this.noOfPlayers];
+
+        return players;
+    }
+
     public void startPlayerTurns() {
         // Method implementation
     }
