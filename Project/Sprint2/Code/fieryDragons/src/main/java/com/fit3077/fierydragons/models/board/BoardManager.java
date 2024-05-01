@@ -2,6 +2,7 @@ package com.fit3077.fierydragons.models.board;
 
 import com.fit3077.fierydragons.Application;
 import com.fit3077.fierydragons.models.creatures.CreatureFactory;
+import com.fit3077.fierydragons.models.dragonCards.DragonCard;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,12 +17,14 @@ import java.util.List;
 public class BoardManager {
     List<Tile> volcanoTiles;
     List<Tile> caveTiles;
+    List<DragonCard> dragonCards;
     private final CreatureFactory creatureFactory;
 
     public BoardManager(CreatureFactory creatureFactory) {
         this.creatureFactory = creatureFactory;
         this.caveTiles = new ArrayList<>();
         this.volcanoTiles = new ArrayList<>();
+        this.dragonCards = new ArrayList<>();
         loadTiles();
     }
 

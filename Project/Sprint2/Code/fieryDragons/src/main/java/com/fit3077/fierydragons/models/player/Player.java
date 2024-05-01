@@ -1,7 +1,7 @@
 package com.fit3077.fierydragons.models.player;
 
-import com.fit3077.fierydragons.models.actions.CardAction;
+import com.fit3077.fierydragons.models.actions.Action;
 
 public class Player {
-    void playTurn(CardAction action){}
+    void playTurn(Action action){}
 }

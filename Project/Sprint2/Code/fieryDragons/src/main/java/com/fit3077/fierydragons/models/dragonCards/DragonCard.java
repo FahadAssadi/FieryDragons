@@ -1,16 +1,14 @@
 package com.fit3077.fierydragons.models.dragonCards;
 
-import com.fit3077.fierydragons.models.actions.CardAction;
+import com.fit3077.fierydragons.models.actions.Action;
 
 public abstract class DragonCard {
-    CardAction action;
-    DragonCard(CardAction action) {
-        this.action = action;
+    private final String imagePath;
+    DragonCard(String imagePath) {
+        this.imagePath = imagePath;
     }
-    void setAction(CardAction action) {
-        this.action = action;
-    };
-    CardAction getAction(){
-        return this.action;
-    };
+    abstract Action getAction();
+    public String getImagePath(){
+        return imagePath;
+    }
 }

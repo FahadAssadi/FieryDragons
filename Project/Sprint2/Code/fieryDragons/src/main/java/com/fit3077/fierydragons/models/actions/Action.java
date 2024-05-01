@@ -1,5 +1,5 @@
 package com.fit3077.fierydragons.models.actions;
 
-public interface CardAction {
+public interface Action {
     boolean execute();
 }
