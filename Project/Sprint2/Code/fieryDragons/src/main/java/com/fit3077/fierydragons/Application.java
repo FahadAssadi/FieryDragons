@@ -11,6 +11,8 @@ import com.fit3077.fierydragons.models.player.PlayerManager;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import static com.fit3077.fierydragons.testing.Test.*;
+
 public class Application extends javafx.application.Application {
     @Override
     public void start(Stage primaryStage) {
@@ -18,6 +20,11 @@ public class Application extends javafx.application.Application {
         PlayerManager playerManager = new PlayerManager();
         BoardManager boardManager = new BoardManager(creatureFactory, playerManager);
         DragonCardsManager dragonCardsManager = new DragonCardsManager(creatureFactory);
+
+        // Testing to ensure everything is created
+        testDragonCardsCreated(dragonCardsManager);
+        testShuffle(dragonCardsManager);
+        testBoardManager(boardManager);
 
         MainLayout mainLayout = new MainLayout(boardManager, dragonCardsManager);
 
