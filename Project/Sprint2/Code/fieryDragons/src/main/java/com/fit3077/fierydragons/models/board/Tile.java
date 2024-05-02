@@ -7,8 +7,9 @@ public abstract class Tile {
     private Creature creature;
     private Player player;
 
-    Tile (Creature creature) {
+    Tile (Creature creature, Player player) {
         this.creature = creature;
+        this.player = player;
     }
 
     public Creature getCreature() {

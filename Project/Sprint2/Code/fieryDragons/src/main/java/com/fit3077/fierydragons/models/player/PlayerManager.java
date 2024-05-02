@@ -40,7 +40,7 @@ public class PlayerManager implements Subscriber {
             for (int i = 0; i < jsonArray.length(); i++) {
                 String playerName = jsonArray.getString(i);
                 // Assuming Player class has a constructor that takes name as argument
-                Player player = new Player(playerName);
+                Player player = new StandardPlayer(playerName, "imgs/HiddenChit.png");
                 players.add(player);
             }
         } catch (IOException e) {

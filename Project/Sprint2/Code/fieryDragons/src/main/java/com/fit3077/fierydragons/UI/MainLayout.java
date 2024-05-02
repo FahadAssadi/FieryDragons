@@ -129,7 +129,7 @@ public class MainLayout {
 
         for (int i = 0; i < positions.length; i++) {
             if (i < caveTiles.size()) {
-                createCave(positions[i][0], positions[i][1], caveTiles.get(i), anchorPane, playerManager.getPlayers().get(i));
+                createCave(positions[i][0], positions[i][1], caveTiles.get(i), anchorPane, caveTiles.get(i).getPlayer());
             }
         }
     }

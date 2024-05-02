@@ -3,6 +3,8 @@ package com.fit3077.fierydragons.models.board;
 import com.fit3077.fierydragons.Application;
 import com.fit3077.fierydragons.models.creatures.CreatureFactory;
 import com.fit3077.fierydragons.models.dragonCards.DragonCard;
+import com.fit3077.fierydragons.models.player.Player;
+import com.fit3077.fierydragons.models.player.PlayerManager;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,17 +20,15 @@ public class BoardManager {
     List<Tile> volcanoTiles;
     List<Tile> caveTiles;
     List<DragonCard> dragonCards;
-    private final CreatureFactory creatureFactory;
 
-    public BoardManager(CreatureFactory creatureFactory) {
-        this.creatureFactory = creatureFactory;
+    public BoardManager(CreatureFactory creatureFactory, PlayerManager playerManager) {
         this.caveTiles = new ArrayList<>();
         this.volcanoTiles = new ArrayList<>();
         this.dragonCards = new ArrayList<>();
-        loadTiles();
+        loadTiles(creatureFactory, playerManager);
     }
 
-    private void loadTiles() {
+    private void loadTiles(CreatureFactory creatureFactory, PlayerManager playerManager) {
         String fileName = "data/Tiles.json";
         try (InputStream is = Application.class.getResourceAsStream(fileName)) {
             if (is == null) {
@@ -42,9 +42,13 @@ public class BoardManager {
             }
             JSONObject jsonObject = new JSONObject(jsonText.toString());
             JSONArray caves = jsonObject.getJSONArray("caves");
+
+            // getting players to add to caves
+            List <Player> players = playerManager.getPlayers();
+
             for (int i = 0; i < caves.length(); i++) {
                 String creatureName = caves.getString(i);
-                caveTiles.add(new CaveTile(creatureFactory.getCreatureByName(creatureName)));
+                caveTiles.add(new CaveTile(creatureFactory.getCreatureByName(creatureName), players.get(i)));
             }
 
             JSONArray volcanoTilesArray = jsonObject.getJSONArray("volcanoTiles");
