@@ -60,8 +60,8 @@ public class CenterGrid {
                 imageView.setPreserveRatio(true);
                 GridPane.setHalignment(imageView, HPos.CENTER);
 
-                StackPane cellStack = new StackPane(imageView);
-                cellStack.setOnMouseClicked(event -> {
+                StackPane dragonCardButton = new StackPane(imageView);
+                dragonCardButton.setOnMouseClicked(event -> {
                     dragonCardsManager.setDragonCard(currentCard);
 
                     Image currentImage = imageView.getImage();
@@ -71,7 +71,7 @@ public class CenterGrid {
                     pause.play();
                 });
 
-                centerGrid.add(cellStack, i, j);
+                centerGrid.add(dragonCardButton, i, j);
             }
         }
 

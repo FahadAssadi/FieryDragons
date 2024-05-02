@@ -19,17 +19,14 @@ public class Application extends javafx.application.Application {
         BoardManager boardManager = new BoardManager(creatureFactory, playerManager);
         DragonCardsManager dragonCardsManager = new DragonCardsManager(creatureFactory);
 
-
-        MainLayout mainLayout = new MainLayout(boardManager, dragonCardsManager, playerManager);
-
-        EventManager eventManager = EventManager.getInstance();
+        MainLayout mainLayout = new MainLayout(boardManager, dragonCardsManager);
 
         // create actions
         MismatchedAction mismatchedAction = new MismatchedAction(playerManager);
 
         // subscribe to events
-        eventManager.subscribe(EventType.GAMESTART, dragonCardsManager);
-        eventManager.subscribe(EventType.MISMATCHED_CREATURE, mismatchedAction);
+        EventManager.getInstance().subscribe(EventType.GAMESTART, dragonCardsManager);
+        EventManager.getInstance().subscribe(EventType.MISMATCHED_CREATURE, mismatchedAction);
 
 
         EventManager.getInstance().notify(EventType.GAMESTART);

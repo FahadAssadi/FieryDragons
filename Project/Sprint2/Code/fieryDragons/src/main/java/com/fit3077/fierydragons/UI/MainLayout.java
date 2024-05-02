@@ -19,13 +19,11 @@ import java.util.Objects;
 public class MainLayout {
     private final BoardManager boardManager;
     private final DragonCardsManager dragonCardsManager;
-    private final PlayerManager playerManager;
     private final int tileSize = 100;
 
-    public MainLayout(BoardManager boardManager, DragonCardsManager dragonCardsManager, PlayerManager playerManager) {
+    public MainLayout(BoardManager boardManager, DragonCardsManager dragonCardsManager) {
         this.boardManager = boardManager;
         this.dragonCardsManager = dragonCardsManager;
-        this.playerManager = playerManager;
     }
 
     public AnchorPane getLayout(int tiles) {
