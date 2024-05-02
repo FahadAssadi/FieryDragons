@@ -38,9 +38,9 @@ public class GameBoard {
 
     public void drawDragonCards() {
         // creating dragon cards and setting locations
-        this.dragonCards = {new DragonCard(1, GameCharacters.Salamander),
+        this.dragonCards = new DragonCard[] {new DragonCard(1, GameCharacters.Salamander),
                             new DragonCard(2, GameCharacters.Salamander),
-                            new DragonCard(3, GameCharacters.Salamander)
+                            new DragonCard(3, GameCharacters.Salamander),
                             new DragonCard(1, GameCharacters.Bat),
                             new DragonCard(2, GameCharacters.Bat),
                             new DragonCard(3, GameCharacters.Bat),
@@ -56,13 +56,24 @@ public class GameBoard {
                             new DragonCard(2, GameCharacters.PirateDragon)
         };
 
-
-
+        // random coordinates inside circle 11x11 grid
+        float[][] relativeCoords = {
+            {6, 3}, {5, 4}, {7, 4}, {4, 5},
+            {6, 5}, {8, 5}, {3, 6}, {5, 6},
+            {7, 6}, {9, 6}, {4, 7}, {6, 7},
+            {8, 7}, {5, 8}, {7, 8}, {6, 9}
+        };
+        // randomly rearrange coordinates
+        ArrayShuffler.shuffleArray(relativeCoords);
 
         int i;
-
-        // Setting home caves for each player
+        // Setting random locations
         for (i = 0; i < this.dragonCards.length; i++) {
+            float x;
+            float y;
+            x = relativeCoords[i][0];
+            y = relativeCoords[i][1];
+            this.dragonCards[i].setPos(x, y);
         }
 
     }
