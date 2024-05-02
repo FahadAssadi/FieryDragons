@@ -1,4 +1,4 @@
-package com.fit3077.fierydragons.models.actions.gameActions;
+package com.fit3077.fierydragons.models.event.gameActions;
 
 import com.fit3077.fierydragons.models.dragonCards.DragonCardsManager;
 import com.fit3077.fierydragons.models.event.Subscriber;
