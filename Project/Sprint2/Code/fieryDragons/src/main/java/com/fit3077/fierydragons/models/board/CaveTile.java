@@ -5,6 +5,7 @@ import com.fit3077.fierydragons.models.player.Player;
 
 public class CaveTile extends Tile{
     CaveTile(Creature creature, Player player) {
-        super(creature, player);
+        super(creature);
+        super.setPlayer(player);
     }
 }
