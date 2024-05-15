@@ -1,0 +1,37 @@
+[
+  {
+    "id": 0,
+    "name": "Salamander",
+    "tileable": 1,
+    "maxNumber": 3,
+    "eachNumber": 1
+  },
+  {
+    "id": 1,
+    "name": "Bat",
+    "tileable": 1,
+    "maxNumber": 3,
+    "eachNumber": 1
+  },
+  {
+    "id": 2,
+    "name": "Spider",
+    "tileable": 1,
+    "maxNumber": 3,
+    "eachNumber": 1
+  },
+  {
+    "id": 3,
+    "name": "BabyDragon",
+    "tileable": 1,
+    "maxNumber": 3,
+    "eachNumber": 1
+  },
+  {
+    "id": 4,
+    "name": "DragonPirate",
+    "tileable": 0,
+    "maxNumber": 2,
+    "eachNumber": 2
+  }
+]
