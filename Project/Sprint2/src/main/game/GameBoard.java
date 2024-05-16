@@ -12,6 +12,7 @@ import main.game.player.Player;
 import main.game.player.PlayerManager;
 import main.game.tile.TileManager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,9 +45,12 @@ public class GameBoard implements EventListener {
         this.tileManager.createVolcanoTileList(creatures);
 
         // usage of the dragonCard factory
-        DragonCardFactory factory = new DragonCardFactory(creatures);
-        while (factory.hasNext()){
-            DragonCard card = factory.next();
+        List<DragonCard> dragonCards = new ArrayList<>();;
+
+        DragonCardFactory dragonCardFactory = new DragonCardFactory(creatures);
+        while (dragonCardFactory.hasNext()){
+            DragonCard card = dragonCardFactory.next();
+            dragonCards.add(card);
         }
 
 
