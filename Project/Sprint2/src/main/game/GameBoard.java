@@ -1,6 +1,7 @@
 package main.game;
 
 import main.game.chit.DragonCard;
+import main.game.chit.DragonCardFactory;
 import main.game.chit.DragonCardManager;
 import main.game.creature.Creature;
 import main.game.creature.CreatureFactory;
@@ -41,6 +42,13 @@ public class GameBoard implements EventListener {
         this.tileManager = new TileManager();
         this.tileManager.createCaveTileList(creatures, this.playerManager.getPlayerList());
         this.tileManager.createVolcanoTileList(creatures);
+
+        // usage of the dragonCard factory
+        DragonCardFactory factory = new DragonCardFactory(creatures);
+        while (factory.hasNext()){
+            DragonCard card = factory.next();
+        }
+
 
         // Create the Dragon Cards
         this.dragonCardManager = new DragonCardManager();
