@@ -9,6 +9,7 @@ import main.game.event.EventListener;
 import main.game.event.EventManager;
 import main.game.event.EventType;
 import main.game.player.Player;
+import main.game.player.PlayerFactory;
 import main.game.player.PlayerManager;
 import main.game.tile.TileManager;
 
@@ -51,6 +52,15 @@ public class GameBoard implements EventListener {
         while (dragonCardFactory.hasNext()){
             DragonCard card = dragonCardFactory.next();
             dragonCards.add(card);
+        }
+
+        // usage of player factory, note that this would be used within the caveTile Factory as players would be
+        // stored and accessed from within the caveTile.  Placed here for reference only
+        PlayerFactory playerFactory = new PlayerFactory();
+        List<Player> players = new ArrayList<>();
+        while (playerFactory.hasNext()) {
+            Player player = playerFactory.next();
+            players.add(player);
         }
 
 
