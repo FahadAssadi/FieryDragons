@@ -25,20 +25,6 @@ public class TileableCreatureIterable implements Iterable<Creature> {
 
     @Override
     public Iterator<Creature> iterator() {
-        return new TileableCreatureIterator();
-    }
-
-    private class TileableCreatureIterator implements Iterator<Creature> {
-        private int currentIndex = 0;
-
-        @Override
-        public boolean hasNext() {
-            return currentIndex < tileableCreatures.size();
-        }
-
-        @Override
-        public Creature next() {
-            return tileableCreatures.get(currentIndex++);
-        }
+        return tileableCreatures.iterator();
     }
 }

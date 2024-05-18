@@ -9,15 +9,10 @@ import javax.swing.*;
 import java.util.*;
 
 public class DragonCardIterable implements Iterable<DragonCard> {
-    private final List<DragonCard> dragonCards;
+    private final List<DragonCard> dragonCards = new ArrayList<>();;
 
     public DragonCardIterable(CreatureIterable creatureIterable) {
-        dragonCards = new ArrayList<>();
-        List<Creature> creatures = new ArrayList<>();
-        for (Creature creature : creatureIterable) {
-            creatures.add(creature);
-        }
-        createCreatureRelatedCards(creatures);
+        createCreatureRelatedCards(creatureIterable);
     }
 
     @Override
@@ -25,9 +20,9 @@ public class DragonCardIterable implements Iterable<DragonCard> {
         return dragonCards.iterator();
     }
 
-    private void createCreatureRelatedCards(List<Creature> creatures) {
+    private void createCreatureRelatedCards(CreatureIterable creatureIterable) {
         // Loop through all creatures
-        for (Creature creature : creatures) {
+        for (Creature creature : creatureIterable) {
             int creatureTimes = creature.getCreatureRepeat();
             int creatureQuantity = creature.getCreatureQuantity();
 

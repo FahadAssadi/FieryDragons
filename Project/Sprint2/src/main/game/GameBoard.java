@@ -4,19 +4,19 @@ import main.game.chit.DragonCard;
 import main.game.chit.DragonCardIterable;
 import main.game.chit.DragonCardKeeper;
 import main.game.creature.CreatureKeeper;
+import main.game.event.EventListener;
+import main.game.event.EventType;
 import main.game.tile.TileKeeper;
 import main.game.tile.TileNode;
 import main.misc.Settings;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * The GameBoard class represents the game board and manages game-related entities.
  * It initializes players, tiles, and dragon cards, and handles player turns.
  */
-public class GameBoard {
+public class GameBoard implements EventListener {
     private final DragonCardKeeper dragonCardKeeper;
     private final TileKeeper tileKeeper;
 
@@ -27,8 +27,6 @@ public class GameBoard {
         CreatureKeeper creatureKeeper = new CreatureKeeper();
         this.tileKeeper = new TileKeeper(creatureKeeper.getTileableCreatureIterable());
         this.dragonCardKeeper = new DragonCardKeeper(creatureKeeper.getCreatureIterable());
-
-//        test();
     }
 
     public TileKeeper getTileKeeper() {
@@ -39,20 +37,10 @@ public class GameBoard {
         return dragonCardKeeper;
     }
 
-    private void test(){
-        int playerDistance = (int) Settings.getSetting("PlayerDistance");
-        int numTiles = (int) Settings.getSetting("TotalPlayers");
+    @Override
+    public void update(EventType eventType) {
+        if (eventType == EventType.PLAYER_TURN_START){
 
-        Iterator<TileNode> volcanoTileIterator = this.tileKeeper.getVolcanoTileIterable().iterator();
-
-        for (int i = 0; i < numTiles; i++){
-            TileNode caveTileNode = volcanoTileIterator.next().getRight();
-            System.out.println(caveTileNode.getType().getPlayer());
-
-            for (int j = 1; j < playerDistance; j++){
-                volcanoTileIterator.next();
-            }
         }
     }
-
 }

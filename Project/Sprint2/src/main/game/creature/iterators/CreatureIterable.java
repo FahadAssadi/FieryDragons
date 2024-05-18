@@ -50,20 +50,7 @@ public class CreatureIterable implements Iterable<Creature> {
 
     @Override
     public Iterator<Creature> iterator() {
-        return new CreatureIterator();
+        return creatures.iterator();
     }
 
-    private class CreatureIterator implements Iterator<Creature> {
-        private int currentIndex = 0;
-
-        @Override
-        public boolean hasNext() {
-            return currentIndex < creatures.size();
-        }
-
-        @Override
-        public Creature next() {
-            return creatures.get(currentIndex++);
-        }
-    }
 }

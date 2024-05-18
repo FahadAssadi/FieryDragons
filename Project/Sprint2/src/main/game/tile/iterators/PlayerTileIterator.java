@@ -20,7 +20,6 @@ public class PlayerTileIterator implements Iterator<TileNode> {
     // Path to the directory containing creature images
     private static final String CREATURE_FILE_PATH = "/assets/pngs/creatures/";
 
-
     public PlayerTileIterator(TileableCreatureIterable tileableCreatureIterable, VolcanoTileIterable volcanoTileIterable) {
         this.constructCaveTiles(tileableCreatureIterable, volcanoTileIterable);
         this.currIndex = 0;
