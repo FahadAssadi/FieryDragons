@@ -29,7 +29,7 @@ public class VolcanoTileIterable implements Iterable<TileNode> {
         int counter = 0;
 
         // Setting the children links
-        while (counter < boardSize) {
+        while (boardSize > 0) {
             if (!tileableCreatureIterator.hasNext()) {
                 tileableCreatureIterator = tileableCreatureIterable.iterator(); // Reset the iterator
             }
@@ -38,7 +38,7 @@ public class VolcanoTileIterable implements Iterable<TileNode> {
             String imagePath = CREATURE_FILE_PATH + currCreature.getCreatureName() + "_1.png";
             ImageIcon volcanoTileImage = new ImageIcon(getClass().getResource(imagePath));
 
-            TileNode currNode = new TileNode(new VolcanoTileType(volcanoTileImage, currCreature), prevNode, counter);
+            TileNode currNode = new TileNode(new VolcanoTileType(volcanoTileImage, currCreature), prevNode, counter++);
 
             // Only occurs during the first iteration
             if (prevNode != null) {
@@ -50,7 +50,7 @@ public class VolcanoTileIterable implements Iterable<TileNode> {
 
             prevNode = currNode;
 
-            counter++;
+            boardSize--;
         }
 
         // Set the parent link for the rootNode
@@ -65,14 +65,19 @@ public class VolcanoTileIterable implements Iterable<TileNode> {
 
     private class VolcanoTileIterator implements Iterator<TileNode> {
         private TileNode currNode = rootNode;
+        private boolean firstCall = true;
 
         @Override
         public boolean hasNext() {
-            return currNode.getLeft() != null;
+            return firstCall || (currNode != rootNode);
         }
 
         @Override
         public TileNode next() {
+            if (firstCall) {
+                firstCall = false;
+            }
+
             TileNode nextNode = currNode;
             currNode = currNode.getLeft();
 
