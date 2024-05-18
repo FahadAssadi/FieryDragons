@@ -1,18 +1,20 @@
 package main.game.command.type.chit;
 
 import main.game.chit.type.CreatureDragonCard;
-import main.game.event.EventManager;
-import main.game.event.EventType;
+import main.game.tile.TileNode;
 
 public class CreatureDragonCardCommand extends DragonCardCommand{
     private final CreatureDragonCard creatureDragonCard;
 
     public CreatureDragonCardCommand(CreatureDragonCard creatureDragonCard){
+        super();
         this.creatureDragonCard = creatureDragonCard;
     }
 
     @Override
     public void execute() {
-        EventManager.getInstance().notify(EventType.PLAYER_TURN_END);
+        TileNode currTileNode = this.gameBoard.getTileKeeper().getPlayerTileQueue().getCurrPlayerTileNode();
+
+
     }
 }

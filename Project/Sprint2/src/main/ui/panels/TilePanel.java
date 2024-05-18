@@ -2,7 +2,6 @@ package main.ui.panels;
 
 import main.game.tile.TileKeeper;
 import main.game.tile.TileNode;
-import main.game.tile.iterators.PlayerTileIterator;
 import main.game.tile.iterators.VolcanoTileIterable;
 import main.misc.Settings;
 import main.ui.shapes.TileHexagon;
@@ -10,7 +9,6 @@ import main.ui.shapes.TileHexagon;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Iterator;
-import java.util.Set;
 
 /**
  * The TilePanel class represents a panel for displaying game tiles in the UI.

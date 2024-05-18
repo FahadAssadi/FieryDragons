@@ -16,14 +16,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class PlayerTileIterator implements Iterator<TileNode>, EventListener {
+public class PlayerTileQueue implements EventListener {
     private final List<TileNode> playerTileList = new ArrayList<>();
     private int currIndex;
 
     // Path to the directory containing creature images
     private static final String CREATURE_FILE_PATH = "/assets/pngs/creatures/";
 
-    public PlayerTileIterator(TileableCreatureIterable tileableCreatureIterable, VolcanoTileIterable volcanoTileIterable) {
+    public PlayerTileQueue(TileableCreatureIterable tileableCreatureIterable, VolcanoTileIterable volcanoTileIterable) {
         this.constructCaveTiles(tileableCreatureIterable, volcanoTileIterable);
         this.currIndex = 0;
 
@@ -65,31 +65,19 @@ public class PlayerTileIterator implements Iterator<TileNode>, EventListener {
         }
     }
 
+    public void queueNextTurn(){
+        this.currIndex = (++this.currIndex) % this.playerTileList.size();
+    }
+
+    public TileNode getCurrPlayerTileNode(){
+        return this.playerTileList.get(currIndex);
+    }
+
     @Override
     public void update(EventType eventType) {
         if (eventType == EventType.PLAYER_TURN_END) {
-            this.next();
+            this.queueNextTurn();
         }
     }
 
-    @Override
-    public boolean hasNext() {
-        return true;
-    }
-
-    @Override
-    public TileNode next() {
-        TileNode nextTileNode = this.playerTileList.get(currIndex);
-        this.currIndex = (currIndex + 1) % this.playerTileList.size();
-
-        return nextTileNode;
-    }
-
-    public void reset(){
-        this.currIndex = 0;
-    }
-
-    public Player getCurrPlayer(){
-        return this.playerTileList.get(currIndex).getType().getPlayer();
-    }
 }

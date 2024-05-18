@@ -10,10 +10,11 @@ import javax.swing.*;
 import java.util.*;
 
 public class DragonCardIterable implements Iterable<DragonCard> {
-    private final List<DragonCard> dragonCards = new ArrayList<>();;
+    private final List<DragonCard> dragonCards = new ArrayList<>();
 
     public DragonCardIterable(CreatureIterable creatureIterable) {
         createCreatureRelatedCards(creatureIterable);
+        Collections.shuffle(dragonCards);
     }
 
     @Override
@@ -43,6 +44,8 @@ public class DragonCardIterable implements Iterable<DragonCard> {
                     }
                 }
             }
+
         }
+
     }
 }

@@ -1,23 +1,23 @@
 package main.game.tile;
 
 import main.game.creature.iterators.TileableCreatureIterable;
-import main.game.tile.iterators.PlayerTileIterator;
+import main.game.tile.iterators.PlayerTileQueue;
 import main.game.tile.iterators.VolcanoTileIterable;
 
 public class TileKeeper {
     private final VolcanoTileIterable volcanoTileIterable;
-    private final PlayerTileIterator playerTileIterator;
+    private final PlayerTileQueue playerTileQueue;
 
     public TileKeeper(TileableCreatureIterable tileableCreatureIterable) {
         this.volcanoTileIterable = new VolcanoTileIterable(tileableCreatureIterable);
-        this.playerTileIterator = new PlayerTileIterator(tileableCreatureIterable, volcanoTileIterable);
+        this.playerTileQueue = new PlayerTileQueue(tileableCreatureIterable, volcanoTileIterable);
     }
 
     public VolcanoTileIterable getVolcanoTileIterable() {
         return this.volcanoTileIterable;
     }
 
-    public PlayerTileIterator getPlayerTileIterator() {
-        return playerTileIterator;
+    public PlayerTileQueue getPlayerTileQueue() {
+        return playerTileQueue;
     }
 }
