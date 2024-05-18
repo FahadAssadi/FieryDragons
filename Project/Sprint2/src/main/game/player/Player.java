@@ -54,4 +54,8 @@ public class Player {
     public String toString() {
         return colour + " " + position;
     }
+
+    public int getTotalMoves() {
+        return totalMoves;
+    }
 }

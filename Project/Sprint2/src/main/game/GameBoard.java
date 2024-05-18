@@ -7,6 +7,7 @@ import main.game.event.EventListener;
 import main.game.event.EventManager;
 import main.game.event.EventType;
 import main.game.tile.TileKeeper;
+import main.game.tile.TileNode;
 
 /**
  * The GameBoard class represents the game board and manages game-related entities.
@@ -47,5 +48,22 @@ public class GameBoard implements EventListener {
         if (eventType == EventType.PLAYER_TURN_START){
             this.nextPlayerTurn();
         }
+    }
+
+    public void testTraverseBackwards(int steps) throws Exception {
+        TileNode rootNode = tileKeeper.getVolcanoTileIterable().iterator().next();
+        TileNode currentNode = rootNode;
+        TileNode curr = tileKeeper.getPlayerTileQueue().getCurrPlayerTileNode();
+        curr.getType().getPlayer().getTotalMoves();
+        System.out.println("Starting from node: " + currentNode.getTempID());
+
+        for (int i = 0; i < steps; i++) {
+            currentNode = currentNode.getNextVolcanoTile();
+            System.out.println("Moving forward to node: " + currentNode.getTempID());
+        }
+
+        System.out.println("Traversing backwards " + steps + " steps...");
+        TileNode newNode = currentNode.traverseBackwards(steps);
+        System.out.println("After traversing backwards, the new node is: " + newNode.getTempID());
     }
 }

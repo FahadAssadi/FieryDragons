@@ -15,6 +15,12 @@ public class Game {
 
         // Display the main.ui
         ui.displayGameUI();
+
+        try {
+            gB.testTraverseBackwards(-3);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
 }

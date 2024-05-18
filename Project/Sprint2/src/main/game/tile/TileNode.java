@@ -1,5 +1,6 @@
 package main.game.tile;
 
+import main.exceptions.BackwardsMoveNotAllowedException;
 import main.game.tile.type.TileType;
 
 public class TileNode {
@@ -51,5 +52,18 @@ public class TileNode {
 
     public TileNode getCaveTile() {
         return caveTile;
+    }
+    /**
+     Steps: given steps to be negative.
+     */
+    public TileNode traverseBackwards(int steps) throws Exception {
+        if (this.previousVolcanoTile == null) {
+            throw new BackwardsMoveNotAllowedException("You are in a cave");
+        }
+        if (steps == 0) {
+            return this;
+        }
+
+        return this.previousVolcanoTile.traverseBackwards(steps + 1);
     }
 }
