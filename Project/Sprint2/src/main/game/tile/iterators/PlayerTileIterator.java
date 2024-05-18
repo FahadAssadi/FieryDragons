@@ -15,7 +15,7 @@ import java.util.List;
 
 public class PlayerTileIterator implements Iterator<TileNode> {
     private final List<TileNode> playerTileList = new ArrayList<>();
-    private int currIndex = 0;
+    private int currIndex;
 
     // Path to the directory containing creature images
     private static final String CREATURE_FILE_PATH = "/assets/pngs/creatures/";
@@ -23,6 +23,7 @@ public class PlayerTileIterator implements Iterator<TileNode> {
 
     public PlayerTileIterator(TileableCreatureIterable tileableCreatureIterable, VolcanoTileIterable volcanoTileIterable) {
         this.constructCaveTiles(tileableCreatureIterable, volcanoTileIterable);
+        this.currIndex = 0;
     }
 
     public void constructCaveTiles(TileableCreatureIterable tileableCreatureIterable, VolcanoTileIterable volcanoTileIterable){
@@ -71,5 +72,13 @@ public class PlayerTileIterator implements Iterator<TileNode> {
         this.currIndex = (currIndex + 1) % this.playerTileList.size();
 
         return nextTileNode;
+    }
+
+    public void reset(){
+        this.currIndex = 0;
+    }
+
+    public Player getCurrPlayer(){
+        return this.playerTileList.get(currIndex).getType().getPlayer();
     }
 }

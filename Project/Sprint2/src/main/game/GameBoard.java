@@ -5,8 +5,10 @@ import main.game.chit.DragonCardIterable;
 import main.game.creature.CreatureKeeper;
 import main.game.tile.TileKeeper;
 import main.game.tile.TileNode;
+import main.misc.Settings;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -26,24 +28,27 @@ public class GameBoard {
         DragonCardIterable dragonCardIterable = new DragonCardIterable(creatureKeeper.getCreatureIterable());
 
         List<DragonCard> dragonCardList = new ArrayList<>();
-        for (DragonCard dragonCard : dragonCardIterable) {
-            dragonCardList.add(dragonCard);
-            System.out.println(dragonCard);
-        }
+
 
         test();
     }
 
+    public TileKeeper getTileKeeper() {
+        return tileKeeper;
+    }
+
     private void test(){
-        for (int i = 0; i < 4; i++){
-            TileNode currPlayerTile = this.tileKeeper.getPlayerTileIterator().next();
-            System.out.println(currPlayerTile.getType().getPlayer());
+        int playerDistance = (int) Settings.getSetting("PlayerDistance");
+        int numTiles = (int) Settings.getSetting("TotalPlayers");
 
-            TileNode currVolcanoTile = currPlayerTile.getLeft();
+        Iterator<TileNode> volcanoTileIterator = this.tileKeeper.getVolcanoTileIterable().iterator();
 
-            for (int j = 0; j < 6; j++){
-                System.out.println(currVolcanoTile.getTempID());
-                currVolcanoTile = currVolcanoTile.getLeft();
+        for (int i = 0; i < numTiles; i++){
+            TileNode caveTileNode = volcanoTileIterator.next().getRight();
+            System.out.println(caveTileNode.getType().getPlayer());
+
+            for (int j = 1; j < playerDistance; j++){
+                volcanoTileIterator.next();
             }
         }
     }
