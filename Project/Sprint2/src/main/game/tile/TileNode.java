@@ -4,6 +4,7 @@ import main.game.tile.type.TileType;
 
 public class TileNode {
     private final TileType type;
+    private int tempID;
 
     // Previous tile in the graph
     private TileNode parent;
@@ -14,9 +15,14 @@ public class TileNode {
     // Follow to potentially reach a cave tile
     private TileNode right;
 
-    public TileNode(TileType type, TileNode parent) {
+    public TileNode(TileType type, TileNode parent, int tempID) {
         this.type = type;
         this.parent = parent;
+        this.tempID = tempID;
+    }
+
+    public int getTempID() {
+        return tempID;
     }
 
     public void setParent(TileNode parent) {

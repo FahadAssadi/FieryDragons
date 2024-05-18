@@ -1,25 +1,23 @@
 package main.game.tile;
 
-import main.game.creature.iterators.CreatureIterator;
-import main.game.tile.iterators.TileContainingPlayerIterator;
-import main.game.tile.iterators.VolcanoTileIterator;
+import main.game.creature.iterators.TileableCreatureIterable;
+import main.game.tile.iterators.PlayerTileIterator;
+import main.game.tile.iterators.VolcanoTileIterable;
 
 public class TileKeeper {
-    private final VolcanoTileIterator volcanoTileIterator;
-    private final TileContainingPlayerIterator tileContainingPlayerIterator;
+    private final VolcanoTileIterable volcanoTileIterable;
+    private final PlayerTileIterator playerTileIterator;
 
-    public TileKeeper(CreatureIterator creatureIterator) {
-        this.volcanoTileIterator = new VolcanoTileIterator(creatureIterator);
-        this.tileContainingPlayerIterator = new TileContainingPlayerIterator();
+    public TileKeeper(TileableCreatureIterable tileableCreatureIterable) {
+        this.volcanoTileIterable = new VolcanoTileIterable(tileableCreatureIterable);
+        this.playerTileIterator = new PlayerTileIterator(tileableCreatureIterable, volcanoTileIterable);
     }
 
-    public VolcanoTileIterator getVolcanoTileIterator() {
-        this.volcanoTileIterator.reset();
-        return this.volcanoTileIterator;
+    public VolcanoTileIterable getVolcanoTileIterable() {
+        return this.volcanoTileIterable;
     }
 
-    public TileContainingPlayerIterator getTileContainingPlayerIterator() {
-        this.tileContainingPlayerIterator.reset();
-        return this.tileContainingPlayerIterator;
+    public PlayerTileIterator getPlayerTileIterator() {
+        return playerTileIterator;
     }
 }
