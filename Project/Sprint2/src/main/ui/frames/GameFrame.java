@@ -1,6 +1,6 @@
 package main.ui.frames;
 
-import main.game.chit.DragonCardManager;
+import main.game.chit.DragonCardKeeper;
 import main.game.tile.TileKeeper;
 import main.ui.panels.DragonCardPanel;
 import main.ui.panels.PlayerTurnPanel;
@@ -37,13 +37,8 @@ public class GameFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    /**
-     * Creates and adds a panel displaying dragon cards to the game frame.
-     *
-     * @param dragonCardManager The manager for dragon cards.
-     */
-    public void createDragonCardPanel(DragonCardManager dragonCardManager){
-        DragonCardPanel dragonCardPanel = new DragonCardPanel(dragonCardManager, DEFAULT_FRAME_WIDTH, DEFAULT_FRAME_HEIGHT);
+    public void createDragonCardPanel(DragonCardKeeper dragonCardKeeper){
+        DragonCardPanel dragonCardPanel = new DragonCardPanel(dragonCardKeeper, DEFAULT_FRAME_WIDTH, DEFAULT_FRAME_HEIGHT);
 
         this.add(dragonCardPanel);
     }

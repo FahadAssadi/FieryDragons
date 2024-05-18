@@ -1,15 +1,13 @@
 package main.game.chit;
 
-import main.game.creature.CreatureKeeper;
 import main.game.creature.iterators.CreatureIterable;
 
 public class DragonCardKeeper {
+    private final DragonCardIterable dragonCardIterable;
     private DragonCard selectedDragonCard;
-    private DragonCardIterable dragonCardIterable;
 
-    public DragonCardKeeper(CreatureKeeper creatureKeeper) {
-        CreatureIterable creatureIterable = creatureKeeper.getCreatureIterable();
-        dragonCardIterable = new DragonCardIterable(creatureIterable);
+    public DragonCardKeeper(CreatureIterable creatureIterable) {
+        this.dragonCardIterable = new DragonCardIterable(creatureIterable);
     }
 
     public DragonCardIterable getDragonCardIterable() {

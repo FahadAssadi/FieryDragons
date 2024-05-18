@@ -21,8 +21,7 @@ public class GameUI {
         this.gameFrame = new GameFrame();
 
         // Create and add panels representing dragon cards, player turns, and tiles to the game frame
-//        this.gameFrame.createDragonCardPanel(gameBoard.getDragonCardManager());
-        // Panel created for testing purposes.
+        this.gameFrame.createDragonCardPanel(gameBoard.getDragonCardKeeper());
         this.gameFrame.createPlayerTurnPanel(gameBoard.getTileKeeper());
         this.gameFrame.createTilePanel(gameBoard.getTileKeeper());
     }

@@ -2,6 +2,7 @@ package main.game;
 
 import main.game.chit.DragonCard;
 import main.game.chit.DragonCardIterable;
+import main.game.chit.DragonCardKeeper;
 import main.game.creature.CreatureKeeper;
 import main.game.tile.TileKeeper;
 import main.game.tile.TileNode;
@@ -16,6 +17,7 @@ import java.util.List;
  * It initializes players, tiles, and dragon cards, and handles player turns.
  */
 public class GameBoard {
+    private final DragonCardKeeper dragonCardKeeper;
     private final TileKeeper tileKeeper;
 
     /**
@@ -24,17 +26,17 @@ public class GameBoard {
     public GameBoard() {
         CreatureKeeper creatureKeeper = new CreatureKeeper();
         this.tileKeeper = new TileKeeper(creatureKeeper.getTileableCreatureIterable());
+        this.dragonCardKeeper = new DragonCardKeeper(creatureKeeper.getCreatureIterable());
 
-        DragonCardIterable dragonCardIterable = new DragonCardIterable(creatureKeeper.getCreatureIterable());
-
-        List<DragonCard> dragonCardList = new ArrayList<>();
-
-
-        test();
+//        test();
     }
 
     public TileKeeper getTileKeeper() {
         return tileKeeper;
+    }
+
+    public DragonCardKeeper getDragonCardKeeper() {
+        return dragonCardKeeper;
     }
 
     private void test(){
