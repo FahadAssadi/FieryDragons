@@ -1,19 +1,17 @@
-package main.game.tile;
+package main.game.tile.type;
 
 import main.game.creature.Creature;
 import main.game.player.Player;
 
 import javax.swing.*;
 
-public abstract class Tile {
+public abstract class TileType {
     private final ImageIcon imageIcon;
-    private final int tileIndex;
     private final Creature creature;
     private Player player;
 
-    public Tile(ImageIcon imageIcon, int tileIndex, Creature creature){
+    public TileType(ImageIcon imageIcon, Creature creature) {
         this.imageIcon = imageIcon;
-        this.tileIndex = tileIndex;
         this.creature = creature;
     }
 
@@ -25,7 +23,12 @@ public abstract class Tile {
         return imageIcon;
     }
 
+    public Creature getCreature() {
+        return creature;
+    }
+
     public Player getPlayer() {
         return player;
     }
+
 }

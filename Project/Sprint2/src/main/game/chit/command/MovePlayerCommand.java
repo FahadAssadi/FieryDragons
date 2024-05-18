@@ -5,7 +5,6 @@ import main.game.chit.types.CreatureRelatedDragonCard;
 import main.game.event.EventManager;
 import main.game.event.EventType;
 import main.game.player.Player;
-import main.game.tile.TileManager;
 
 /**
  * The MovePlayerCommand class represents a command to move a player on the main.game board.
