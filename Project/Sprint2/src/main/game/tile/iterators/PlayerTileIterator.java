@@ -2,6 +2,9 @@ package main.game.tile.iterators;
 
 import main.game.creature.Creature;
 import main.game.creature.iterators.TileableCreatureIterable;
+import main.game.event.EventListener;
+import main.game.event.EventManager;
+import main.game.event.EventType;
 import main.game.player.Player;
 import main.game.player.PlayerFactory;
 import main.game.tile.TileNode;
@@ -13,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class PlayerTileIterator implements Iterator<TileNode> {
+public class PlayerTileIterator implements Iterator<TileNode>, EventListener {
     private final List<TileNode> playerTileList = new ArrayList<>();
     private int currIndex;
 
@@ -23,6 +26,8 @@ public class PlayerTileIterator implements Iterator<TileNode> {
     public PlayerTileIterator(TileableCreatureIterable tileableCreatureIterable, VolcanoTileIterable volcanoTileIterable) {
         this.constructCaveTiles(tileableCreatureIterable, volcanoTileIterable);
         this.currIndex = 0;
+
+        EventManager.getInstance().subscribe(EventType.PLAYER_TURN_END, this);
     }
 
     public void constructCaveTiles(TileableCreatureIterable tileableCreatureIterable, VolcanoTileIterable volcanoTileIterable){
@@ -57,6 +62,13 @@ public class PlayerTileIterator implements Iterator<TileNode> {
             for (int i = 0; i < playerDistance; i++){
                 currVolcanoTile = volcanoTileIterator.next();
             }
+        }
+    }
+
+    @Override
+    public void update(EventType eventType) {
+        if (eventType == EventType.PLAYER_TURN_END) {
+            this.next();
         }
     }
 

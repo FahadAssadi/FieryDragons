@@ -1,6 +1,6 @@
 package main.game.chit;
 
-import main.game.chit.command.DragonCardCommand;
+import main.game.command.type.chit.DragonCardCommand;
 
 import javax.swing.*;
 

@@ -1,7 +1,8 @@
-package main.game.chit;
+package main.game.chit.iterators;
 
-import main.game.chit.types.CreatureDragonCard;
-import main.game.chit.types.PirateDragonCard;
+import main.game.chit.DragonCard;
+import main.game.chit.type.CreatureDragonCard;
+import main.game.chit.type.PirateDragonCard;
 import main.game.creature.Creature;
 import main.game.creature.iterators.CreatureIterable;
 

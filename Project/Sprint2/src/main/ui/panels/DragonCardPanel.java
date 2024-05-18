@@ -1,14 +1,13 @@
 package main.ui.panels;
 
 import main.game.chit.DragonCard;
-import main.game.chit.DragonCardIterable;
+import main.game.chit.iterators.DragonCardIterable;
 import main.game.chit.DragonCardKeeper;
 import main.misc.Settings;
 import main.ui.buttons.DragonCardButton;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
 
 /**
  * The DragonCardPanel class represents a panel displaying dragon cards in the main.game UI.
