@@ -2,6 +2,7 @@ package main.game.tile;
 
 import main.exceptions.BackwardsMoveNotAllowedException;
 import main.game.tile.type.TileType;
+import main.misc.Settings;
 
 public class TileNode {
     private final TileType type;
@@ -52,6 +53,21 @@ public class TileNode {
 
     public TileNode getCaveTile() {
         return caveTile;
+    }
+
+    public TileNode getNextTile(int steps, int totalMoves) {
+        if (steps > 1){
+            nextVolcanoTile = this.getNextVolcanoTile();
+            return nextVolcanoTile.getNextTile(steps - 1, totalMoves + 1);
+        } else {
+            long boardSize = (long) Settings.getSetting("VolcanoTile");
+            if (totalMoves == ++boardSize) {
+                return getCaveTile();
+            } else {
+                return this.getNextVolcanoTile();
+            }
+        }
+
     }
     /**
      Steps: given steps to be negative.

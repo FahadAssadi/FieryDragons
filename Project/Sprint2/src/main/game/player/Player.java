@@ -45,6 +45,10 @@ public class Player {
         return colour;
     }
 
+    public int getTotalMoves() {
+        return totalMoves;
+    }
+
     /**
      * Retrieves a string representation of the player, including the colour and position.
      *

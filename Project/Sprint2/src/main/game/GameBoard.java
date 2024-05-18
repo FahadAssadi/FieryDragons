@@ -26,6 +26,7 @@ public class GameBoard implements EventListener {
         this.dragonCardKeeper = new DragonCardKeeper(creatureKeeper.getCreatureIterable());
 
         EventManager.getInstance().subscribe(EventType.PLAYER_TURN_START, this);
+        test();
     }
 
     public TileKeeper getTileKeeper() {
@@ -48,6 +49,14 @@ public class GameBoard implements EventListener {
         if (eventType == EventType.PLAYER_TURN_START){
             this.nextPlayerTurn();
         }
+    }
+
+    public void test() {
+        TileNode playerNode = tileKeeper.getPlayerTileQueue().getCurrPlayerTileNode();
+        int totalMoves = playerNode.getType().getPlayer().getTotalMoves();
+        TileNode newNode = playerNode.getNextTile(26, totalMoves);
+        System.out.println("starting node: " + playerNode.getTempID() + playerNode.getType());
+        System.out.println("ending node: " + newNode.getTempID() + newNode.getType());
     }
 
     public void testTraverseBackwards(int steps) throws Exception {
