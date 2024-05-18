@@ -53,9 +53,9 @@ public class PlayerTileQueue implements EventListener {
             ImageIcon caveTileImage = new ImageIcon(getClass().getResource(imagePath));
 
             TileNode caveTileNode = new TileNode(new CaveTileType(caveTileImage, currCreature, player), null, count++);
-            caveTileNode.setLeft(currVolcanoTile);
+            caveTileNode.setNextVolcanoTile(currVolcanoTile);
 
-            currVolcanoTile.setRight(caveTileNode);
+            currVolcanoTile.setCaveTile(caveTileNode);
 
             this.playerTileList.add(caveTileNode);
 

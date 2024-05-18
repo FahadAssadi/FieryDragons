@@ -97,7 +97,7 @@ public class TilePanel extends JPanel {
             int tileX = (int) (centerX + (caveRingRadius - TILE_SIZE / 2) * Math.cos(angle));
             int tileY = (int) (centerY + (caveRingRadius - TILE_SIZE / 2) * Math.sin(angle));
 
-            TileNode caveTileNode = volcanoTileIterator.next().getRight();
+            TileNode caveTileNode = volcanoTileIterator.next().getCaveTile();
 
             TileHexagon tileHexagon = new TileHexagon(caveTileNode.getType(), tileX, tileY);
             tileHexagon.drawTile(g);

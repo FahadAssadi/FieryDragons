@@ -7,17 +7,17 @@ public class TileNode {
     private int tempID;
 
     // Previous tile in the graph
-    private TileNode parent;
+    private TileNode previousVolcanoTile;
 
     // Follow to reach a volcano tile
-    private TileNode left;
+    private TileNode nextVolcanoTile;
 
     // Follow to potentially reach a cave tile
-    private TileNode right;
+    private TileNode caveTile;
 
-    public TileNode(TileType type, TileNode parent, int tempID) {
+    public TileNode(TileType type, TileNode previousVolcanoTile, int tempID) {
         this.type = type;
-        this.parent = parent;
+        this.previousVolcanoTile = previousVolcanoTile;
         this.tempID = tempID;
     }
 
@@ -25,31 +25,31 @@ public class TileNode {
         return tempID;
     }
 
-    public void setParent(TileNode parent) {
-        this.parent = parent;
+    public void setPreviousVolcanoTile(TileNode previousVolcanoTile) {
+        this.previousVolcanoTile = previousVolcanoTile;
     }
 
-    public void setLeft(TileNode left) {
-        this.left = left;
+    public void setNextVolcanoTile(TileNode nextVolcanoTile) {
+        this.nextVolcanoTile = nextVolcanoTile;
     }
 
-    public void setRight(TileNode right) {
-        this.right = right;
+    public void setCaveTile(TileNode caveTile) {
+        this.caveTile = caveTile;
     }
 
     public TileType getType() {
         return type;
     }
 
-    public TileNode getParent() {
-        return parent;
+    public TileNode getPreviousVolcanoTile() {
+        return previousVolcanoTile;
     }
 
-    public TileNode getLeft() {
-        return left;
+    public TileNode getNextVolcanoTile() {
+        return nextVolcanoTile;
     }
 
-    public TileNode getRight() {
-        return right;
+    public TileNode getCaveTile() {
+        return caveTile;
     }
 }
