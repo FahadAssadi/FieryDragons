@@ -4,20 +4,15 @@ import main.game.creature.Creature;
 import main.misc.Settings;
 import main.misc.Utility;
 
-import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
-public class CreatureIterator implements Iterator<Creature> {
+public class CreatureIterable implements Iterable<Creature> {
     private List<Creature> creatures;
-    private int currentIndex;
 
     private static final String DEFAULT_CREATURE_CONFIG_PATH = "/data/creature.json";
 
-    public CreatureIterator() {
+    public CreatureIterable() {
         this.createCreatures();
-        this.currentIndex = 0;
     }
 
     /**
@@ -54,16 +49,21 @@ public class CreatureIterator implements Iterator<Creature> {
     }
 
     @Override
-    public boolean hasNext() {
-        return this.currentIndex < this.creatures.size();
+    public Iterator<Creature> iterator() {
+        return new CreatureIterator();
     }
 
-    @Override
-    public Creature next() {
-        return this.creatures.get(this.currentIndex++);
-    }
+    private class CreatureIterator implements Iterator<Creature> {
+        private int currentIndex = 0;
 
-    public void reset() {
-        this.currentIndex = 0;
+        @Override
+        public boolean hasNext() {
+            return currentIndex < creatures.size();
+        }
+
+        @Override
+        public Creature next() {
+            return creatures.get(currentIndex++);
+        }
     }
 }
