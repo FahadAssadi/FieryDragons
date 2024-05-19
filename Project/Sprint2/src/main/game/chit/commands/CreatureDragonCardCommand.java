@@ -16,8 +16,10 @@ public class CreatureDragonCardCommand extends DragonCardCommand {
 
     @Override
     public void execute(GameBoard gameBoard) {
+        // Get the tile the player is standing on
         TileNode currPlayerTileNode = gameBoard.getTileKeeper().getPlayerTileQueue().getCurrPlayerTileNode();
 
+        // Match it to the chit they selected
         boolean match = creatureDragonCard.getCreature().equals(currPlayerTileNode.getType().getCreature());
 
         if (!match){
@@ -25,5 +27,20 @@ public class CreatureDragonCardCommand extends DragonCardCommand {
             return;
         }
 
+        // Get the next tile to move to
+        int steps = this.creatureDragonCard.getAmount();
+        int totalMoves = currPlayerTileNode.getType().getPlayer().getTotalMoves();
+        TileNode nextTileNode;
+
+        // Move the player to that tile
+        try {
+            nextTileNode = currPlayerTileNode.traverseForward(steps, totalMoves);
+            currPlayerTileNode.movePlayerToTile(nextTileNode, steps);
+        } catch (Exception _) {
+            EventManager.getInstance().notify(EventType.PLAYER_TURN_END);
+            return;
+        }
+
+        System.out.println(nextTileNode.getType().getPlayer());
     }
 }

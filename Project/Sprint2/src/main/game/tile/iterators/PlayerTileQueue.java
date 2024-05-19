@@ -80,4 +80,8 @@ public class PlayerTileQueue implements EventListener {
         }
     }
 
+    public void updateCurrPlayerTileNode(TileNode tileNode) {
+
+    }
+
 }

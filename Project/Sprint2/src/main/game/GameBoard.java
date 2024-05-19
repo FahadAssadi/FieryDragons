@@ -48,37 +48,4 @@ public class GameBoard implements EventListener {
             this.nextPlayerTurn();
         }
     }
-
-    public void test() {
-        TileNode playerNode = tileKeeper.getPlayerTileQueue().getCurrPlayerTileNode();
-        int totalMoves = playerNode.getType().getPlayer().getTotalMoves();
-        TileNode newNode = null;
-
-        try {
-            newNode = playerNode.traverseForward(25, totalMoves);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
-
-        System.out.println("starting node: " + playerNode.getTempID() + " " + playerNode.getType());
-        System.out.println("ending node: " + newNode.getTempID() + " " +  newNode.getType());
-    }
-
-    public void testTraverseBackwards(int steps) throws Exception {
-        TileNode rootNode = tileKeeper.getVolcanoTileIterable().iterator().next();
-        TileNode currentNode = rootNode;
-        TileNode curr = tileKeeper.getPlayerTileQueue().getCurrPlayerTileNode();
-        curr.getType().getPlayer().getTotalMoves();
-        System.out.println("Starting from node: " + currentNode.getTempID());
-
-        for (int i = 0; i < steps; i++) {
-            currentNode = currentNode.getNextTile();
-            System.out.println("Moving forward to node: " + currentNode.getTempID());
-        }
-
-        System.out.println("Traversing backwards " + steps + " steps...");
-        TileNode newNode = currentNode.traverseBackward(steps);
-        System.out.println("After traversing backwards, the new node is: " + newNode.getTempID());
-    }
 }

@@ -1,10 +1,9 @@
 package main.game.tile;
 
+import main.exceptions.FilledTileException;
 import main.exceptions.UndefinedMoveException;
+import main.game.player.Player;
 import main.game.tile.type.TileType;
-import main.misc.Settings;
-
-import javax.swing.plaf.basic.BasicDesktopIconUI;
 
 public class TileNode {
     private final TileType type;
@@ -66,7 +65,7 @@ public class TileNode {
         return adjacentTile;
     }
 
-    public TileNode traverseForward(int steps, int totalMoves) throws UndefinedMoveException {
+    public TileNode traverseForward(int steps, int totalMoves) throws Exception {
         if (steps == 0){
             return this;
         }
@@ -94,5 +93,17 @@ public class TileNode {
         }
 
         return this.previousTile.traverseBackward(++steps);
+    }
+
+    public void movePlayerToTile(TileNode nextTile, int steps) throws Exception {
+        if (nextTile.getType().getPlayer() != null) {
+            throw new FilledTileException("Player Exists");
+        }
+
+        Player player = this.getType().getPlayer();
+        this.getType().setPlayer(null);
+
+        player.move(steps);
+        nextTile.getType().setPlayer(player);
     }
 }
