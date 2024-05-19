@@ -1,5 +1,7 @@
 package main.ui.panels;
 
+import main.game.event.EventListener;
+import main.game.event.EventType;
 import main.game.tile.TileKeeper;
 import main.game.tile.TileNode;
 import main.game.tile.iterators.VolcanoTileIterable;
@@ -14,7 +16,7 @@ import java.util.Iterator;
  * The TilePanel class represents a panel for displaying game tiles in the UI.
  * It extends the JPanel class and is responsible for painting volcano and cave tiles.
  */
-public class TilePanel extends JPanel {
+public class TilePanel extends JPanel implements EventListener {
     // Tile manager to retrieve tile information
     private final TileKeeper tileKeeper;
 
@@ -107,5 +109,10 @@ public class TilePanel extends JPanel {
             }
         }
 
+    }
+
+    @Override
+    public void update(EventType eventType) {
+        repaint();
     }
 }

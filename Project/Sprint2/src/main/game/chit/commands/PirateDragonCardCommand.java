@@ -4,7 +4,6 @@ import main.game.GameBoard;
 import main.game.chit.type.PirateDragonCard;
 import main.game.event.EventManager;
 import main.game.event.EventType;
-import main.game.player.Player;
 import main.game.tile.TileNode;
 
 public class PirateDragonCardCommand extends DragonCardCommand{
@@ -17,7 +16,7 @@ public class PirateDragonCardCommand extends DragonCardCommand{
     @Override
     public void execute(GameBoard gameBoard) {
         TileNode currPlayerTileNode = gameBoard.getTileKeeper().getPlayerTileQueue().getCurrPlayerTileNode();
-        int steps = this.pirateDragonCard.getAmount();
+        int steps = -1 * this.pirateDragonCard.getAmount();
         TileNode nextTileNode;
 
         try {

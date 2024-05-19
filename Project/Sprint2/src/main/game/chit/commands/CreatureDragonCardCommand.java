@@ -41,6 +41,7 @@ public class CreatureDragonCardCommand extends DragonCardCommand {
             return;
         }
 
+        gameBoard.getTileKeeper().getPlayerTileQueue().updateCurrPlayerTileNode(nextTileNode);
         System.out.println(nextTileNode.getType().getPlayer());
     }
 }

@@ -106,4 +106,12 @@ public class TileNode {
         player.move(steps);
         nextTile.getType().setPlayer(player);
     }
+
+    @Override
+    public String toString() {
+        return "TileNode{" +
+                "tempID=" + tempID +
+                ", type=" + type +
+                '}';
+    }
 }

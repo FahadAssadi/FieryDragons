@@ -40,6 +40,8 @@ public class GameBoard implements EventListener {
         DragonCard currDragonCard = this.dragonCardKeeper.getSelectedDragonCard();
 
         currDragonCard.getDragonCardCommand().execute(this);
+
+        System.out.println(this.tileKeeper.getPlayerTileQueue());
     }
 
     @Override

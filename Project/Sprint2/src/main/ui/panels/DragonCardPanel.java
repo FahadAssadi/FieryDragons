@@ -10,7 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * The DragonCardPanel class represents a panel displaying dragon cards in the main.game UI.
+ * The DragonCardPanel class represents a panel displaying dragon cards in the game UI.
  * It extends the JPanel class and arranges dragon card buttons in a grid layout.
  */
 public class DragonCardPanel extends JPanel {

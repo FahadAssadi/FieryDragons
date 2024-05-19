@@ -81,7 +81,11 @@ public class PlayerTileQueue implements EventListener {
     }
 
     public void updateCurrPlayerTileNode(TileNode tileNode) {
-
+        this.playerTileList.set(this.currIndex, tileNode);
     }
 
+    @Override
+    public String toString() {
+        return this.playerTileList.toString();
+    }
 }
