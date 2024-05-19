@@ -5,30 +5,29 @@ import main.ui.frames.GameFrame;
 
 /**
  * The GameUI class manages the user interface of the main.game.
- * It initializes the main.game frame and populates it with panels representing different main.game elements.
+ * It initializes the game frame and populates it with panels representing different main.game elements.
  */
 public class GameUI {
     // The main.game frame containing the user interface components
     private final GameFrame gameFrame;
 
     /**
-     * Constructs a GameUI object with the specified main.game board.
-     * Initializes the main.game frame and populates it with panels representing main.game elements.
+     * Constructs a GameUI object with the specified game board.
+     * Initializes the game frame and populates it with panels representing game elements.
      *
-     * @param gameBoard The main.game board containing main.game-related information.
+     * @param gameBoard The game board containing game-related information.
      */
     public GameUI(GameBoard gameBoard) {
         this.gameFrame = new GameFrame();
 
-        // Create and add panels representing dragon cards, player turns, and tiles to the main.game frame
-        this.gameFrame.createDragonCardPanel(gameBoard.getDragonCardManager());
-        // Panel created for main.testing purposes.
-        this.gameFrame.createPlayerTurnPanel(gameBoard.getPlayerManager());
-        this.gameFrame.createTilePanel(gameBoard.getTileManager());
+        // Create and add panels representing dragon cards, player turns, and tiles to the game frame
+        this.gameFrame.createDragonCardPanel(gameBoard.getDragonCardKeeper());
+        this.gameFrame.createPlayerTurnPanel(gameBoard.getTileKeeper());
+        this.gameFrame.createTilePanel(gameBoard.getTileKeeper());
     }
 
     /**
-     * Displays the main.game user interface by setting the main.game frame visible.
+     * Displays the game user interface by setting the game frame visible.
      */
     public void displayGameUI(){
         this.gameFrame.setVisible(true);

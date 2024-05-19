@@ -14,6 +14,8 @@ public enum EventType {
      */
     PLAYER_TURN_END,
 
+    PLAYER_MOVED,
+
     /**
      * Indicates the event to shuffle cards.
      */

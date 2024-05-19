@@ -3,10 +3,9 @@ package main;
 import main.game.GameBoard;
 import main.ui.GameUI;
 
-
 /**
  * The main.Game class serves as the entry point for the application.
- * It initializes the main.game board and the user interface and displays the main.game UI.
+ * It initializes the game board and the user interface and displays the game UI.
  */
 public class Game {
     public static void main(String[] args) {
