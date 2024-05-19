@@ -26,7 +26,10 @@ public class PirateDragonCardCommand extends DragonCardCommand{
             EventManager.getInstance().notify(EventType.PLAYER_TURN_END);
             return;
         }
+
+
         gameBoard.getTileKeeper().getPlayerTileQueue().updateCurrPlayerTileNode(nextTileNode);
+        EventManager.getInstance().notify(EventType.PLAYER_MOVED);
         EventManager.getInstance().notify(EventType.PLAYER_TURN_END);
     }
 }

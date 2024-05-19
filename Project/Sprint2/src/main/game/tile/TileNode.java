@@ -4,6 +4,7 @@ import main.exceptions.FilledTileException;
 import main.exceptions.UndefinedMoveException;
 import main.game.player.Player;
 import main.game.tile.type.TileType;
+import main.misc.Settings;
 
 public class TileNode {
     private final TileType type;
@@ -66,15 +67,18 @@ public class TileNode {
     }
 
     public TileNode traverseForward(int steps, int totalMoves) throws Exception {
+        long boardSize = (long) Settings.getSetting("VolcanoTile");
+        boardSize++;
+
         if (steps == 0){
             return this;
         }
 
-        if (totalMoves > 25) {
+        if (totalMoves > boardSize) {
             throw new UndefinedMoveException("Moves overflow the graph");
-        } else if (totalMoves == 25) {
+        } else if (totalMoves == boardSize) {
             return this.getAdjacentTile().traverseForward(--steps, ++totalMoves);
-        } else {
+        } else { // totalMoves < boardSize
             return this.getNextTile().traverseForward(--steps, ++totalMoves);
         }
 
@@ -92,7 +96,7 @@ public class TileNode {
             throw new UndefinedMoveException("No previous tile before cave");
         }
 
-        return this.previousTile.traverseBackward(++steps);
+        return this.getPreviousTile().traverseBackward(++steps);
     }
 
     public void movePlayerToTile(TileNode nextTile, int steps) throws Exception {

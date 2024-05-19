@@ -1,18 +1,20 @@
 package main.ui.frames;
 
 import main.game.chit.DragonCardKeeper;
+import main.game.event.EventListener;
+import main.game.event.EventManager;
+import main.game.event.EventType;
 import main.game.tile.TileKeeper;
 import main.ui.panels.DragonCardPanel;
 import main.ui.panels.PlayerTurnPanel;
 import main.ui.panels.TilePanel;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * The main frame of the game UI, responsible for managing and displaying various main.game panels.
  */
-public class GameFrame extends JFrame {
+public class GameFrame extends JFrame implements EventListener {
     private static final int DEFAULT_FRAME_WIDTH = 800;
     private static final int DEFAULT_FRAME_HEIGHT = 800;
     private static final String GAME_TITLE = "Fiery Dragons";
@@ -29,12 +31,13 @@ public class GameFrame extends JFrame {
         // Set the icon image
         setIconImage(new ImageIcon(getClass().getResource(GAME_LOGO_PATH)).getImage());
 
-        getContentPane().setBackground(Color.white);
-
-        setLayout(null);
         setResizable(false);
 
+        setLayout(null);
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        EventManager.getInstance().subscribe(EventType.PLAYER_MOVED, this);
     }
 
     public void createDragonCardPanel(DragonCardKeeper dragonCardKeeper){
@@ -55,5 +58,11 @@ public class GameFrame extends JFrame {
         TilePanel tilePanel = new TilePanel(tileKeeper, DEFAULT_FRAME_WIDTH, DEFAULT_FRAME_HEIGHT);
 
         this.add(tilePanel);
+    }
+
+
+    @Override
+    public void update(EventType eventType) {
+        repaint();
     }
 }

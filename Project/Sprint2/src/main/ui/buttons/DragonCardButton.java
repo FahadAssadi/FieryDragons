@@ -36,11 +36,10 @@ public class DragonCardButton extends JButton implements ActionListener {
         // Set the unflipped dragon card image
         ImageIcon dragonCardImage = new ImageIcon(getClass().getResource(DRAGONCARD_IMG_PATH));
         this.dragonCardUnflippedImage = Utility.getScaledImage(dragonCardImage, BUTTON_WIDTH, BUTTON_HEIGHT);
-        this.dragonCardFlippedImage = Utility.getScaledImage(dragonCard.getDragonCardImage(), BUTTON_WIDTH, BUTTON_HEIGHT);
-        setIcon(this.dragonCardFlippedImage);
+        setIcon(this.dragonCardUnflippedImage);
 
         // Set the flipped dragon card image
-
+        this.dragonCardFlippedImage = Utility.getScaledImage(dragonCard.getDragonCardImage(), BUTTON_WIDTH, BUTTON_HEIGHT);
 
         addActionListener(this);
 
@@ -57,7 +56,7 @@ public class DragonCardButton extends JButton implements ActionListener {
         // Wait for FLIP_DELAY milliseconds before unflipping the image
         Timer timer = new Timer(FLIP_DELAY, e -> {
             // Set the unflipped image after the delay
-            setIcon(dragonCardFlippedImage);
+            setIcon(dragonCardUnflippedImage);
         });
 
         timer.setRepeats(false);
