@@ -22,11 +22,11 @@ public class PirateDragonCardCommand extends DragonCardCommand{
         try {
             nextTileNode = currPlayerTileNode.traverseBackward(steps);
             currPlayerTileNode.movePlayerToTile(nextTileNode, steps);
-        } catch (Exception _) {
+        } catch (Exception e) {
             EventManager.getInstance().notify(EventType.PLAYER_TURN_END);
             return;
         }
-
-        System.out.println(nextTileNode.getType().getPlayer());
+        gameBoard.getTileKeeper().getPlayerTileQueue().updateCurrPlayerTileNode(nextTileNode);
+        EventManager.getInstance().notify(EventType.PLAYER_TURN_END);
     }
 }
