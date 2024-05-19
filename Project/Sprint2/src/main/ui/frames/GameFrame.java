@@ -63,6 +63,8 @@ public class GameFrame extends JFrame implements EventListener {
 
     @Override
     public void update(EventType eventType) {
-        repaint();
+        if (eventType == EventType.PLAYER_MOVED) {
+            repaint();
+        }
     }
 }

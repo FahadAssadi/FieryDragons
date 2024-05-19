@@ -1,6 +1,9 @@
 package main.game.player;
 
+import main.game.event.EventManager;
+import main.game.event.EventType;
 import main.game.player.behaviour.BehaviourStrategy;
+import main.misc.Settings;
 
 /**
  * The Player class represents a player in the main.game.
@@ -33,6 +36,10 @@ public class Player {
 
     public void move(int steps) {
         this.totalMoves += steps;
+
+        if (this.totalMoves == (long) Settings.getSetting("VolcanoTile") + 2) {
+            EventManager.getInstance().notify(EventType.GAME_OVER);
+        }
     }
 
     /**

@@ -36,10 +36,11 @@ public class DragonCardButton extends JButton implements ActionListener {
         // Set the unflipped dragon card image
         ImageIcon dragonCardImage = new ImageIcon(getClass().getResource(DRAGONCARD_IMG_PATH));
         this.dragonCardUnflippedImage = Utility.getScaledImage(dragonCardImage, BUTTON_WIDTH, BUTTON_HEIGHT);
-        setIcon(this.dragonCardUnflippedImage);
 
         // Set the flipped dragon card image
         this.dragonCardFlippedImage = Utility.getScaledImage(dragonCard.getDragonCardImage(), BUTTON_WIDTH, BUTTON_HEIGHT);
+
+        setIcon(this.dragonCardUnflippedImage);
 
         addActionListener(this);
 

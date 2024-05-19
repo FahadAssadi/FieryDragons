@@ -7,7 +7,6 @@ import main.game.event.EventListener;
 import main.game.event.EventManager;
 import main.game.event.EventType;
 import main.game.tile.TileKeeper;
-import main.game.tile.TileNode;
 
 /**
  * The GameBoard class represents the game board and manages game-related entities.

@@ -101,7 +101,7 @@ public class TileNode {
 
     public void movePlayerToTile(TileNode nextTile, int steps) throws Exception {
         if (nextTile.getType().getPlayer() != null) {
-            throw new FilledTileException("Player Exists");
+            this.resolveCollision();
         }
 
         Player player = this.getType().getPlayer();
@@ -109,6 +109,13 @@ public class TileNode {
 
         player.move(steps);
         nextTile.getType().setPlayer(player);
+    }
+
+    public void resolveCollision() throws Exception {
+        // Currently only throws exception
+        throw new FilledTileException("Player Exists");
+
+        // With the extended feature, will have some implementation
     }
 
     @Override

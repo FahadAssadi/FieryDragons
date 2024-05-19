@@ -74,7 +74,9 @@ public class PlayerTurnPanel extends JPanel implements EventListener {
      */
     @Override
     public void update(EventType eventType) {
-        // Repaint the panel to update the displayed player
-        repaint();
+        if (eventType == EventType.PLAYER_TURN_END) {
+            // Repaint the panel to update the displayed player
+            repaint();
+        }
     }
 }
