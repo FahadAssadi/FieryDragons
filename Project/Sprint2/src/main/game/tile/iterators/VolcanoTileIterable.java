@@ -42,8 +42,8 @@ public class VolcanoTileIterable implements Iterable<TileNode> {
 
             // Only occurs during the first iteration
             if (prevNode != null) {
-                prevNode.setNextVolcanoTile(currNode);
-                currNode.setPreviousVolcanoTile(prevNode);
+                prevNode.setNextTile(currNode);
+                currNode.setPreviousTile(prevNode);
             } else {
                 this.rootNode = currNode; // Set the first node as the rootNode
             }
@@ -54,8 +54,8 @@ public class VolcanoTileIterable implements Iterable<TileNode> {
         }
 
         // Set the parent link for the rootNode
-        prevNode.setNextVolcanoTile(this.rootNode);
-        this.rootNode.setPreviousVolcanoTile(prevNode);
+        prevNode.setNextTile(this.rootNode);
+        this.rootNode.setPreviousTile(prevNode);
     }
 
     @Override
@@ -79,7 +79,7 @@ public class VolcanoTileIterable implements Iterable<TileNode> {
             }
 
             TileNode nextNode = currNode;
-            currNode = currNode.getNextVolcanoTile();
+            currNode = currNode.getNextTile();
 
             return nextNode;
         }

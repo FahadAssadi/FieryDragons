@@ -1,7 +1,7 @@
 package main.game.chit.type;
 
-import main.game.command.type.chit.DragonCardCommand;
-import main.game.command.type.chit.PirateDragonCardCommand;
+import main.game.chit.commands.DragonCardCommand;
+import main.game.chit.commands.PirateDragonCardCommand;
 import main.game.creature.Creature;
 
 import javax.swing.*;

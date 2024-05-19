@@ -11,13 +11,13 @@ public class Game {
     public static void main(String[] args) {
         // Create the main.game board and the main.ui
         GameBoard gB = new GameBoard();
-        GameUI ui = new GameUI(gB);
-
-        // Display the main.ui
-        ui.displayGameUI();
+//        GameUI ui = new GameUI(gB);
+//
+//        // Display the main.ui
+//        ui.displayGameUI();
 
         try {
-            gB.testTraverseBackwards(-3);
+            gB.test();
         } catch (Exception e) {
             System.out.println(e);
         }

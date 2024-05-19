@@ -1,25 +1,36 @@
 package main.game.tile;
 
-import main.exceptions.BackwardsMoveNotAllowedException;
+import main.exceptions.UndefinedMoveException;
 import main.game.tile.type.TileType;
 import main.misc.Settings;
+
+import javax.swing.plaf.basic.BasicDesktopIconUI;
 
 public class TileNode {
     private final TileType type;
     private int tempID;
 
+    /*
+    The structure of a tile will look something like this:
+
+                        ADJACENT_TILE
+                              |
+               PREV_TILE --- this --- NEXT_TILE
+
+     */
+
     // Previous tile in the graph
-    private TileNode previousVolcanoTile;
+    private TileNode previousTile;
 
     // Follow to reach a volcano tile
-    private TileNode nextVolcanoTile;
+    private TileNode nextTile;
 
     // Follow to potentially reach a cave tile
-    private TileNode caveTile;
+    private TileNode adjacentTile;
 
-    public TileNode(TileType type, TileNode previousVolcanoTile, int tempID) {
+    public TileNode(TileType type, TileNode previousTile, int tempID) {
         this.type = type;
-        this.previousVolcanoTile = previousVolcanoTile;
+        this.previousTile = previousTile;
         this.tempID = tempID;
     }
 
@@ -27,59 +38,61 @@ public class TileNode {
         return tempID;
     }
 
-    public void setPreviousVolcanoTile(TileNode previousVolcanoTile) {
-        this.previousVolcanoTile = previousVolcanoTile;
+    public void setPreviousTile(TileNode previousTile) {
+        this.previousTile = previousTile;
     }
 
-    public void setNextVolcanoTile(TileNode nextVolcanoTile) {
-        this.nextVolcanoTile = nextVolcanoTile;
+    public void setNextTile(TileNode nextTile) {
+        this.nextTile = nextTile;
     }
 
-    public void setCaveTile(TileNode caveTile) {
-        this.caveTile = caveTile;
+    public void setAdjacentTile(TileNode adjacentTile) {
+        this.adjacentTile = adjacentTile;
     }
 
     public TileType getType() {
         return type;
     }
 
-    public TileNode getPreviousVolcanoTile() {
-        return previousVolcanoTile;
+    public TileNode getPreviousTile() {
+        return previousTile;
     }
 
-    public TileNode getNextVolcanoTile() {
-        return nextVolcanoTile;
+    public TileNode getNextTile() {
+        return nextTile;
     }
 
-    public TileNode getCaveTile() {
-        return caveTile;
+    public TileNode getAdjacentTile() {
+        return adjacentTile;
     }
 
-    public TileNode getNextTile(int steps, int totalMoves) {
-        if (steps > 1){
-            nextVolcanoTile = this.getNextVolcanoTile();
-            return nextVolcanoTile.getNextTile(steps - 1, totalMoves + 1);
+    public TileNode traverseForward(int steps, int totalMoves) throws UndefinedMoveException {
+        if (steps == 0){
+            return this;
+        }
+
+        if (totalMoves > 25) {
+            throw new UndefinedMoveException("Moves overflow the graph");
+        } else if (totalMoves == 25) {
+            return this.getAdjacentTile().traverseForward(--steps, ++totalMoves);
         } else {
-            long boardSize = (long) Settings.getSetting("VolcanoTile");
-            if (totalMoves == ++boardSize) {
-                return getCaveTile();
-            } else {
-                return this.getNextVolcanoTile();
-            }
+            return this.getNextTile().traverseForward(--steps, ++totalMoves);
         }
 
     }
+
     /**
      Steps: given steps to be negative.
      */
-    public TileNode traverseBackwards(int steps) throws Exception {
-        if (this.previousVolcanoTile == null) {
-            throw new BackwardsMoveNotAllowedException("You are in a cave");
-        }
+    public TileNode traverseBackward(int steps) throws Exception {
         if (steps == 0) {
             return this;
         }
 
-        return this.previousVolcanoTile.traverseBackwards(steps + 1);
+        if (this.previousTile == null) {
+            throw new UndefinedMoveException("No previous tile before cave");
+        }
+
+        return this.previousTile.traverseBackward(++steps);
     }
 }
