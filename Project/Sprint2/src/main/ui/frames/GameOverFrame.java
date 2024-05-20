@@ -1,11 +1,13 @@
 package main.ui.frames;
 
+import main.game.player.Player;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class GameOverFrame extends JFrame {
 
-    public GameOverFrame(String winner) {
+    public GameOverFrame(Player winner) {
         setTitle("Game Over");
         setSize(400, 200);
         setLocationRelativeTo(null);
@@ -14,11 +16,11 @@ public class GameOverFrame extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
 
-        JLabel gameOverLabel = new JLabel("Game Over!", SwingConstants.CENTER);
-        gameOverLabel.setFont(new Font("Serif", Font.BOLD, 24));
+        JLabel gameOverLabel = new JLabel("Game Won!", SwingConstants.CENTER);
+        gameOverLabel.setFont(new Font("SansSerif", Font.BOLD, 24));
         panel.add(gameOverLabel, BorderLayout.NORTH);
 
-        JLabel winnerLabel = new JLabel("Winner: " + winner, SwingConstants.CENTER);
+        JLabel winnerLabel = new JLabel("Winner: ", SwingConstants.CENTER);
         winnerLabel.setFont(new Font("Serif", Font.PLAIN, 18));
         panel.add(winnerLabel, BorderLayout.CENTER);
 
