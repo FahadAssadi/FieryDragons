@@ -54,6 +54,8 @@ public class GameUI implements EventListener {
         // Get the winning player
         Player winningPlayer = gameBoard.getTileKeeper().getPlayerTileQueue().getCurrPlayerTileNode().getType().getPlayer();
 
+        System.out.println(winningPlayer);
+
         // Hide the main game frame
         gameFrame.setVisible(false);
 

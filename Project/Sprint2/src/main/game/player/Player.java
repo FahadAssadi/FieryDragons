@@ -1,15 +1,18 @@
 package main.game.player;
 
+import main.game.event.EventListener;
 import main.game.event.EventManager;
 import main.game.event.EventType;
 import main.game.player.behaviour.BehaviourStrategy;
 import main.misc.Settings;
 
+import java.util.Set;
+
 /**
  * The Player class represents a player in the main.game.
  * It contains information such as behaviour, position, and total moves of the player.
  */
-public class Player {
+public class Player implements EventListener {
     // The behaviour strategy of the player
     private final BehaviourStrategy behaviour;
 
@@ -32,14 +35,18 @@ public class Player {
         this.behaviour = behaviour;
         this.colour = colour;
         this.totalMoves = DEFAULT_TOTAL_MOVES;
+
+        EventManager.getInstance().subscribe(EventType.PLAYER_MOVED, this);
     }
 
     public void move(int steps) {
         this.totalMoves += steps;
+    }
 
-        if (this.totalMoves == (long) Settings.getSetting("VolcanoTile") + 2) {
-            EventManager.getInstance().notify(EventType.GAME_OVER);
-        }
+    public boolean hasWon() {
+        long boardSize = (long) Settings.getSetting("VolcanoTile");
+
+        return this.totalMoves == boardSize + 2;
     }
 
     /**
@@ -63,5 +70,15 @@ public class Player {
 
     public int getTotalMoves() {
         return totalMoves;
+    }
+
+    @Override
+    public void update(EventType eventType) {
+        if (eventType == EventType.PLAYER_MOVED) {
+            if (hasWon()){
+                EventManager.getInstance().notify(EventType.GAME_OVER);
+            }
+        }
+
     }
 }
