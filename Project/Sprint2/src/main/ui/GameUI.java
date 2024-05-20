@@ -56,9 +56,6 @@ public class GameUI implements EventListener {
 
         System.out.println(winningPlayer);
 
-        // Hide the main game frame
-        gameFrame.setVisible(false);
-
         // Create and display the Game Over frame
         GameOverFrame gameOverFrame = new GameOverFrame(winningPlayer);
         gameOverFrame.setVisible(true);
