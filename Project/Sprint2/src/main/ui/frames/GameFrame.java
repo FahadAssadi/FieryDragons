@@ -1,6 +1,6 @@
 package main.ui.frames;
 
-import main.game.chit.DragonCardKeeper;
+import main.game.GameBoard;
 import main.game.event.EventListener;
 import main.game.event.EventManager;
 import main.game.event.EventType;
@@ -40,8 +40,8 @@ public class GameFrame extends JFrame implements EventListener {
         EventManager.getInstance().subscribe(EventType.PLAYER_MOVED, this);
     }
 
-    public void createDragonCardPanel(DragonCardKeeper dragonCardKeeper){
-        DragonCardPanel dragonCardPanel = new DragonCardPanel(dragonCardKeeper, DEFAULT_FRAME_WIDTH, DEFAULT_FRAME_HEIGHT);
+    public void createDragonCardPanel(GameBoard gameBoard){
+        DragonCardPanel dragonCardPanel = new DragonCardPanel(gameBoard, DEFAULT_FRAME_WIDTH, DEFAULT_FRAME_HEIGHT);
 
         this.add(dragonCardPanel);
     }

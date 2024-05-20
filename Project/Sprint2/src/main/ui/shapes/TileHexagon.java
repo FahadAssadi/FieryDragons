@@ -1,5 +1,6 @@
 package main.ui.shapes;
 
+import main.game.player.Player;
 import main.game.tile.type.TileType;
 
 import java.awt.*;
@@ -39,16 +40,11 @@ public class TileHexagon extends Polygon {
         g.drawImage(this.tile.getImageIcon().getImage(), imageX - 10, imageY, TILE_SIZE, TILE_SIZE, null);
 
         // Draw the player indicator
-        if (this.tile.getPlayer() != null) {
-            Color playerColor = Color.decode(this.tile.getPlayer().getColour());
-            drawPlayerIndicator(g, centerX, centerY, playerColor);
+        Player player = this.tile.getPlayer();
+
+        if (player != null) {
+            DragonToken dragonToken = new DragonToken(player);
+            dragonToken.drawPlayerIndicator(g, centerX, centerY);
         }
     }
-
-    private void drawPlayerIndicator(Graphics g, int centerX, int centerY, Color playerColor) {
-        g.setColor(playerColor);
-        int indicatorSize = TILE_SIZE / 2;
-        g.fillOval(centerX - indicatorSize / 2, centerY - indicatorSize / 2, indicatorSize, indicatorSize);
-    }
-
 }

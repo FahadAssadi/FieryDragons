@@ -5,11 +5,6 @@ package main.game.event;
  */
 public enum EventType {
     /**
-     * Indicates the start of a player's turn.
-     */
-    PLAYER_TURN_START,
-
-    /**
      * Indicates the end of a player's turn.
      */
     PLAYER_TURN_END,
