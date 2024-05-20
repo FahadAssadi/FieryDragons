@@ -1,5 +1,6 @@
 package main.ui.panels;
 
+import main.game.GameBoard;
 import main.game.chit.DragonCard;
 import main.game.chit.iterators.DragonCardIterable;
 import main.game.chit.DragonCardKeeper;
@@ -20,7 +21,7 @@ public class DragonCardPanel extends JPanel {
     private static final int DEFAULT_BUTTON_GAP = 2;
 
 
-    public DragonCardPanel(DragonCardKeeper dragonCardKeeper, int parentWidth, int parentHeight) {
+    public DragonCardPanel(GameBoard gameBoard, int parentWidth, int parentHeight) {
         super();
 
         // Calculate the grid dimensions based on the number of dragon cards
@@ -33,7 +34,7 @@ public class DragonCardPanel extends JPanel {
         setLayout(new GridLayout(gridLength, gridLength, DEFAULT_BUTTON_GAP, DEFAULT_BUTTON_GAP));
 
         // Create dragon card buttons
-        createDragonCards(dragonCardKeeper);
+        createDragonCards(gameBoard);
     }
 
     /**
@@ -50,13 +51,13 @@ public class DragonCardPanel extends JPanel {
     }
 
 
-    private void createDragonCards(DragonCardKeeper dragonCardKeeper) {
-        DragonCardIterable dragonCardIterable = dragonCardKeeper.getDragonCardIterable();
+    private void createDragonCards(GameBoard gameBoard) {
+        DragonCardIterable dragonCardIterable = gameBoard.getDragonCardKeeper().getDragonCardIterable();
 
         // Add images to the buttons
         for (DragonCard dragonCard : dragonCardIterable) {
             // Create a button with the image
-            DragonCardButton dragonCardButton = new DragonCardButton(dragonCardKeeper, dragonCard);
+            DragonCardButton dragonCardButton = new DragonCardButton(gameBoard, dragonCard);
             this.add(dragonCardButton);
         }
     }

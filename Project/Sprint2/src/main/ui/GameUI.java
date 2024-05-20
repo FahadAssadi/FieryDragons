@@ -18,17 +18,17 @@ public class GameUI implements EventListener {
     private final GameBoard gameBoard;
 
     /**
-     * Constructs a GameUI object with the specified main.game board.
-     * Initializes the main.game frame and populates it with panels representing main.game elements.
+     * Constructs a GameUI object with the specified game board.
+     * Initializes the game frame and populates it with panels representing game elements.
      *
-     * @param gameBoard The main.game board containing main.game-related information.
+     * @param gameBoard The game board containing game-related information.
      */
     public GameUI(GameBoard gameBoard) {
         this.gameFrame = new GameFrame();
         this.gameBoard = gameBoard;
 
         // Create and add panels representing dragon cards, player turns, and tiles to the game frame
-        this.gameFrame.createDragonCardPanel(gameBoard.getDragonCardKeeper());
+        this.gameFrame.createDragonCardPanel(gameBoard);
         this.gameFrame.createPlayerTurnPanel(gameBoard.getTileKeeper());
         this.gameFrame.createTilePanel(gameBoard.getTileKeeper());
 
@@ -37,7 +37,7 @@ public class GameUI implements EventListener {
     }
 
     /**
-     * Displays the game user interface by setting the main.game frame visible.
+     * Displays the game user interface by setting the game frame visible.
      */
     public void displayGameUI(){
         this.gameFrame.setVisible(true);
