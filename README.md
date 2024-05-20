@@ -11,5 +11,7 @@ Project/Sprint2/src/resources includes all assets and json files used in the mai
 Project/Sprint2/src/main.testing includes all the main.testing appropriate files used to test the functionality of the main.game.
 Project/Sprint2/src/main.ui includes all the main.ui elements related to the main.game. <br />
 
+Video url: https://youtu.be/iiM_17GldbQ
+
 Executable Platform: Windows 11<br />
 Java SDK: 22 <br />
