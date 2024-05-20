@@ -1,17 +1,17 @@
 package main.ui.shapes;
 
-import main.game.tile.Tile;
+import main.game.tile.type.TileType;
 
 import java.awt.*;
 
 public class TileHexagon extends Polygon {
-    private final Tile tile;
+    private final TileType tile;
 
     private static final int TOTAL_POINTS = 6; // 6 points for a hexagon
     private static final int TILE_SIZE = 36;
     private static final Color TILE_COLOR = new Color(120, 59, 5, 244);
 
-    public TileHexagon(Tile tile, int tileX, int tileY) {
+    public TileHexagon(TileType tile, int tileX, int tileY) {
         super();
         this.tile = tile;
 

@@ -4,7 +4,7 @@ import main.game.event.EventListener;
 import main.game.event.EventManager;
 import main.game.event.EventType;
 import main.game.player.Player;
-import main.game.player.PlayerManager;
+import main.game.tile.TileKeeper;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +15,7 @@ import java.awt.*;
  */
 public class PlayerTurnPanel extends JPanel implements EventListener {
     // Player manager to retrieve current player information
-    private final PlayerManager playerManager;
+    private final TileKeeper tileKeeper;
 
     // Panel dimensions and offsets
     private static final int xOffset = 0;
@@ -24,17 +24,10 @@ public class PlayerTurnPanel extends JPanel implements EventListener {
     private static final int PANEL_HEIGHT = 50;
     private static final int FONT_SIZE = 20;
 
-    /**
-     * Constructs a PlayerTurnPanel object with the specified player manager, parent width, and parent height.
-     * Initializes the panel's appearance and subscribes to PLAYER_TURN_END events.
-     *
-     * @param playerManager The player manager containing player information.
-     * @param parentWidth   The width of the parent container.
-     * @param parentHeight  The height of the parent container.
-     */
-    public PlayerTurnPanel(PlayerManager playerManager, int parentWidth, int parentHeight) {
+
+    public PlayerTurnPanel(TileKeeper tileKeeper, int parentWidth, int parentHeight) {
         super();
-        this.playerManager = playerManager;
+        this.tileKeeper = tileKeeper;
 
         // Set panel bounds, background color, and border
         setBounds(xOffset, yOffset, parentWidth, parentHeight);
@@ -60,7 +53,7 @@ public class PlayerTurnPanel extends JPanel implements EventListener {
         super.paintComponent(g);
 
         // Get the current player and player color
-        Player currentPlayer = playerManager.getCurrPlayer();
+        Player currentPlayer = tileKeeper.getPlayerTileQueue().getCurrPlayerTileNode().getType().getPlayer();
         String playerColor = currentPlayer.getColour();
         String playerTurnText = "Current Player: ";
 
@@ -81,7 +74,9 @@ public class PlayerTurnPanel extends JPanel implements EventListener {
      */
     @Override
     public void update(EventType eventType) {
-        // Repaint the panel to update the displayed player
-        repaint();
+        if (eventType == EventType.PLAYER_TURN_END) {
+            // Repaint the panel to update the displayed player
+            repaint();
+        }
     }
 }

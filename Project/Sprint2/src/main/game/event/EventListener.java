@@ -1,7 +1,7 @@
 package main.game.event;
 
 /**
- * The EventListener interface defines a contract for classes that listen for main.game events.
+ * The EventListener interface defines a contract for classes that listen for game events.
  */
 public interface EventListener {
     /**

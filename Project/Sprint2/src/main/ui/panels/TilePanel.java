@@ -1,20 +1,22 @@
 package main.ui.panels;
 
-import main.game.tile.Tile;
-import main.game.tile.TileManager;
+import main.game.tile.TileKeeper;
+import main.game.tile.TileNode;
+import main.game.tile.iterators.VolcanoTileIterable;
+import main.misc.Settings;
 import main.ui.shapes.TileHexagon;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
+import java.util.Iterator;
 
 /**
- * The TilePanel class represents a panel for displaying main.game tiles in the UI.
+ * The TilePanel class represents a panel for displaying game tiles in the UI.
  * It extends the JPanel class and is responsible for painting volcano and cave tiles.
  */
 public class TilePanel extends JPanel {
     // Tile manager to retrieve tile information
-    private final TileManager tileManager;
+    private final TileKeeper tileKeeper;
 
     // Panel dimensions and offsets
     private static final int xOffset = 0;
@@ -22,20 +24,16 @@ public class TilePanel extends JPanel {
     private static final int TILE_SIZE = 36;
     private static final int RING_RADIUS = 270;
 
-    /**
-     * Constructs a TilePanel object with the specified tile manager, parent width, and parent height.
-     *
-     * @param tileManager  The tile manager containing tile information.
-     * @param parentWidth  The width of the parent container.
-     * @param parentHeight The height of the parent container.
-     */
-    public TilePanel(TileManager tileManager, int parentWidth, int parentHeight) {
+
+    public TilePanel(TileKeeper tileKeeper, int parentWidth, int parentHeight) {
         super();
-        this.tileManager = tileManager;
+        this.tileKeeper = tileKeeper;
 
         // Set panel bounds and background color
         setBounds(xOffset, yOffset, parentWidth, parentHeight);
         setBackground(Color.WHITE);
+
+//        EventManager.getInstance().subscribe(EventType.PLAYER_MOVED, this);
     }
 
     /**
@@ -52,51 +50,38 @@ public class TilePanel extends JPanel {
         int centerY = getHeight() / 2;
 
         // Draw volcano tiles
-        List<Tile> volcanoTiles = this.tileManager.getVolcanoTileList();
-        drawVolcanoTiles(g, centerX, centerY, volcanoTiles);
+        drawVolcanoTiles(g, centerX, centerY, this.tileKeeper.getVolcanoTileIterable());
 
         // Draw cave tiles
-        List<Tile> caveTiles = this.tileManager.getCaveTileList();
-        drawCaveTiles(g, centerX, centerY, caveTiles);
+        drawCaveTiles(g, centerX, centerY, this.tileKeeper.getVolcanoTileIterable());
     }
 
-    /**
-     * Draws volcano tiles around the center of the panel.
-     *
-     * @param g           The Graphics object used for drawing.
-     * @param centerX      The x-coordinate of the center of the panel.
-     * @param centerY      The y-coordinate of the center of the panel.
-     * @param volcanoTiles The list of volcano tiles to be drawn.
-     */
-    private void drawVolcanoTiles(Graphics g, int centerX, int centerY, List<Tile> volcanoTiles) {
-        int numTiles = volcanoTiles.size();
+
+    private void drawVolcanoTiles(Graphics g, int centerX, int centerY, VolcanoTileIterable volcanoTileIterable) {
+        long numTiles = (long) Settings.getSetting("VolcanoTile");
         double angleIncrement = 2 * Math.PI / numTiles;
 
         // Start drawing tiles from 12 o'clock (270 degrees)
         double startAngle = Math.PI * 1.5;
+        int i = 0;
 
         // Draw each volcano tile around the center in a ring
-        for (int i = 0; i < numTiles; i++) {
-            double angle = startAngle + i * angleIncrement;
+        for (TileNode volcanoTile : volcanoTileIterable) {
+            double angle = startAngle + i++ * angleIncrement;
 
             int tileX = (int) (centerX + (RING_RADIUS - TILE_SIZE / 2) * Math.cos(angle));
             int tileY = (int) (centerY + (RING_RADIUS - TILE_SIZE / 2) * Math.sin(angle));
 
-            TileHexagon tileHexagon = new TileHexagon(volcanoTiles.get(i), tileX, tileY);
+            TileHexagon tileHexagon = new TileHexagon(volcanoTile.getType(), tileX, tileY);
             tileHexagon.drawTile(g);
         }
     }
 
-    /**
-     * Draws cave tiles around the center of the panel.
-     *
-     * @param g         The Graphics object used for drawing.
-     * @param centerX    The x-coordinate of the center of the panel.
-     * @param centerY    The y-coordinate of the center of the panel.
-     * @param caveTiles  The list of cave tiles to be drawn.
-     */
-    private void drawCaveTiles(Graphics g, int centerX, int centerY, List<Tile> caveTiles) {
-        int numTiles = caveTiles.size();
+
+    private void drawCaveTiles(Graphics g, int centerX, int centerY, VolcanoTileIterable volcanoTileIterable) {
+        int playerDistance = (int) Settings.getSetting("PlayerDistance");
+        int numTiles = (int) Settings.getSetting("TotalPlayers");
+
         double angleIncrement = 2 * Math.PI / numTiles;
 
         // Start drawing tiles from 12 o'clock (270 degrees)
@@ -105,15 +90,25 @@ public class TilePanel extends JPanel {
         // Set the larger radius for the cave tiles
         int caveRingRadius = RING_RADIUS + TILE_SIZE + 20;
 
-        // Draw each cave tile around the center in a larger ring
-        for (int i = 0; i < numTiles; i++) {
+        Iterator<TileNode> volcanoTileIterator = volcanoTileIterable.iterator();
+
+        // Draw each volcano tile around the center in a ring
+        for (int i = 0; i < numTiles; i++){
             double angle = startAngle + i * angleIncrement;
 
             int tileX = (int) (centerX + (caveRingRadius - TILE_SIZE / 2) * Math.cos(angle));
             int tileY = (int) (centerY + (caveRingRadius - TILE_SIZE / 2) * Math.sin(angle));
 
-            TileHexagon tileHexagon = new TileHexagon(caveTiles.get(i), tileX, tileY);
+            TileNode caveTileNode = volcanoTileIterator.next().getAdjacentTile();
+
+            TileHexagon tileHexagon = new TileHexagon(caveTileNode.getType(), tileX, tileY);
             tileHexagon.drawTile(g);
+
+            for (int j = 1; j < playerDistance; j++){
+                volcanoTileIterator.next();
+            }
         }
+
     }
+
 }

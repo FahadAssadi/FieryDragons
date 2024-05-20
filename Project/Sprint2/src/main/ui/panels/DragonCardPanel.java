@@ -1,16 +1,16 @@
 package main.ui.panels;
 
 import main.game.chit.DragonCard;
-import main.game.chit.DragonCardManager;
+import main.game.chit.iterators.DragonCardIterable;
+import main.game.chit.DragonCardKeeper;
 import main.misc.Settings;
 import main.ui.buttons.DragonCardButton;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
 
 /**
- * The DragonCardPanel class represents a panel displaying dragon cards in the main.game UI.
+ * The DragonCardPanel class represents a panel displaying dragon cards in the game UI.
  * It extends the JPanel class and arranges dragon card buttons in a grid layout.
  */
 public class DragonCardPanel extends JPanel {
@@ -19,15 +19,8 @@ public class DragonCardPanel extends JPanel {
     private static final int DEFAULT_PANEL_HEIGHT = 300;
     private static final int DEFAULT_BUTTON_GAP = 2;
 
-    /**
-     * Constructs a DragonCardPanel object with the specified dragon card manager, parent width, and parent height.
-     * Initializes the panel's layout and creates dragon card buttons.
-     *
-     * @param dragonCardManager The dragon card manager containing dragon card data.
-     * @param parentWidth       The width of the parent container.
-     * @param parentHeight      The height of the parent container.
-     */
-    public DragonCardPanel(DragonCardManager dragonCardManager, int parentWidth, int parentHeight) {
+
+    public DragonCardPanel(DragonCardKeeper dragonCardKeeper, int parentWidth, int parentHeight) {
         super();
 
         // Calculate the grid dimensions based on the number of dragon cards
@@ -40,7 +33,7 @@ public class DragonCardPanel extends JPanel {
         setLayout(new GridLayout(gridLength, gridLength, DEFAULT_BUTTON_GAP, DEFAULT_BUTTON_GAP));
 
         // Create dragon card buttons
-        createDragonCards(dragonCardManager);
+        createDragonCards(dragonCardKeeper);
     }
 
     /**
@@ -56,18 +49,14 @@ public class DragonCardPanel extends JPanel {
         setBounds(x, y, DEFAULT_PANEL_WIDTH, DEFAULT_PANEL_HEIGHT);
     }
 
-    /**
-     * Creates dragon card buttons and adds them to the panel.
-     *
-     * @param dragonCardManager The dragon card manager containing dragon card data.
-     */
-    private void createDragonCards(DragonCardManager dragonCardManager) {
-        List<DragonCard> dragonCardList = dragonCardManager.getDragonCards();
+
+    private void createDragonCards(DragonCardKeeper dragonCardKeeper) {
+        DragonCardIterable dragonCardIterable = dragonCardKeeper.getDragonCardIterable();
 
         // Add images to the buttons
-        for (DragonCard dragonCard : dragonCardList) {
+        for (DragonCard dragonCard : dragonCardIterable) {
             // Create a button with the image
-            DragonCardButton dragonCardButton = new DragonCardButton(dragonCardManager, dragonCard);
+            DragonCardButton dragonCardButton = new DragonCardButton(dragonCardKeeper, dragonCard);
             this.add(dragonCardButton);
         }
     }
