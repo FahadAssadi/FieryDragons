@@ -6,8 +6,6 @@ import main.game.event.EventType;
 import main.game.player.behaviour.BehaviourStrategy;
 import main.misc.Settings;
 
-import java.util.Set;
-
 /**
  * The Player class represents a player in the main.game.
  * It contains information such as behaviour, position, and total moves of the player.

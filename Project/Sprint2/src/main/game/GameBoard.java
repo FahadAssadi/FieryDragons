@@ -21,6 +21,7 @@ public class GameBoard{
         this.dragonCardKeeper = new DragonCardKeeper(creatureKeeper.getCreatureIterable());
     }
 
+    // Getters only used by UI elements and command classes
     public TileKeeper getTileKeeper() {
         return tileKeeper;
     }
