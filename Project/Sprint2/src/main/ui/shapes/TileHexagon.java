@@ -7,17 +7,18 @@ import java.awt.*;
 
 public class TileHexagon extends Polygon {
     private final TileType tile;
+    private final Color color;
 
     private static final int TOTAL_POINTS = 6; // 6 points for a hexagon
     private static final int TILE_SIZE = 36;
-    private static final Color TILE_COLOR = new Color(120, 59, 5, 244);
 
-    public TileHexagon(TileType tile, int tileX, int tileY) {
+    public TileHexagon(TileType tile, int tileX, int tileY, Color color) {
         super();
         this.tile = tile;
 
         this.npoints = TOTAL_POINTS;
         this.pointsSetup(tileX, tileY);
+        this.color = color;
     }
 
     private void pointsSetup(int x, int y){
@@ -26,7 +27,7 @@ public class TileHexagon extends Polygon {
     }
 
     public void drawTile(Graphics g){
-        g.setColor(TILE_COLOR);
+        g.setColor(color);
         g.fillPolygon(this);
 
         // Calculate the center of the hexagon
