@@ -1,48 +1,58 @@
 package main.ui.frames;
 
 import main.game.player.Player;
-
+import java.util.List;
 import javax.swing.*;
 import java.awt.*;
 
 public class GameOverFrame extends JFrame {
 
-    public GameOverFrame(Player winner) {
+    public GameOverFrame(List<Player> players) {
         setTitle("Game Over");
-        setSize(400, 200);
+        setSize(400, 400);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
 
-        JLabel gameOverLabel = new JLabel("Game Won!", SwingConstants.CENTER);
+        JLabel gameOverLabel = new JLabel("Game Over!", SwingConstants.CENTER);
         gameOverLabel.setFont(new Font("SansSerif", Font.BOLD, 24));
         panel.add(gameOverLabel, BorderLayout.NORTH);
 
-        // Creating a sub-panel to hold both the label and the color indicator
-        JPanel winnerPanel = new JPanel(new FlowLayout());
+        // Sorting players according to their scores in descending order
+        players.sort((p1, p2) -> Integer.compare(p2.getTotalMoves(), p1.getTotalMoves()));
 
-        JLabel winnerLabel = new JLabel("Winner: ", SwingConstants.CENTER);
-        winnerLabel.setFont(new Font("Serif", Font.PLAIN, 18));
+        // Creating the leaderboard panel
+        JPanel leaderboardPanel = new JPanel();
+        leaderboardPanel.setLayout(new BoxLayout(leaderboardPanel, BoxLayout.Y_AXIS));
 
-        // Creating a small panel to show the color of the winner
-        JPanel colorIndicator = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                g.setColor(Color.decode(winner.getColour()));
-                g.fillOval(0, 0, 20, 20);
-            }
-        };
-        colorIndicator.setPreferredSize(new Dimension(20, 20));
+        // Adding each player to the leaderboard panel
+        for (Player player : players) {
+            JPanel playerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
-        // Add components to the winner panel
-        winnerPanel.add(winnerLabel);
-        winnerPanel.add(colorIndicator);
+            JLabel playerLabel = new JLabel( "Player Score: " + player.getTotalMoves());
+            playerLabel.setFont(new Font("Serif", Font.PLAIN, 18));
 
-        // Add winnerPanel to the main panel
-        panel.add(winnerPanel, BorderLayout.CENTER);
+            // Creating a small panel to show the color of the player
+            JPanel colorIndicator = new JPanel() {
+                @Override
+                protected void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    g.setColor(Color.decode(player.getColour()));
+                    g.fillOval(0, 0, 20, 20);
+                }
+            };
+            colorIndicator.setPreferredSize(new Dimension(20, 20));
+
+            playerPanel.add(colorIndicator);
+            playerPanel.add(playerLabel);
+
+            leaderboardPanel.add(playerPanel);
+        }
+
+        // Add leaderboardPanel to the main panel
+        panel.add(leaderboardPanel, BorderLayout.CENTER);
 
         add(panel);
     }

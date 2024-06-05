@@ -84,6 +84,10 @@ public class PlayerTileQueue implements EventListener {
         this.playerTileList.set(this.currIndex, tileNode);
     }
 
+    public int size() {
+        return this.playerTileList.size();
+    }
+
     @Override
     public String toString() {
         return this.playerTileList.toString();

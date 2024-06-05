@@ -23,7 +23,6 @@ public class DragonCardButton extends JButton implements ActionListener {
     private static final int BUTTON_WIDTH = 90;
     private static final int BUTTON_HEIGHT = 90;
     private static final int FLIP_DELAY = 500;
-
     public DragonCardButton(GameBoard gameBoard, DragonCard dragonCard) {
         super();
         this.gameBoard = gameBoard;
@@ -38,7 +37,8 @@ public class DragonCardButton extends JButton implements ActionListener {
         // Set the flipped dragon card image
         this.dragonCardFlippedImage = Utility.getScaledImage(dragonCard.getDragonCardImage(), BUTTON_WIDTH, BUTTON_HEIGHT);
 
-        setIcon(this.dragonCardUnflippedImage);
+//        setIcon(this.dragonCardUnflippedImage);
+        setIcon(this.dragonCardFlippedImage);
 
         addActionListener(this);
 
@@ -55,12 +55,50 @@ public class DragonCardButton extends JButton implements ActionListener {
         // Wait for FLIP_DELAY milliseconds before unflipping the image
         Timer timer = new Timer(FLIP_DELAY, e -> {
             // Set the unflipped image after the delay
-            setIcon(dragonCardUnflippedImage);
+//            setIcon(dragonCardUnflippedImage);
+            setIcon(dragonCardFlippedImage);
         });
 
         timer.setRepeats(false);
         timer.start();
     }
+//    public DragonCardButton(GameBoard gameBoard, DragonCard dragonCard) {
+//        super();
+//        this.gameBoard = gameBoard;
+//        this.dragonCard = dragonCard;
+//
+//        setRolloverEnabled(false);
+//
+//        // Set the unflipped dragon card image
+//        ImageIcon dragonCardImage = new ImageIcon(getClass().getResource(DRAGONCARD_IMG_PATH));
+//        this.dragonCardUnflippedImage = Utility.getScaledImage(dragonCardImage, BUTTON_WIDTH, BUTTON_HEIGHT);
+//
+//        // Set the flipped dragon card image
+//        this.dragonCardFlippedImage = Utility.getScaledImage(dragonCard.getDragonCardImage(), BUTTON_WIDTH, BUTTON_HEIGHT);
+//
+//        setIcon(this.dragonCardUnflippedImage);
+//
+//        addActionListener(this);
+//
+//        setSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+//    }
+//
+//    /**
+//     * Flips the dragon card image when the button is clicked.
+//     */
+//    private void flipDragonCardImage() {
+//        // Set the flipped image
+//        setIcon(dragonCardFlippedImage);
+//
+//        // Wait for FLIP_DELAY milliseconds before unflipping the image
+//        Timer timer = new Timer(FLIP_DELAY, e -> {
+//            // Set the unflipped image after the delay
+//            setIcon(dragonCardUnflippedImage);
+//        });
+//
+//        timer.setRepeats(false);
+//        timer.start();
+//    }
 
     /**
      * Handles button click events.

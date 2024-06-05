@@ -1,5 +1,7 @@
 package main.ui;
 
+import java.util.List;
+import java.util.ArrayList;
 import main.game.GameBoard;
 import main.game.event.EventListener;
 import main.game.event.EventManager;
@@ -51,13 +53,19 @@ public class GameUI implements EventListener {
      */
     @Override
     public void update(EventType eventType) {
-        // Get the winning player
-        Player winningPlayer = gameBoard.getTileKeeper().getPlayerTileQueue().getCurrPlayerTileNode().getType().getPlayer();
+        // Get number of players
+        int numPlayers = gameBoard.getTileKeeper().getPlayerTileQueue().size();
 
-        System.out.println(winningPlayer);
+        // Get list of players
+        List<Player> players = new ArrayList<>();
+        for (int i = 0; i < numPlayers; i++) {
+            Player player = gameBoard.getTileKeeper().getPlayerTileQueue().getCurrPlayerTileNode().getType().getPlayer();
+            gameBoard.getTileKeeper().getPlayerTileQueue().queueNextTurn();
+            players.add(player);
+        }
 
         // Create and display the Game Over frame
-        GameOverFrame gameOverFrame = new GameOverFrame(winningPlayer);
+        GameOverFrame gameOverFrame = new GameOverFrame(players);
         gameOverFrame.setVisible(true);
     }
 }
