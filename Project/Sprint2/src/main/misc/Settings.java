@@ -20,7 +20,11 @@ public class Settings {
         // Load settings from the configuration file
         this.settingsMap = (Map<String, Object>) Utility.getDictionaryFromObj(Utility.readJSONFileToObj(getClass().getResourceAsStream(DEFAULT_SETTINGS_CONFIG_PATH)));
 
-        long boardSize = (long) this.settingsMap.get("VolcanoTile");
+        long volcanoCards = (long) this.settingsMap.get("VolcanoCards");
+        long animals = (long) this.settingsMap.get("VolcanoCardAnimals");
+
+        long boardSize = volcanoCards * animals;
+
         long humanPlayers = (long) this.settingsMap.get("HumanPlayers");
         long AIPlayers = (long) this.settingsMap.get("AIPlayers");
 
