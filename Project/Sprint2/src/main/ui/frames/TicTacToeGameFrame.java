@@ -5,13 +5,22 @@ import main.game.player.Player;
 import javax.swing.*;
 import java.awt.*;
 
-
+/**
+ * This class represents the main frame for a Tic Tac Toe game, providing the graphical user interface components
+ * and interactions needed to play the game.
+ */
 public class TicTacToeGameFrame extends JFrame {
     private final TicTacToeModel model;
     private final JButton[][] boardButtons;
     private final JLabel statusLabel;
     private final JPanel statusPanel;
 
+    /**
+     * Constructs a TicTacToeGameFrame which initializes the game model and the UI components.
+     *
+     * @param playerX the player who will play as 'X'
+     * @param playerO the player who will play as 'O'
+     */
     public TicTacToeGameFrame(Player playerX, Player playerO) {
         this.model = new TicTacToeModel(playerX, playerO);
 
@@ -40,6 +49,11 @@ public class TicTacToeGameFrame extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * Initializes the board with buttons for each cell of the Tic Tac Toe game.
+     *
+     * @param boardPanel the JPanel containing the board's buttons
+     */
     private void initializeBoard(JPanel boardPanel) {
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
@@ -54,6 +68,11 @@ public class TicTacToeGameFrame extends JFrame {
         }
     }
 
+    /**
+     * Handles button clicks on the game board by making a move at the clicked index if valid.
+     *
+     * @param index the index of the button in the board array
+     */
     private void handleButtonClick(int index) {
         if (model.getCell(index).isEmpty() && model.getWinner() == null) {
             model.makeMove(index);
@@ -67,6 +86,9 @@ public class TicTacToeGameFrame extends JFrame {
         }
     }
 
+    /**
+     * Updates the board to reflect the current state of the game model.
+     */
     private void updateBoard() {
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
@@ -76,6 +98,9 @@ public class TicTacToeGameFrame extends JFrame {
         }
     }
 
+    /**
+     * Updates the status label to display the current state of the game.
+     */
     private void updateStatusLabel() {
         statusPanel.removeAll(); // Clear the statusPanel
 
@@ -118,12 +143,20 @@ public class TicTacToeGameFrame extends JFrame {
         statusPanel.repaint();
     }
 
+    /**
+     * Handles the action to reset the game to its initial state.
+     */
     private void handleResetButton() {
         model.resetGame();
         updateBoard();
         updateStatusLabel();
     }
 
+    /**
+     * Gets the winner of the game if there is one.
+     *
+     * @return the player who has won the game, or null if there is no winner yet
+     */
     public Player getWinner() {
         return model.getWinner();
     }
