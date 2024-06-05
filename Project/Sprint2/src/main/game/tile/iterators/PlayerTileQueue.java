@@ -8,6 +8,7 @@ import main.game.event.EventType;
 import main.game.player.Player;
 import main.game.player.PlayerFactory;
 import main.game.tile.TileNode;
+import main.game.tile.VolcanoCard;
 import main.game.tile.type.CaveTileType;
 import main.misc.Settings;
 
@@ -23,22 +24,25 @@ public class PlayerTileQueue implements EventListener {
     // Path to the directory containing creature images
     private static final String CREATURE_FILE_PATH = "/assets/pngs/creatures/";
 
-    public PlayerTileQueue(TileableCreatureIterable tileableCreatureIterable, VolcanoTileIterable volcanoTileIterable) {
-        this.constructCaveTiles(tileableCreatureIterable, volcanoTileIterable);
+    public PlayerTileQueue(TileableCreatureIterable tileableCreatureIterable, VolcanoCardIterable volcanoCardIterable) {
+        this.constructCaveTiles(tileableCreatureIterable, volcanoCardIterable);
         this.currIndex = 0;
 
         EventManager.getInstance().subscribe(EventType.PLAYER_TURN_END, this);
     }
 
-    public void constructCaveTiles(TileableCreatureIterable tileableCreatureIterable, VolcanoTileIterable volcanoTileIterable){
+    public void constructCaveTiles(TileableCreatureIterable tileableCreatureIterable, VolcanoCardIterable volcanoCardIterable){
         int playerDistance = (int) Settings.getSetting("PlayerDistance");
 
         PlayerFactory playerFactory = new PlayerFactory();
         Iterator<Creature> tileableCreatureIterator = tileableCreatureIterable.iterator();
-        Iterator<TileNode> volcanoTileIterator = volcanoTileIterable.iterator();
+//        Iterator<VolcanoCard> volcanoCardIterator = volcanoCardIterable.iterator();
+        Iterator<VolcanoCard> volcanoCardIterator = volcanoCardIterable.iterator();
+
+        VolcanoCard currVolcanoCard = volcanoCardIterator.next();
+        Iterator<TileNode> volcanoTileIterator = currVolcanoCard.iterator();
 
         TileNode currVolcanoTile = volcanoTileIterator.next();
-
         int count = 0;
 
         while (playerFactory.hasNext()){
@@ -60,8 +64,20 @@ public class PlayerTileQueue implements EventListener {
             this.playerTileList.add(caveTileNode);
 
             for (int i = 0; i < playerDistance; i++){
-                currVolcanoTile = volcanoTileIterator.next();
+                if (!volcanoTileIterator.hasNext()) {
+                    if (!volcanoCardIterator.hasNext()) {
+                        volcanoCardIterator = volcanoCardIterable.iterator();  // Cycle through VolcanoCards if needed.
+                        if (!volcanoCardIterator.hasNext()) return;  // Handle empty iterator on reset.
+                    }
+                    currVolcanoCard = volcanoCardIterator.next();
+                    volcanoTileIterator = currVolcanoCard.iterator();
+                    if (!volcanoTileIterator.hasNext()) return;  // Handle empty TileNodes in the new VolcanoCard.
+                }
+                TileNode volcanoTile = volcanoTileIterator.next();
+                currVolcanoTile = volcanoTile;
             }
+
+
         }
     }
 
