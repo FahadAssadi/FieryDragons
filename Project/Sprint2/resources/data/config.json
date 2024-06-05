@@ -2,6 +2,8 @@
   "Creatures": 5,
   "DragonCard": 16,
   "VolcanoTile": 24,
+  "VolcanoCards": 8,
+  "VolcanoCardAnimals": 4,
   "HumanPlayers": 4,
   "AIPlayers": 0
 }
