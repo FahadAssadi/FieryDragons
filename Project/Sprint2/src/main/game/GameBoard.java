@@ -4,6 +4,7 @@ import main.game.chit.DragonCardKeeper;
 import main.game.creature.CreatureKeeper;
 import main.game.snapshot.Memento;
 import main.game.tile.TileKeeper;
+import main.misc.Utility;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -42,14 +43,23 @@ public class GameBoard implements Memento {
      * @return      the updated map with the saved state
      */
     @Override
-    public Map save(Map map) {
-        map.put("tileKeeper", this.tileKeeper.save(map));
-        map.put("dragonCardKeeper", this.dragonCardKeeper.save(map));
+    public Map<String , Object> save(Map<String , Object> map) {
+        map.put("dragonCardKeeper", this.dragonCardKeeper.save(new HashMap<>()));
+//        map.put("tileKeeper", this.tileKeeper.save(map));
         return map;
     }
 
     @Override
-    public Map load(Map map) {
+    public Map<String , Object> load(Map<String , Object> map) {
         return Map.of();
+    }
+
+    public static void main(String[] args) {
+        GameBoard gameBoard = new GameBoard();
+
+        Map<String, Object> map = gameBoard.save(new HashMap<>());
+        System.out.println(map);
+
+        Utility.writeYamlFile(map, "save_10.yaml");
     }
 }

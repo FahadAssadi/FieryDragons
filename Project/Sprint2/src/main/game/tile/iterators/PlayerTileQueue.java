@@ -17,6 +17,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class PlayerTileQueue implements EventListener, Memento {
     private final List<TileNode> playerTileList = new ArrayList<>();
@@ -106,12 +107,12 @@ public class PlayerTileQueue implements EventListener, Memento {
     }
 
     @Override
-    public void save(String filePath) {
-
+    public Map<String, Object> save(Map<String, Object> map) {
+        return Map.of();
     }
 
     @Override
-    public Object load(String filePath) {
-        return null;
+    public Map<String, Object> load(Map<String, Object> map) {
+        return Map.of();
     }
 }

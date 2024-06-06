@@ -32,7 +32,7 @@ public class Game implements EventListener {
         Settings.getInstance().incrementSaveCount();
         long saveNumber = (long) Settings.getSetting("Saves");
 
-        Map map = new HashMap<>();
+        Map<String , Object> map = new HashMap<>();
 
         map = this.gameBoard.save(map);
 

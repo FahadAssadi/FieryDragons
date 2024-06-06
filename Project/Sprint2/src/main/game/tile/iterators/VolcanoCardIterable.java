@@ -11,6 +11,7 @@ import main.misc.Settings;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Represents an iterable collection of VolcanoCards.
@@ -130,14 +131,15 @@ public class VolcanoCardIterable implements Iterable<VolcanoCard>, Memento {
         return new VolcanoCardIterator();
     }
 
-    @Override
-    public void save(String filePath) {
 
+    @Override
+    public Map<String, Object> save(Map<String, Object> map) {
+        return Map.of();
     }
 
     @Override
-    public Object load(String filePath) {
-        return null;
+    public Map<String, Object> load(Map<String, Object> map) {
+        return Map.of();
     }
 
     /**

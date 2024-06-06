@@ -1,9 +1,8 @@
 package main.game.snapshot;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public interface Memento {
-    Map save(Map map);
-    Map load(Map map);
+    Map<String, Object> save(Map<String , Object> map);
+    Map<String, Object> load(Map<String , Object> map);
 }

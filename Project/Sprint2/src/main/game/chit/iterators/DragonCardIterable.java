@@ -51,12 +51,27 @@ public class DragonCardIterable implements Iterable<DragonCard>, Memento {
     }
 
     @Override
-    public void save(String filePath) {
+    public Map<String , Object> save(Map<String , Object> map) {
+        // Create a loop that calls the save for the individual dragon cards
+        List<Map<String , Object>> dragonCardsSaveList = new ArrayList<>();
 
+        for (DragonCard dragonCard : this.dragonCards) {
+            dragonCardsSaveList.add(dragonCard.save(new HashMap<>()));
+        }
+
+        map.put("dragonCards", dragonCardsSaveList);
+        return map;
     }
 
     @Override
-    public Object load(String filePath) {
-        return null;
+    public Map<String , Object> load(Map<String , Object> map) {
+        return Map.of();
+    }
+
+    public static void main(String[] args) {
+        DragonCardIterable dragonCardIterable = new DragonCardIterable(new CreatureIterable());
+
+        Map<String, Object> map = new HashMap<>();
+        System.out.println(dragonCardIterable.save(map));
     }
 }

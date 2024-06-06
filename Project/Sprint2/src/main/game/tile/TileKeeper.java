@@ -25,14 +25,14 @@ public class TileKeeper implements Memento {
     }
 
     @Override
-    public Map save(Map map) {
+    public Map<String , Object> save(Map<String , Object> map) {
         map.put("volcanoCardIterable", volcanoCardIterable.save(map));
         map.put("playerTileQueue", playerTileQueue.save(map));
         return map;
     }
 
     @Override
-    public Map load(Map map) {
+    public Map<String , Object> load(Map map) {
         return Map.of();
     }
 }

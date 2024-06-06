@@ -4,6 +4,7 @@ import main.game.chit.iterators.DragonCardIterable;
 import main.game.creature.iterators.CreatureIterable;
 import main.game.snapshot.Memento;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class DragonCardKeeper implements Memento {
@@ -18,12 +19,13 @@ public class DragonCardKeeper implements Memento {
     }
 
     @Override
-    public Map save(Map map) {
-        return Map.of();
+    public Map<String , Object> save(Map<String , Object> map) {
+        map.put("dragonCardIterable", this.dragonCardIterable.save(new HashMap<>()));
+        return map;
     }
 
     @Override
-    public Map load(Map map) {
+    public Map<String , Object> load(Map<String , Object> map) {
         return Map.of();
     }
 }
