@@ -1,5 +1,8 @@
 package main.misc;
 
+import org.json.simple.JSONArray;
+
+import java.io.InputStream;
 import java.util.Map;
 
 /**
@@ -12,6 +15,7 @@ public class Settings {
     private final Map<String, Object> settingsMap;
     // Path to the default settings configuration file
     private static final String DEFAULT_SETTINGS_CONFIG_PATH = "/data/config.json";
+    private static final String DEFAULT_VOLCANO_CARD_CONFIG_PATH = "/data/volcanoCard.json";
 
     /**
      * Private constructor to prevent external instantiation.
@@ -31,9 +35,16 @@ public class Settings {
         int totalPlayers = (int) (humanPlayers + AIPlayers);
         int playerDistance = (int) (boardSize / totalPlayers);
 
+        // Getting the num of animals for the last volcano card seperately for use in iterators.
+        InputStream inputStream = getClass().getResourceAsStream(DEFAULT_VOLCANO_CARD_CONFIG_PATH);
+        JSONArray volcanoCardsArray = Utility.readJSONFileToArr(inputStream);
+
+        long lastVolcanoAnimals = (long) Utility.getObjFromArr(volcanoCardsArray, volcanoCardsArray.size() - 1).get("animals");
+
         this.settingsMap.put("TotalPlayers", totalPlayers);
         this.settingsMap.put("PlayerDistance", playerDistance);
         this.settingsMap.put("BoardSize", boardSize);
+        this.settingsMap.put("LastVolcanoAnimals", lastVolcanoAnimals);
     }
 
     /**
