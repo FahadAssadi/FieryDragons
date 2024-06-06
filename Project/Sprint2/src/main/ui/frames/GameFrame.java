@@ -55,6 +55,7 @@ public class GameFrame extends JFrame implements EventListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Save button clicked!");
+                EventManager.getInstance().notify(EventType.SAVE);
             }
         });
 
