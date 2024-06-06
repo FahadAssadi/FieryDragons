@@ -14,10 +14,7 @@ import main.game.tile.type.CaveTileType;
 import main.misc.Settings;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class PlayerTileQueue implements EventListener, Memento {
     private final List<TileNode> playerTileList = new ArrayList<>();
@@ -108,7 +105,11 @@ public class PlayerTileQueue implements EventListener, Memento {
 
     @Override
     public Map<String, Object> save(Map<String, Object> map) {
-        return Map.of();
+        for (TileNode tileNode: this.playerTileList) {
+            map.put(tileNode.toString(), tileNode.save(new HashMap<>()));
+        }
+
+        return map;
     }
 
     @Override

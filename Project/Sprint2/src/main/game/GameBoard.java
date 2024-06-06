@@ -45,7 +45,7 @@ public class GameBoard implements Memento {
     @Override
     public Map<String , Object> save(Map<String , Object> map) {
         map.put("dragonCardKeeper", this.dragonCardKeeper.save(new HashMap<>()));
-//        map.put("tileKeeper", this.tileKeeper.save(map));
+        map.put("tileKeeper", this.tileKeeper.save(new HashMap<>()));
         return map;
     }
 

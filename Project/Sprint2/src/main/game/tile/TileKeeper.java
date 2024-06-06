@@ -5,6 +5,7 @@ import main.game.snapshot.Memento;
 import main.game.tile.iterators.PlayerTileQueue;
 import main.game.tile.iterators.VolcanoCardIterable;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class TileKeeper implements Memento {
@@ -27,7 +28,7 @@ public class TileKeeper implements Memento {
     @Override
     public Map<String , Object> save(Map<String , Object> map) {
         map.put("volcanoCardIterable", volcanoCardIterable.save(map));
-        map.put("playerTileQueue", playerTileQueue.save(map));
+        map.put("playerTileQueue", playerTileQueue.save(new HashMap<>()));
         return map;
     }
 
