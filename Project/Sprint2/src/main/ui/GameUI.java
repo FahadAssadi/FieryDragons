@@ -60,4 +60,13 @@ public class GameUI implements EventListener {
         GameOverFrame gameOverFrame = new GameOverFrame(winningPlayer);
         gameOverFrame.setVisible(true);
     }
+
+    /**
+     * Returns the game frame containing the user interface components.
+     *
+     * @return the game frame
+     */
+    public GameFrame getGameFrame() {
+        return gameFrame;
+    }
 }
