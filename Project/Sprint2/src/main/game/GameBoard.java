@@ -27,6 +27,16 @@ public class GameBoard implements Memento {
         this.dragonCardKeeper = new DragonCardKeeper(creatureKeeper.getCreatureIterable());
     }
 
+    public GameBoard(Map<String, Object> saveMap) {
+        CreatureKeeper creatureKeeper = new CreatureKeeper();
+
+        Map<String, Object> dragonKeeperSaveMap = (Map<String, Object>) saveMap.get("dragonCardKeeper");
+        this.dragonCardKeeper = new DragonCardKeeper(dragonKeeperSaveMap, creatureKeeper.getCreatureIterable());
+
+        Map<String, Object> tileKeeperSaveMap = (Map<String, Object>) saveMap.get("tileKeeper");
+        this.tileKeeper = new TileKeeper(creatureKeeper.getTileableCreatureIterable());
+    }
+
     // Getters only used by UI elements and command classes
     public TileKeeper getTileKeeper() {
         return tileKeeper;
@@ -49,13 +59,10 @@ public class GameBoard implements Memento {
         return map;
     }
 
-
     public static void main(String[] args) {
-        GameBoard gameBoard = new GameBoard();
-        Map<String, Object> map = gameBoard.save(new LinkedHashMap<>());
+        Map<String, Object> map = Utility.readYamlFile("save_10.yml");
 
-        String path = "save_" + 10 + ".yml";
-        Utility.writeYamlFile(map, path);
+        GameBoard gameBoard = new GameBoard(map);
     }
 
 }

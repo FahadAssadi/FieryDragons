@@ -30,9 +30,6 @@ public class Game implements EventListener {
     }
 
     public void startSaveProcess() {
-//        Settings.getInstance().incrementSaveCount();
-//        long saveNumber = (long) Settings.getSetting("Saves");
-
         Map<String, Object> map = this.gameBoard.save(new LinkedHashMap<>());
 
         String path = "save_" + 10 + ".yml";
@@ -43,7 +40,7 @@ public class Game implements EventListener {
         String path = "save_" + 10 + ".yml";
         Map<String, Object> map = Utility.readYamlFile(path);
 
-//        this.gameBoard.load(map);
+        this.gameBoard = new GameBoard(map);
     }
 
     @Override

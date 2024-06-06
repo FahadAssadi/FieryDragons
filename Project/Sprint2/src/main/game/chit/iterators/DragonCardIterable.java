@@ -18,6 +18,12 @@ public class DragonCardIterable implements Iterable<DragonCard>, Memento {
         Collections.shuffle(dragonCards);
     }
 
+    public DragonCardIterable(Map<String , Object> saveMap, CreatureIterable creatureIterable) {
+        List<Map<String, Object>> dragonCardArray = (List<Map<String, Object>>) saveMap.get("dragonCards");
+
+        loadCreatureRelatedDragonCards(dragonCardArray, creatureIterable);
+    }
+
     @Override
     public Iterator<DragonCard> iterator() {
         return dragonCards.iterator();
@@ -50,6 +56,32 @@ public class DragonCardIterable implements Iterable<DragonCard>, Memento {
 
     }
 
+    private void loadCreatureRelatedDragonCards(List<Map<String, Object>> dragonCardArray, CreatureIterable creatureIterable) {
+        for (Map<String, Object> dragonCardSaveMap : dragonCardArray) {
+            int dragonCreatureID = (int) dragonCardSaveMap.get("creature");
+            int dragonCreatureAmount = (int) dragonCardSaveMap.get("amount");
+
+            // Loop through all creatures
+            for (Creature creature : creatureIterable) {
+                if (creature.getCreatureID() != dragonCreatureID){
+                    continue;
+                }
+
+                String creatureImagePath = "/assets/pngs/creatures/" + creature.getCreatureName() + "_";
+
+                String dragonCardImagePath = creatureImagePath + dragonCreatureAmount + ".png";
+                ImageIcon dragonCardImage = new ImageIcon(Objects.requireNonNull(getClass().getResource(dragonCardImagePath)));
+
+                if (creature.isTileable()) {
+                    dragonCards.add(new CreatureDragonCard(dragonCardImage, creature, dragonCreatureAmount));
+                } else {
+                    dragonCards.add(new PirateDragonCard(dragonCardImage, creature, dragonCreatureAmount));
+                }
+            }
+        }
+
+    }
+
     @Override
     public Map<String , Object> save(Map<String , Object> map) {
         // Create a loop that calls the save for the individual dragon cards
@@ -63,10 +95,4 @@ public class DragonCardIterable implements Iterable<DragonCard>, Memento {
         return map;
     }
 
-    public static void main(String[] args) {
-        DragonCardIterable dragonCardIterable = new DragonCardIterable(new CreatureIterable());
-
-        Map<String, Object> map = new HashMap<>();
-        System.out.println(dragonCardIterable.save(map));
-    }
 }

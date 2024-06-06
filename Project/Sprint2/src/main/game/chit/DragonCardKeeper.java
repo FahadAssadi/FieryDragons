@@ -14,6 +14,12 @@ public class DragonCardKeeper implements Memento {
         this.dragonCardIterable = new DragonCardIterable(creatureIterable);
     }
 
+    public DragonCardKeeper(Map<String, Object> saveMap, CreatureIterable creatureIterable) {
+        Map<String, Object> dragonCardIterableSaveMap = (Map<String, Object>) saveMap.get("dragonCardIterable");
+
+        this.dragonCardIterable = new DragonCardIterable(dragonCardIterableSaveMap, creatureIterable);
+    }
+
     public DragonCardIterable getDragonCardIterable() {
         return dragonCardIterable;
     }
