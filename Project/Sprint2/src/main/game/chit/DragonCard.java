@@ -1,6 +1,7 @@
 package main.game.chit;
 
 import main.game.chit.commands.DragonCardCommand;
+import main.game.snapshot.Memento;
 
 import javax.swing.*;
 
@@ -8,7 +9,7 @@ import javax.swing.*;
  * The DragonCard class represents a card with a dragon image in the main.game.
  * This class is abstract and provides a blueprint for specific types of dragon cards.
  */
-public abstract class DragonCard {
+public abstract class DragonCard implements Memento {
     // The image representing the dragon card
     private final ImageIcon dragonCardImage;
 

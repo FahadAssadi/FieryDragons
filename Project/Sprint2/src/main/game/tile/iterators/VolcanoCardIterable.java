@@ -2,6 +2,7 @@ package main.game.tile.iterators;
 
 import main.game.creature.Creature;
 import main.game.creature.iterators.TileableCreatureIterable;
+import main.game.snapshot.Memento;
 import main.game.tile.TileNode;
 import main.game.tile.VolcanoCard;
 import main.game.tile.type.VolcanoTileType;
@@ -15,7 +16,7 @@ import java.util.Iterator;
  * Represents an iterable collection of VolcanoCards.
  * This class also handles the creation and linking of these cards based on provided creatures.
  */
-public class VolcanoCardIterable implements Iterable<VolcanoCard> {
+public class VolcanoCardIterable implements Iterable<VolcanoCard>, Memento {
     private VolcanoCard rootVolcanoCard;
     // Path to the directory containing creature images
     private static final String CREATURE_FILE_PATH = "/assets/pngs/creatures/";
@@ -127,6 +128,16 @@ public class VolcanoCardIterable implements Iterable<VolcanoCard> {
     @Override
     public Iterator<VolcanoCard> iterator() {
         return new VolcanoCardIterator();
+    }
+
+    @Override
+    public void save(String filePath) {
+
+    }
+
+    @Override
+    public Object load(String filePath) {
+        return null;
     }
 
     /**

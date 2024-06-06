@@ -5,11 +5,12 @@ import main.game.chit.type.CreatureDragonCard;
 import main.game.chit.type.PirateDragonCard;
 import main.game.creature.Creature;
 import main.game.creature.iterators.CreatureIterable;
+import main.game.snapshot.Memento;
 
 import javax.swing.*;
 import java.util.*;
 
-public class DragonCardIterable implements Iterable<DragonCard> {
+public class DragonCardIterable implements Iterable<DragonCard>, Memento {
     private final List<DragonCard> dragonCards = new ArrayList<>();
 
     public DragonCardIterable(CreatureIterable creatureIterable) {
@@ -47,5 +48,15 @@ public class DragonCardIterable implements Iterable<DragonCard> {
 
         }
 
+    }
+
+    @Override
+    public void save(String filePath) {
+
+    }
+
+    @Override
+    public Object load(String filePath) {
+        return null;
     }
 }

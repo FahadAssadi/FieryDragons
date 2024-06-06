@@ -5,6 +5,10 @@ import main.game.creature.CreatureKeeper;
 import main.game.snapshot.Memento;
 import main.game.tile.TileKeeper;
 
+import java.util.HashMap;
+import java.util.Map;
+
+
 /**
  * The GameBoard class represents the game board and manages game-related entities.
  * It initializes players, tiles, and dragon cards, and handles player turns.
@@ -31,15 +35,21 @@ public class GameBoard implements Memento {
         return dragonCardKeeper;
     }
 
-
+    /**
+     * Overrides the save method to save the current state of the game board.
+     *
+     * @param  map  the map to save the state to
+     * @return      the updated map with the saved state
+     */
     @Override
-    public void save(String filePath) {
-
+    public Map save(Map map) {
+        map.put("tileKeeper", this.tileKeeper.save(map));
+        map.put("dragonCardKeeper", this.dragonCardKeeper.save(map));
+        return map;
     }
 
     @Override
-    public Object load(String filePath) {
-        return null;
+    public Map load(Map map) {
+        return Map.of();
     }
-
 }

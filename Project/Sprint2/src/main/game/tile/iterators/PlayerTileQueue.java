@@ -7,6 +7,7 @@ import main.game.event.EventManager;
 import main.game.event.EventType;
 import main.game.player.Player;
 import main.game.player.PlayerFactory;
+import main.game.snapshot.Memento;
 import main.game.tile.TileNode;
 import main.game.tile.VolcanoCard;
 import main.game.tile.type.CaveTileType;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class PlayerTileQueue implements EventListener {
+public class PlayerTileQueue implements EventListener, Memento {
     private final List<TileNode> playerTileList = new ArrayList<>();
     private int currIndex;
 
@@ -77,7 +78,6 @@ public class PlayerTileQueue implements EventListener {
                 currVolcanoTile = volcanoTile;
             }
 
-
         }
     }
 
@@ -103,5 +103,15 @@ public class PlayerTileQueue implements EventListener {
     @Override
     public String toString() {
         return this.playerTileList.toString();
+    }
+
+    @Override
+    public void save(String filePath) {
+
+    }
+
+    @Override
+    public Object load(String filePath) {
+        return null;
     }
 }

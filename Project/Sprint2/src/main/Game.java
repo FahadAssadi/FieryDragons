@@ -8,7 +8,8 @@ import main.misc.Settings;
 import main.misc.Utility;
 import main.ui.GameUI;
 
-import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The main.Game class serves as the entry point for the application.
@@ -31,15 +32,18 @@ public class Game implements EventListener {
         Settings.getInstance().incrementSaveCount();
         long saveNumber = (long) Settings.getSetting("Saves");
 
-        String path = "save_" + saveNumber;
+        Map map = new HashMap<>();
 
-        this.gameBoard.save(path);
+        map = this.gameBoard.save(map);
+
+        String path = "save_" + saveNumber + ".yml";
+        Utility.writeYamlFile(map, path);
     }
 
     public void startLoadProcess() {
         String path = "save_";
 
-        this.gameBoard.load(path);
+        this.gameBoard.load(null);
     }
 
     @Override
