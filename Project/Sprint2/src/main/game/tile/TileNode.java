@@ -6,6 +6,7 @@ import main.game.player.Player;
 import main.game.tile.collision.TicTacToeModel;
 import main.game.tile.type.TileType;
 import main.misc.Settings;
+import main.ui.frames.TicTacToeGameFrame;
 
 public class TileNode {
     private final TileType type;
@@ -117,8 +118,8 @@ public class TileNode {
         // Currently only throws exception
 //        throw new FilledTileException("Player Exists");
 
-        TicTacToeModel ticTacToeModel = new TicTacToeModel(player1, player2);
-        return ticTacToeModel.getWinner();
+        TicTacToeGameFrame ticTacToeGameFrame = new TicTacToeGameFrame(player1, player2);
+        return ticTacToeGameFrame.getWinner();
     }
 
     @Override
