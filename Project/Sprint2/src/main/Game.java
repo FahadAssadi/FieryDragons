@@ -9,6 +9,7 @@ import main.misc.Utility;
 import main.ui.GameUI;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -32,9 +33,7 @@ public class Game implements EventListener {
         Settings.getInstance().incrementSaveCount();
         long saveNumber = (long) Settings.getSetting("Saves");
 
-        Map<String , Object> map = new HashMap<>();
-
-        map = this.gameBoard.save(map);
+        Map<String, Object> map = this.gameBoard.save(new LinkedHashMap<>());
 
         String path = "save_" + saveNumber + ".yml";
         Utility.writeYamlFile(map, path);
@@ -59,6 +58,7 @@ public class Game implements EventListener {
         Game game = new Game();
 
         // Display the main.ui
-        game.gameUI.displayGameUI();
+//        game.gameUI.displayGameUI();
+        game.startSaveProcess();
     }
 }

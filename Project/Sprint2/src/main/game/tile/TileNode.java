@@ -134,15 +134,16 @@ public class TileNode implements Memento {
 
     @Override
     public Map<String, Object> save(Map<String, Object> map) {
-        map.put("ID", this.getTempID());
         map.put("Creature", this.getType().getCreature().getCreatureID());
-        Player player = this.getType().getPlayer();
 
-        if (player == null) {
-            map.put("Player", null);
+        TileNode CaveTile = this.getAdjacentTile();
+
+        if (CaveTile == null) {
+            map.put("Cave", null);
         } else {
-            map.put("Player", this.getType().getPlayer().save(new LinkedHashMap<>()));
+            map.put("Cave", this.getAdjacentTile().getTempID());
         }
+
 
         return map;
     }

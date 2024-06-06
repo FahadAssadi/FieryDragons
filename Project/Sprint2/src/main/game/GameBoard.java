@@ -4,6 +4,7 @@ import main.game.chit.DragonCardKeeper;
 import main.game.creature.CreatureKeeper;
 import main.game.snapshot.Memento;
 import main.game.tile.TileKeeper;
+import main.misc.Settings;
 import main.misc.Utility;
 
 import java.util.HashMap;
@@ -55,12 +56,13 @@ public class GameBoard implements Memento {
         return Map.of();
     }
 
+
     public static void main(String[] args) {
         GameBoard gameBoard = new GameBoard();
+        Map<String, Object> map = gameBoard.save(new LinkedHashMap<>());
 
-        Map<String, Object> map = gameBoard.save(new HashMap<>());
-        System.out.println(map);
-
-        Utility.writeYamlFile(map, "save_10.yaml");
+        String path = "save_" + 10 + ".yml";
+        Utility.writeYamlFile(map, path);
     }
+
 }

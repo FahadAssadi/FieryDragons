@@ -107,7 +107,7 @@ public class PlayerTileQueue implements EventListener, Memento {
     public Map<String, Object> save(Map<String, Object> map) {
         int count = 0;
         for (TileNode tileNode: this.playerTileList) {
-            map.put("tileNode"+ count++, tileNode.save(new LinkedHashMap<>()));
+            map.put("Player"+ count++, tileNode.getType().getPlayer().save(new LinkedHashMap<>()));
         }
 
         return map;
