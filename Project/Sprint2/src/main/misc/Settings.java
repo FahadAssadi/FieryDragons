@@ -33,6 +33,7 @@ public class Settings {
 
         this.settingsMap.put("TotalPlayers", totalPlayers);
         this.settingsMap.put("PlayerDistance", playerDistance);
+        this.settingsMap.put("BoardSize", boardSize);
     }
 
     /**
