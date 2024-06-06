@@ -12,6 +12,13 @@ public class DragonToken {
         this.player = player;
     }
 
+    /**
+     * Draws a player indicator on the given Graphics object at the specified center coordinates.
+     *
+     * @param  g  the Graphics object used for painting
+     * @param  centerX  the x-coordinate of the center of the indicator
+     * @param  centerY  the y-coordinate of the center of the indicator
+     */
     public void drawPlayerIndicator(Graphics g, int centerX, int centerY) {
         g.setColor(Color.decode(player.getColour()));
         int indicatorSize = TILE_SIZE / 2;

@@ -72,6 +72,11 @@ public class Game implements EventListener {
         }
     }
 
+    /**
+     * The main function of the Java program.
+     *
+     * @param  args  the command line arguments
+     */
     public static void main(String[] args) {
         Game game = new Game();
         game.gameUI.displayStartGameUI();

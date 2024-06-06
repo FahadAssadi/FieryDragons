@@ -43,6 +43,9 @@ public class GameUI implements EventListener {
         EventManager.getInstance().subscribe(EventType.GAME_OVER, this);
     }
 
+    /**
+     * Displays the start game user interface by creating and showing the start game frame.
+     */
     public void displayStartGameUI() {
         StartGameFrame startGameFrame = new StartGameFrame(new StartNewGameListener(), new LoadGameListener());
         startGameFrame.setVisible(true);

@@ -117,6 +117,12 @@ public class Utility {
         return new ImageIcon(scaledImage);
     }
 
+    /**
+     * Writes the given data to a YAML file with the specified file name.
+     *
+     * @param  data      the data to be written to the YAML file
+     * @param  fileName  the name of the YAML file to be created
+     */
     public static void writeYamlFile(Map<String, Object> data, String fileName) {
         final DumperOptions options = new DumperOptions();
         options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
@@ -137,6 +143,12 @@ public class Utility {
         }
     }
 
+    /**
+     * Reads a YAML file and parses its content into a Map of String keys to Object values.
+     *
+     * @param  fileName  the name of the YAML file to be read
+     * @return           a Map containing the key-value pairs from the YAML file
+     */
     public static Map<String, Object> readYamlFile(String fileName) {
         Yaml yaml = new Yaml();
 
@@ -147,6 +159,11 @@ public class Utility {
         return yaml.load(inputStream);
     }
 
+    /**
+     * The main function that demonstrates the usage of the Utility class.
+     *
+     * @param  args  the command-line arguments passed to the program
+     */
     public static void main(String[] args) {
         Map<String, Object> data = new LinkedHashMap<>();
         data.put("name", "Silenthand Olleander");
