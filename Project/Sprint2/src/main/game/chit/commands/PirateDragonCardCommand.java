@@ -33,6 +33,7 @@ public class PirateDragonCardCommand extends DragonCardCommand{
                     if (caveNode.getType().getPlayer() == null) {
                         caveFound = true;
                     }
+                    System.out.println(caveNode);
                 }
                 currNode = currNode.getPreviousTile();
             }
@@ -43,14 +44,16 @@ public class PirateDragonCardCommand extends DragonCardCommand{
         try {
             nextTileNode = currPlayerTileNode.traverseBackward(steps);
             currPlayerTileNode.movePlayerToTile(nextTileNode, steps);
+
+            nextTileNode.movePlayerToTile(nextTileNode.getAdjacentTile(), -1);
+
         } catch (Exception e) {
             EventManager.getInstance().notify(EventType.PLAYER_TURN_END);
             return;
         }
 
 
-        gameBoard.getTileKeeper().getPlayerTileQueue().updateCurrPlayerTileNode(nextTileNode);
+        gameBoard.getTileKeeper().getPlayerTileQueue().updateCurrPlayerTileNode(nextTileNode.getAdjacentTile());
         EventManager.getInstance().notify(EventType.PLAYER_MOVED);
-        // EventManager.getInstance().notify(EventType.PLAYER_TURN_END);
     }
 }
