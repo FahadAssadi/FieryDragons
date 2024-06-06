@@ -119,7 +119,6 @@ public class TilePanel extends JPanel {
             int tileY = (int) (centerY + (caveRingRadius - TILE_SIZE / 2) * Math.sin(angle));
 
             TileNode caveTileNode = volcanoTiles.get(counter).getAdjacentTile();
-            System.out.println(caveTileNode);
 
             TileHexagon tileHexagon = new TileHexagon(caveTileNode.getType(), tileX, tileY, CAVE_COLOR);
             tileHexagon.drawTile(g);

@@ -9,7 +9,7 @@ import java.awt.*;
  * This class represents the main frame for a Tic Tac Toe game, providing the graphical user interface components
  * and interactions needed to play the game.
  */
-public class TicTacToeGameFrame extends JFrame {
+public class TicTacToeGameFrame extends JDialog {
     private final TicTacToeModel model;
     private final JButton[][] boardButtons;
     private final JLabel statusLabel;
@@ -45,6 +45,7 @@ public class TicTacToeGameFrame extends JFrame {
         JButton resetButton = new JButton("Reset Game");
         resetButton.addActionListener(e -> handleResetButton());
         add(resetButton, BorderLayout.SOUTH);
+        setModal(true);
 
         setVisible(true);
     }

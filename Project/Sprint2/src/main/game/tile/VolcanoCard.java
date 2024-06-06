@@ -66,7 +66,7 @@ public class VolcanoCard implements Iterable<TileNode>{
     private class volcanoCardIterator implements Iterator<TileNode> {
         private TileNode currNode = startTileNode;
         private boolean firstCall = true;
-        long totalNumAnimals = (long) Settings.getSetting("VolcanoCardAnimals");
+        long totalNumAnimals = (long) Settings.getSetting("LastVolcanoAnimals");
 
         /**
          * Determines if there is a next node available in the iteration sequence.
