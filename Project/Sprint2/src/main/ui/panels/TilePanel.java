@@ -62,7 +62,7 @@ public class TilePanel extends JPanel {
 
 
     private void drawVolcanoTiles(Graphics g, int centerX, int centerY, VolcanoCardIterable volcanoCardIterable) {
-        long numTiles = (long) Settings.getSetting("VolcanoTile");
+        long numTiles = (long) Settings.getSetting("BoardSize");
         double angleIncrement = 2 * Math.PI / numTiles;
 
         // Start drawing tiles from 12 o'clock (270 degrees)
