@@ -35,7 +35,6 @@ public class PlayerTileQueue implements EventListener, Memento {
         this.loadPlayerTileQueue(saveMap);
 
         this.currIndex = (int) saveMap.get("currIndex");
-        System.out.println();
     }
 
     public void constructCaveTiles(TileableCreatureIterable tileableCreatureIterable, VolcanoCardIterable volcanoCardIterable){
@@ -92,18 +91,21 @@ public class PlayerTileQueue implements EventListener, Memento {
             Map<String, Object> playerTileNodeMap = (Map<String, Object>) saveMap.get("Player" + i);
             int playerSteps = (int) playerTileNodeMap.get("totalMoves");
 
-            TileNode currPlayerTileNode = this.playerTileList.get(i);
-            TileNode nextTileNode = null;
+            if (playerSteps != 0) {
+                TileNode currPlayerTileNode = this.playerTileList.get(i);
+                TileNode nextTileNode = null;
 
-            // Move the player to that tile
-            try {
-                nextTileNode = currPlayerTileNode.traverseForward(playerSteps, playerSteps);
-                currPlayerTileNode.movePlayerToTile(nextTileNode, playerSteps);
-            } catch (Exception _) {
-                // this will never cause an exception
+                // Move the player to that tile
+                try {
+                    nextTileNode = currPlayerTileNode.traverseForward(playerSteps, playerSteps);
+                    currPlayerTileNode.movePlayerToTile(nextTileNode, playerSteps);
+                } catch (Exception _) {
+                    // this will never cause an exception
+                }
+
+                updateCurrPlayerTileNode(nextTileNode);
             }
 
-            updateCurrPlayerTileNode(nextTileNode);
             queueNextTurn();
         }
     }

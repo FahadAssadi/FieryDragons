@@ -32,6 +32,6 @@
     "name": "DragonPirate",
     "tileable": 0,
     "maxNumber": 2,
-    "eachNumber": 2
+    "eachNumber": 1
   }
 ]

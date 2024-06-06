@@ -1,6 +1,7 @@
 package main.game.chit.iterators;
 
 import main.game.chit.DragonCard;
+import main.game.chit.type.BackwardDragonCard;
 import main.game.chit.type.CreatureDragonCard;
 import main.game.chit.type.PirateDragonCard;
 import main.game.creature.Creature;
@@ -15,6 +16,7 @@ public class DragonCardIterable implements Iterable<DragonCard>, Memento {
 
     public DragonCardIterable(CreatureIterable creatureIterable) {
         createCreatureRelatedCards(creatureIterable);
+        createOtherDragonCards();
         Collections.shuffle(dragonCards);
     }
 
@@ -35,49 +37,68 @@ public class DragonCardIterable implements Iterable<DragonCard>, Memento {
             int creatureTimes = creature.getCreatureRepeat();
             int creatureQuantity = creature.getCreatureQuantity();
 
-            String creatureImagePath = "/assets/pngs/creatures/" + creature.getCreatureName() + "_";
-
             // Multiple of the same creature and quantity
             for (int j = 0; j < creatureTimes; j++) {
                 // Multiple creatures with different quantities
                 for (int k = 1; k <= creatureQuantity; k++) {
-                    String dragonCardImagePath = creatureImagePath + k + ".png";
-                    ImageIcon dragonCardImage = new ImageIcon(Objects.requireNonNull(getClass().getResource(dragonCardImagePath)));
-
-                    if (creature.isTileable()) {
-                        dragonCards.add(new CreatureDragonCard(dragonCardImage, creature, k));
-                    } else {
-                        dragonCards.add(new PirateDragonCard(dragonCardImage, creature, k));
-                    }
+                    createRelatedCard(creature, k);
                 }
             }
 
         }
+    }
 
+    private void createOtherDragonCards(){
+        String dragonCardImagePath = "/assets/pngs/dragoncard/BackwardsDragon.png";
+        ImageIcon dragonCardImage = new ImageIcon(Objects.requireNonNull(getClass().getResource(dragonCardImagePath)));
+        dragonCards.add(new BackwardDragonCard(dragonCardImage));
+        dragonCards.add(new BackwardDragonCard(dragonCardImage));
+    }
+
+    private void createRelatedCard(Creature creature, int k) {
+        String creatureImagePath = "/assets/pngs/creatures/" + creature.getCreatureName() + "_";
+
+        String dragonCardImagePath = creatureImagePath + k + ".png";
+        ImageIcon dragonCardImage = new ImageIcon(Objects.requireNonNull(getClass().getResource(dragonCardImagePath)));
+
+        if (creature.isTileable()) {
+            dragonCards.add(new CreatureDragonCard(dragonCardImage, creature, k));
+        } else {
+            dragonCards.add(new PirateDragonCard(dragonCardImage, creature, k));
+        }
     }
 
     private void loadCreatureRelatedDragonCards(List<Map<String, Object>> dragonCardArray, CreatureIterable creatureIterable) {
         for (Map<String, Object> dragonCardSaveMap : dragonCardArray) {
-            int dragonCreatureID = (int) dragonCardSaveMap.get("creature");
-            int dragonCreatureAmount = (int) dragonCardSaveMap.get("amount");
+            boolean hasCreature = (boolean) dragonCardSaveMap.get("hasCreature");
 
-            // Loop through all creatures
-            for (Creature creature : creatureIterable) {
-                if (creature.getCreatureID() != dragonCreatureID){
-                    continue;
+            if (hasCreature) {
+                int dragonCreatureID = (int) dragonCardSaveMap.get("creature");
+                int dragonCreatureAmount = (int) dragonCardSaveMap.get("amount");
+
+                // Loop through all creatures
+                for (Creature creature : creatureIterable) {
+                    if (creature.getCreatureID() != dragonCreatureID){
+                        continue;
+                    }
+
+                    String creatureImagePath = "/assets/pngs/creatures/" + creature.getCreatureName() + "_";
+
+                    String dragonCardImagePath = creatureImagePath + dragonCreatureAmount + ".png";
+                    ImageIcon dragonCardImage = new ImageIcon(Objects.requireNonNull(getClass().getResource(dragonCardImagePath)));
+
+                    if (creature.isTileable()) {
+                        dragonCards.add(new CreatureDragonCard(dragonCardImage, creature, dragonCreatureAmount));
+                    } else {
+                        dragonCards.add(new PirateDragonCard(dragonCardImage, creature, dragonCreatureAmount));
+                    }
                 }
-
-                String creatureImagePath = "/assets/pngs/creatures/" + creature.getCreatureName() + "_";
-
-                String dragonCardImagePath = creatureImagePath + dragonCreatureAmount + ".png";
+            } else {
+                String dragonCardImagePath = "/assets/pngs/dragoncard/BackwardsDragon.png";
                 ImageIcon dragonCardImage = new ImageIcon(Objects.requireNonNull(getClass().getResource(dragonCardImagePath)));
-
-                if (creature.isTileable()) {
-                    dragonCards.add(new CreatureDragonCard(dragonCardImage, creature, dragonCreatureAmount));
-                } else {
-                    dragonCards.add(new PirateDragonCard(dragonCardImage, creature, dragonCreatureAmount));
-                }
+                dragonCards.add(new BackwardDragonCard(dragonCardImage));
             }
+
         }
 
     }
@@ -88,7 +109,7 @@ public class DragonCardIterable implements Iterable<DragonCard>, Memento {
         List<Map<String , Object>> dragonCardsSaveList = new ArrayList<>();
 
         for (DragonCard dragonCard : this.dragonCards) {
-            dragonCardsSaveList.add(dragonCard.save(new HashMap<>()));
+            dragonCardsSaveList.add(dragonCard.save(new LinkedHashMap<>()));
         }
 
         map.put("dragonCards", dragonCardsSaveList);

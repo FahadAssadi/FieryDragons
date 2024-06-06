@@ -21,6 +21,7 @@ public class PirateDragonCard extends CharacterDragonCard {
 
     @Override
     public Map<String , Object> save(Map<String , Object> map) {
+        map.put("hasCreature", true);
         map.put("creature", this.getCreature().getCreatureID());
         map.put("amount", this.getAmount());
         return map;

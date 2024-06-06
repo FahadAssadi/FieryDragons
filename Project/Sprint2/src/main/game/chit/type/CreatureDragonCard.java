@@ -20,10 +20,9 @@ public class CreatureDragonCard extends CharacterDragonCard{
 
     @Override
     public Map<String , Object> save(Map<String , Object> map) {
-        Map<String , Object> creatureDragonCardMap = new HashMap<>();
-
-        creatureDragonCardMap.put("creature", this.getCreature().getCreatureID());
-        creatureDragonCardMap.put("amount", this.getAmount());
-        return creatureDragonCardMap;
+        map.put("hasCreature", true);
+        map.put("creature", this.getCreature().getCreatureID());
+        map.put("amount", this.getAmount());
+        return map;
     }
 }
