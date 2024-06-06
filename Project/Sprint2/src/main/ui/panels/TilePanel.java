@@ -91,8 +91,7 @@ public class TilePanel extends JPanel {
 
 
     private void drawCaveTiles(Graphics g, int centerX, int centerY, VolcanoCardIterable volcanoCardIterable) {
-        int playerDistance = (int) Settings.getSetting("PlayerDistance");
-        int numTiles = (int) Settings.getSetting("TotalPlayers");
+        long numTiles = (long) Settings.getSetting("BoardSize");
 
         double angleIncrement = 2 * Math.PI / numTiles;
 
@@ -108,22 +107,26 @@ public class TilePanel extends JPanel {
                 volcanoTiles.add(tileNode);
             }
         }
-        int counter = 0;
-//         Draw each volcano tile around the center in a ring
-        for (int i = 0; i < numTiles; i++){
+
+        // Draw cave tiles
+        for (int i = 0; i < numTiles; i++) {
+            TileNode currVolcanoTile = volcanoTiles.get(i);
+
+            if (currVolcanoTile.getAdjacentTile() == null) {
+                continue;
+            }
+
+            TileNode caveTile = currVolcanoTile.getAdjacentTile();
+
+            System.out.println(caveTile);
+
             double angle = startAngle + i * angleIncrement;
 
             int tileX = (int) (centerX + (caveRingRadius - TILE_SIZE / 2) * Math.cos(angle));
             int tileY = (int) (centerY + (caveRingRadius - TILE_SIZE / 2) * Math.sin(angle));
 
-            TileNode caveTileNode = volcanoTiles.get(counter).getAdjacentTile();
-
-            TileHexagon tileHexagon = new TileHexagon(caveTileNode.getType(), tileX, tileY, CAVE_COLOR);
+            TileHexagon tileHexagon = new TileHexagon(caveTile.getType(), tileX, tileY, CAVE_COLOR);
             tileHexagon.drawTile(g);
-
-            for (int j = 1; j < playerDistance + 1; j++){
-                counter ++;
-            }
         }
 
     }
