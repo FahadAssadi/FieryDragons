@@ -1,5 +1,8 @@
 package main.game.chit.commands;
 
+import main.exceptions.FilledTileException;
+import main.exceptions.PlayerSwappedException;
+import main.exceptions.UndefinedMoveException;
 import main.game.GameBoard;
 import main.game.chit.type.CreatureDragonCard;
 import main.game.event.EventManager;
@@ -42,9 +45,13 @@ public class CreatureDragonCardCommand extends DragonCardCommand {
         try {
             nextTileNode = currPlayerTileNode.traverseForward(steps, totalMoves);
             currPlayerTileNode.movePlayerToTile(nextTileNode, steps);
-        } catch (Exception e) {
+        } catch (FilledTileException | UndefinedMoveException e) {
             EventManager.getInstance().notify(EventType.PLAYER_TURN_END);
             System.out.println(currPlayer + " did not move");
+            return;
+        } catch (PlayerSwappedException e) {
+            EventManager.getInstance().notify(EventType.PLAYER_MOVED);
+            EventManager.getInstance().notify(EventType.PLAYER_TURN_END);
             return;
         }
 

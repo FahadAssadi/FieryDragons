@@ -5,6 +5,7 @@ import main.game.chit.commands.PirateDragonCardCommand;
 import main.game.creature.Creature;
 
 import javax.swing.*;
+import java.util.Map;
 
 public class PirateDragonCard extends CharacterDragonCard {
 
@@ -16,4 +17,13 @@ public class PirateDragonCard extends CharacterDragonCard {
     public DragonCardCommand getDragonCardCommand() {
         return new PirateDragonCardCommand(this);
     }
+
+
+    @Override
+    public Map<String , Object> save(Map<String , Object> map) {
+        map.put("creature", this.getCreature().getCreatureID());
+        map.put("amount", this.getAmount());
+        return map;
+    }
+
 }

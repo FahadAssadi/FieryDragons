@@ -8,7 +8,8 @@ import main.game.tile.TileKeeper;
 import main.ui.panels.DragonCardPanel;
 import main.ui.panels.PlayerTurnPanel;
 import main.ui.panels.TilePanel;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
@@ -38,6 +39,27 @@ public class GameFrame extends JFrame implements EventListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         EventManager.getInstance().subscribe(EventType.PLAYER_MOVED, this);
+
+        createSaveButton();
+    }
+
+    /**
+     * Creates a save button and adds it to the frame.
+     *
+     * @return  void
+     */
+    private void createSaveButton() {
+        JButton saveButton = new JButton("Save");
+        saveButton.setBounds(10, DEFAULT_FRAME_HEIGHT - 80, 80, 30);
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Game Saved!");
+                EventManager.getInstance().notify(EventType.SAVE);
+            }
+        });
+
+        this.add(saveButton);
     }
 
     public void createDragonCardPanel(GameBoard gameBoard){
