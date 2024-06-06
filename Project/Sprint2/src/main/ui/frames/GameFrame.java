@@ -55,11 +55,37 @@ public class GameFrame extends JFrame implements EventListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Game Saved!");
-                EventManager.getInstance().notify(EventType.SAVE);
+//                EventManager.getInstance().notify(EventType.SAVE);
+                SaveGameFrame saveGameFrame = new SaveGameFrame(new SaveGame1Listener(), new SaveGame2Listener(), new SaveGame3Listener());
+                saveGameFrame.setVisible(true);
             }
         });
 
         this.add(saveButton);
+    }
+
+    private class SaveGame1Listener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // Save game 1 functionality to be implemented
+            System.out.println("Save Game 1 button clicked!");
+        }
+    }
+
+    private class SaveGame2Listener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // Save game 2 functionality to be implemented
+            System.out.println("Save Game 2 button clicked!");
+        }
+    }
+
+    private class SaveGame3Listener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // Save game 3 functionality to be implemented
+            System.out.println("Save Game 3 button clicked!");
+        }
     }
 
     /**
