@@ -5,7 +5,8 @@ import main.game.creature.iterators.TileableCreatureIterable;
 import main.game.tile.TileNode;
 import main.game.tile.VolcanoCard;
 import main.game.tile.type.VolcanoTileType;
-import main.misc.Settings;
+import main.misc.Utility;
+import org.json.simple.JSONArray;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -39,16 +40,19 @@ public class VolcanoCardIterable implements Iterable<VolcanoCard> {
      * @param tileableCreatureIterable an iterable of creatures used to populate the volcano tiles
      */
     private void constructVolcanoTiles(TileableCreatureIterable tileableCreatureIterable) {
-        long numVolcanoCards = (long) Settings.getSetting("VolcanoCards");
-        long totalNumAnimals = (long) Settings.getSetting("VolcanoCardAnimals");
+        JSONArray volcanoCardsArrayFromJson = Utility.readJSONFileToArr(getClass().getResourceAsStream(DEFAULT_VOLCANO_CARD_CONFIG_PATH));
+
+        int totalVolcanoCards = volcanoCardsArrayFromJson.size();
 
         Iterator<Creature> tileableCreatureIterator = tileableCreatureIterable.iterator();
 
         VolcanoCard currVolcanoCard = null;
-        int counter = 0;
 
-        while (numVolcanoCards > 0) {
-            long numAnimals = totalNumAnimals; // Reset the count for each volcano card
+        int counter = 0; // counter just for temporary id of nodes
+        int cardCounter = 0; // counting volcano cards
+
+        while (totalVolcanoCards > 0) {
+            long numAnimals = (long) Utility.getObjFromArr(volcanoCardsArrayFromJson, cardCounter).get("animals");
 
             TileNode prevNode = null;
             TileNode startNode = null;
@@ -83,8 +87,8 @@ public class VolcanoCardIterable implements Iterable<VolcanoCard> {
                 currVolcanoCard = new VolcanoCard(startNode);
                 rootVolcanoCard = currVolcanoCard;
             }
-
-            numVolcanoCards--;
+            cardCounter ++;
+            totalVolcanoCards--;
         }
 
 
@@ -110,13 +114,6 @@ public class VolcanoCardIterable implements Iterable<VolcanoCard> {
          // Connecting final and root node
          volcanoTiles.getLast().setNextTile(rootVolcanoCard.getStartTileNode());
          rootVolcanoCard.getStartTileNode().setPreviousTile(volcanoTiles.getLast());
-
-        for (VolcanoCard volcanoCard : this){
-            for (TileNode tileNode : volcanoCard) {
-                System.out.println(tileNode.getTempID() + " " + tileNode.getNextTile().getTempID());
-            }
-        }
-
     }
 
     /**
