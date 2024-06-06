@@ -7,10 +7,7 @@ import main.game.event.EventListener;
 import main.game.event.EventManager;
 import main.game.event.EventType;
 import main.game.player.Player;
-import main.ui.frames.GameFrame;
-import main.ui.frames.GameOverFrame;
-import main.ui.frames.LoadGameFrame;
-import main.ui.frames.StartGameFrame;
+import main.ui.frames.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -110,6 +107,8 @@ public class GameUI implements EventListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             // Load game 1 functionality to be implemented
+            LoadAndSave.getInstance().setLoadFileNumber(1);
+
             EventManager.getInstance().notify(EventType.LOAD);
         }
     }
@@ -117,15 +116,20 @@ public class GameUI implements EventListener {
     private class LoadGame2Listener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            LoadAndSave.getInstance().setLoadFileNumber(2);
+
             // Load game 2 functionality to be implemented
             System.out.println("Load Game 2 button clicked!");
+            EventManager.getInstance().notify(EventType.LOAD);
         }
     }
 
     private class LoadGame3Listener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            LoadAndSave.getInstance().setLoadFileNumber(3);
             // Load game 3 functionality to be implemented
+            EventManager.getInstance().notify(EventType.LOAD);
             System.out.println("Load Game 3 button clicked!");
         }
     }

@@ -4,7 +4,6 @@ import main.game.chit.DragonCardKeeper;
 import main.game.creature.CreatureKeeper;
 import main.game.snapshot.Memento;
 import main.game.tile.TileKeeper;
-import main.misc.Utility;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -57,17 +56,6 @@ public class GameBoard implements Memento {
         map.put("dragonCardKeeper", this.dragonCardKeeper.save(new LinkedHashMap<>()));
         map.put("tileKeeper", this.tileKeeper.save(new LinkedHashMap<>()));
         return map;
-    }
-
-    /**
-     * The main function that initializes a GameBoard object using a saved state from a YAML file.
-     *
-     * @param  args  the command line arguments (not used in this function)
-     */
-    public static void main(String[] args) {
-        Map<String, Object> map = Utility.readYamlFile("save_10.yml");
-
-        GameBoard gameBoard = new GameBoard(map);
     }
 
 }

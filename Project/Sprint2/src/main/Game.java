@@ -4,11 +4,10 @@ import main.game.GameBoard;
 import main.game.event.EventListener;
 import main.game.event.EventManager;
 import main.game.event.EventType;
-import main.misc.Settings;
 import main.misc.Utility;
 import main.ui.GameUI;
+import main.ui.frames.LoadAndSave;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -35,10 +34,7 @@ public class Game implements EventListener {
      * @return  void
      */
     public void startSaveProcess() {
-        Map<String, Object> map = this.gameBoard.save(new LinkedHashMap<>());
-
-        String path = "save_" + 10 + ".yml";
-        Utility.writeYamlFile(map, path);
+        new LoadAndSave().save(this.gameBoard);
     }
 
     /**
@@ -47,15 +43,7 @@ public class Game implements EventListener {
      * @return  void
      */
     public void startLoadProcess() {
-        String path = "save_" + 10 + ".yml";
-        Map<String, Object> map = Utility.readYamlFile(path);
-
-        this.gameBoard = new GameBoard(map);
-        this.gameUI = new GameUI(gameBoard);
-
-        this.gameUI.displayGameUI();
-
-        System.out.println("LOADED GAME");
+        this.gameBoard = new LoadAndSave().load();
     }
 
     /**

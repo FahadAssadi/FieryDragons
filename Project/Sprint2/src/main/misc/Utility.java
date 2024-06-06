@@ -159,21 +159,4 @@ public class Utility {
         return yaml.load(inputStream);
     }
 
-    /**
-     * The main function that demonstrates the usage of the Utility class.
-     *
-     * @param  args  the command-line arguments passed to the program
-     */
-    public static void main(String[] args) {
-        Map<String, Object> data = new LinkedHashMap<>();
-        data.put("name", "Silenthand Olleander");
-        data.put("race", "Human");
-        data.put("traits", new String[] { "ONE_HAND", "ONE_EYE" });
-
-        String filename = "save_1.yml";
-
-        writeYamlFile(data, filename);
-
-        System.out.println(readYamlFile(filename));
-    }
 }
