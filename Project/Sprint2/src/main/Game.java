@@ -47,7 +47,6 @@ public class Game implements EventListener {
     public void update(EventType eventType) {
         if (eventType == EventType.SAVE) {
             startSaveProcess();
-            this.gameUI.getGameFrame().setVisible(false);
         } else if (eventType == EventType.LOAD) {
             startLoadProcess();
         }
