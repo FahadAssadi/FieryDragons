@@ -34,7 +34,7 @@ public class Game implements EventListener {
      * @return  void
      */
     public void startSaveProcess() {
-        new LoadAndSave().save(this.gameBoard);
+        LoadAndSave.getInstance().save(this.gameBoard);
     }
 
     /**
@@ -43,7 +43,11 @@ public class Game implements EventListener {
      * @return  void
      */
     public void startLoadProcess() {
-        this.gameBoard = new LoadAndSave().load();
+        this.gameBoard = LoadAndSave.getInstance().load();
+        this.gameUI = new GameUI(gameBoard);
+
+        // Update the UI
+        this.gameUI.displayGameUI();
     }
 
     /**

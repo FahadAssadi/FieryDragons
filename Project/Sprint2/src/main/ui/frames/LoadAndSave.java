@@ -36,6 +36,7 @@ public class LoadAndSave {
         String path = "save_" + this.loadFileNumber + ".yml";
 
         Map<String, Object> map = Utility.readYamlFile(path);
+        System.out.println(map );
 
         return new GameBoard(map);
     }
