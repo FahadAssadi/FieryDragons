@@ -31,7 +31,6 @@ public class PirateDragonCardCommand extends DragonCardCommand{
                     TileNode caveNode = currNode.getAdjacentTile();
                     // If no player is at cave
                     if (caveNode.getType().getPlayer() == null) {
-                        System.out.println(caveNode.toString() + ", steps to this cave: " + stepsToCave);
                         caveFound = true;
                     }
                 }
