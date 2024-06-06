@@ -7,6 +7,10 @@ import main.game.event.EventType;
 import main.game.player.Player;
 import main.ui.frames.GameFrame;
 import main.ui.frames.GameOverFrame;
+import main.ui.frames.StartGameFrame;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * The GameUI class manages the user interface of the main.game.
@@ -34,6 +38,11 @@ public class GameUI implements EventListener {
 
         // Subscribe to game over event
         EventManager.getInstance().subscribe(EventType.GAME_OVER, this);
+    }
+
+    public void displayStartGameUI() {
+        StartGameFrame startGameFrame = new StartGameFrame(new StartNewGameListener(), new LoadGameListener());
+        startGameFrame.setVisible(true);
     }
 
     /**
@@ -68,5 +77,20 @@ public class GameUI implements EventListener {
      */
     public GameFrame getGameFrame() {
         return gameFrame;
+    }
+
+    private class StartNewGameListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            displayGameUI();
+        }
+    }
+
+    private class LoadGameListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // Load game functionality to be implemented
+            System.out.println("Load Game button clicked!");
+        }
     }
 }

@@ -43,7 +43,7 @@ public class Game implements EventListener {
         String path = "save_" + 10 + ".yml";
         Map<String, Object> map = Utility.readYamlFile(path);
 
-        this.gameBoard.load(map);
+//        this.gameBoard.load(map);
     }
 
     @Override
@@ -59,7 +59,10 @@ public class Game implements EventListener {
     public static void main(String[] args) {
         Game game = new Game();
 
-        // Display the main.ui
-        game.gameUI.displayGameUI();
+//         Display the main.ui
+//        game.gameUI.displayGameUI();
+        game.gameUI.displayStartGameUI();
+
+//        game.startSaveProcess();
     }
 }
