@@ -1,4 +1,4 @@
-package main.game;
+package main.game.tile.collision;
 
 import main.game.player.Player;
 

@@ -3,6 +3,7 @@ package main.game.tile;
 import main.exceptions.FilledTileException;
 import main.exceptions.UndefinedMoveException;
 import main.game.player.Player;
+import main.game.tile.collision.TicTacToeModel;
 import main.game.tile.type.TileType;
 import main.misc.Settings;
 
@@ -100,22 +101,24 @@ public class TileNode {
     }
 
     public void movePlayerToTile(TileNode nextTile, int steps) throws Exception {
-        if (nextTile.getType().getPlayer() != null) {
-            this.resolveCollision();
+        Player currPlayer = this.getType().getPlayer();
+        Player adjPlayer = nextTile.getType().getPlayer();
+
+        if (adjPlayer != null) {
+            currPlayer = this.resolveCollision(currPlayer, adjPlayer);
         }
 
-        Player player = this.getType().getPlayer();
         this.getType().setPlayer(null);
-
-        player.move(steps);
-        nextTile.getType().setPlayer(player);
+        currPlayer.move(steps);
+        nextTile.getType().setPlayer(currPlayer);
     }
 
-    public void resolveCollision() throws Exception {
+    public Player resolveCollision(Player player1, Player player2) throws Exception {
         // Currently only throws exception
-        throw new FilledTileException("Player Exists");
+//        throw new FilledTileException("Player Exists");
 
-        // With the extended feature, will have some implementation
+        TicTacToeModel ticTacToeModel = new TicTacToeModel(player1, player2);
+        return ticTacToeModel.getWinner();
     }
 
     @Override

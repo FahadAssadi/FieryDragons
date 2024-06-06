@@ -1,6 +1,6 @@
 package main.ui.frames;
 
-import main.game.TicTacToeModel;
+import main.game.tile.collision.TicTacToeModel;
 import main.game.player.Player;
 import javax.swing.*;
 import java.awt.*;
