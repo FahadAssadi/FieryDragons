@@ -1,5 +1,7 @@
 package main.game.tile;
 
+import main.exceptions.FilledTileException;
+import main.exceptions.PlayerSwappedException;
 import main.exceptions.UndefinedMoveException;
 import main.game.player.Player;
 import main.game.snapshot.Memento;
@@ -70,7 +72,7 @@ public class TileNode implements Memento {
         return adjacentTile;
     }
 
-    public TileNode traverseForward(int steps, int totalMoves) throws Exception {
+    public TileNode traverseForward(int steps, int totalMoves) throws UndefinedMoveException {
         long boardSize = (long) Settings.getSetting("VolcanoTile");
         boardSize++;
 
@@ -103,12 +105,26 @@ public class TileNode implements Memento {
         return this.getPreviousTile().traverseBackward(++steps);
     }
 
-    public void movePlayerToTile(TileNode nextTile, int steps) throws Exception {
+    public void movePlayerToTile(TileNode nextTile, int steps) throws FilledTileException, PlayerSwappedException {
         Player currPlayer = this.getType().getPlayer();
         Player adjPlayer = nextTile.getType().getPlayer();
 
         if (adjPlayer != null) {
-            currPlayer = this.resolveCollision(currPlayer, adjPlayer);
+            Player winner = this.resolveCollision(currPlayer, adjPlayer);
+            if (winner != currPlayer) {
+                throw new FilledTileException("Player Exists");
+            } else {
+                // swap players
+                int difference = findTileDifference(this, nextTile, 0);
+
+                nextTile.getType().setPlayer(currPlayer);
+                this.getType().setPlayer(adjPlayer);
+
+                currPlayer.move(difference);
+                adjPlayer.move(difference * - 1);
+
+                throw new PlayerSwappedException("Player swapped");
+            }
         }
 
         this.getType().setPlayer(null);
@@ -116,12 +132,20 @@ public class TileNode implements Memento {
         nextTile.getType().setPlayer(currPlayer);
     }
 
-    public Player resolveCollision(Player player1, Player player2) throws Exception {
+    public Player resolveCollision(Player player1, Player player2) {
         // Currently only throws exception
 //        throw new FilledTileException("Player Exists");
 
         TicTacToeGameFrame ticTacToeGameFrame = new TicTacToeGameFrame(player1, player2);
         return ticTacToeGameFrame.getWinner();
+    }
+
+    public int findTileDifference(TileNode currentTile, TileNode targetTile, int currentSteps) {
+        if (currentTile.equals(targetTile)) {
+            return currentSteps;
+        }
+
+        return findTileDifference(currentTile.getNextTile(), targetTile, currentSteps + 1);
     }
 
     @Override
