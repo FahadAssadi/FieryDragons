@@ -41,6 +41,11 @@ public class Game implements EventListener {
         Map<String, Object> map = Utility.readYamlFile(path);
 
         this.gameBoard = new GameBoard(map);
+        this.gameUI = new GameUI(gameBoard);
+
+        this.gameUI.displayGameUI();
+
+        System.out.println("LOADED GAME");
     }
 
     @Override
@@ -58,7 +63,5 @@ public class Game implements EventListener {
 //         Display the main.ui
 //        game.gameUI.displayGameUI();
         game.gameUI.displayStartGameUI();
-
-//        game.startSaveProcess();
     }
 }

@@ -99,7 +99,7 @@ public class GameUI implements EventListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             // Load game 1 functionality to be implemented
-            System.out.println("Load Game 1 button clicked!");
+            EventManager.getInstance().notify(EventType.LOAD);
         }
     }
 
