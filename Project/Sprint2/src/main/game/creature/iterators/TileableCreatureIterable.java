@@ -13,6 +13,11 @@ public class TileableCreatureIterable implements Iterable<Creature> {
         this.createTileableCreatures(creatureIterable);
     }
 
+    /**
+     * Creates a list of tileable creatures from the given creature iterable.
+     *
+     * @param  creatureIterable  the iterable of creatures to create tileable creatures from
+     */
     private void createTileableCreatures(CreatureIterable creatureIterable){
         this.tileableCreatures = new ArrayList<>();
 
@@ -23,6 +28,11 @@ public class TileableCreatureIterable implements Iterable<Creature> {
         }
     }
 
+    /**
+     * Returns an iterator over the elements in this TileableCreatureIterable.
+     *
+     * @return  an Iterator object for iterating over the elements in this TileableCreatureIterable
+     */
     @Override
     public Iterator<Creature> iterator() {
         return tileableCreatures.iterator();

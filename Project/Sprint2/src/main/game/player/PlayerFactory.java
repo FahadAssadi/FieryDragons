@@ -21,11 +21,21 @@ public class PlayerFactory implements Iterator<Player> {
         totalPlayers = (int) (humanPlayers + AIPlayers);
     }
 
+    /**
+     * Checks if there are more players to iterate over.
+     *
+     * @return true if there are more players, false otherwise
+     */
     @Override
     public boolean hasNext() {
         return currentIndex < totalPlayers;
     }
 
+    /**
+     * Returns the next player in the iteration.
+     *
+     * @return         	The next player in the iteration.
+     */
     @Override
     public Player next() {
         Dictionary playerConfig = Utility.getObjFromArr(Utility.readJSONFileToArr(getClass().getResourceAsStream(DEFAULT_PLAYER_CONFIG_PATH)), currentIndex);

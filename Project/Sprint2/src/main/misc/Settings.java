@@ -48,6 +48,10 @@ public class Settings {
 
     }
 
+    /**
+     * Increments the save count in the settings and updates the settings map accordingly.
+     *
+     */
     public void incrementSaveCount(){
         InputStream inputStream = getClass().getResourceAsStream(DEFAULT_SETTINGS_CONFIG_PATH);
         Utility.incrementValueInJSONFile(inputStream, "Saves");
@@ -55,7 +59,12 @@ public class Settings {
         this.settingsMap = (Map<String, Object>) Utility.getDictionaryFromObj(Utility.readJSONFileToObj(getClass().getResourceAsStream(DEFAULT_SETTINGS_CONFIG_PATH)));
     }
 
-
+    /**
+     * Returns the singleton instance of the Settings class. If the instance does not exist,
+     * it creates a new one.
+     *
+     * @return  the singleton instance of the Settings class
+     */
     public static Settings getInstance() {
         if (instance == null) {
             instance = new Settings();

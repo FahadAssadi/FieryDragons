@@ -50,7 +50,11 @@ public class DragonCardPanel extends JPanel {
         setBounds(x, y, DEFAULT_PANEL_WIDTH, DEFAULT_PANEL_HEIGHT);
     }
 
-
+    /**
+     * Creates dragon card buttons based on the dragon cards in the given game board.
+     *
+     * @param  gameBoard  the game board containing the dragon cards
+     */
     private void createDragonCards(GameBoard gameBoard) {
         DragonCardIterable dragonCardIterable = gameBoard.getDragonCardKeeper().getDragonCardIterable();
 

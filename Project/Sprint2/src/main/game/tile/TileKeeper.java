@@ -26,14 +26,30 @@ public class TileKeeper implements Memento {
         this.playerTileQueue = new PlayerTileQueue(playerTileQueueSaveMap, tileableCreatureIterable, volcanoCardIterable);
     }
 
+    /**
+     * Returns the VolcanoCardIterable object that is a member of this TileKeeper.
+     *
+     * @return  the VolcanoCardIterable object
+     */
     public VolcanoCardIterable getVolcanoCardIterable() {
         return this.volcanoCardIterable;
     }
 
+    /**
+     * Returns the PlayerTileQueue object that is a member of this TileKeeper.
+     *
+     * @return  the PlayerTileQueue object
+     */
     public PlayerTileQueue getPlayerTileQueue() {
         return playerTileQueue;
     }
 
+    /**
+     * Overrides the save method to save the state of the TileKeeper object.
+     *
+     * @param  map  a map containing the state of the TileKeeper object
+     * @return      a map containing the updated state of the TileKeeper object
+     */
     @Override
     public Map<String , Object> save(Map<String , Object> map) {
         map.put("volcanoCardIterable", volcanoCardIterable.save(new LinkedHashMap<>()));

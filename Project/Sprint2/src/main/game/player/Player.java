@@ -40,10 +40,21 @@ public class Player implements EventListener, Memento {
         EventManager.getInstance().subscribe(EventType.PLAYER_MOVED, this);
     }
 
+    /**
+     * Increases the total number of moves made by the player by the specified number of steps.
+     *
+     * @param  steps  the number of steps to add to the total number of moves
+     */
     public void move(int steps) {
         this.totalMoves += steps;
     }
 
+    /**
+     * Checks if the player has won the game by determining if the total number of moves made by the player
+     * is equal to the board size plus two.
+     *
+     * @return true if the player has won, false otherwise
+     */
     public boolean hasWon() {
         long boardSize = (long) Settings.getSetting("VolcanoTile");
 
@@ -69,10 +80,20 @@ public class Player implements EventListener, Memento {
         return colour + " " + totalMoves;
     }
 
+    /**
+     * Gets the total number of moves.
+     *
+     * @return         the total number of moves
+     */
     public int getTotalMoves() {
         return totalMoves;
     }
 
+    /**
+     * Updates the game state based on the event type provided.
+     *
+     * @param  eventType  the type of event triggering the update
+     */
     @Override
     public void update(EventType eventType) {
         if (eventType == EventType.PLAYER_MOVED) {
@@ -83,6 +104,12 @@ public class Player implements EventListener, Memento {
 
     }
 
+    /**
+     * Saves the player's colour and total moves into a map.
+     *
+     * @param  map  the map to store the player's data
+     * @return      the same map with the player's data added
+     */
     @Override
     public Map<String, Object> save(Map<String, Object> map) {
         map.put("colour", this.getColour());

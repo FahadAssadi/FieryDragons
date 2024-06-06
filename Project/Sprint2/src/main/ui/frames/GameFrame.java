@@ -62,27 +62,44 @@ public class GameFrame extends JFrame implements EventListener {
         this.add(saveButton);
     }
 
+    /**
+     * Creates a DragonCardPanel and adds it to the current frame.
+     *
+     * @param  gameBoard  the GameBoard object to be passed to the DragonCardPanel constructor
+     */
     public void createDragonCardPanel(GameBoard gameBoard){
         DragonCardPanel dragonCardPanel = new DragonCardPanel(gameBoard, DEFAULT_FRAME_WIDTH, DEFAULT_FRAME_HEIGHT);
 
         this.add(dragonCardPanel);
     }
 
-
+    /**
+     * Creates a PlayerTurnPanel and adds it to the current frame.
+     *
+     * @param  tileKeeper  the TileKeeper object to be passed to the PlayerTurnPanel constructor
+     */
     public void createPlayerTurnPanel(TileKeeper tileKeeper) {
         PlayerTurnPanel playerTurnPanel = new PlayerTurnPanel(tileKeeper, DEFAULT_FRAME_WIDTH, DEFAULT_FRAME_HEIGHT);
 
         this.add(playerTurnPanel);
     }
 
-
+    /**
+     * Creates a TilePanel and adds it to the current frame.
+     *
+     * @param  tileKeeper  the TileKeeper object to be passed to the TilePanel constructor
+     */
     public void createTilePanel(TileKeeper tileKeeper) {
         TilePanel tilePanel = new TilePanel(tileKeeper, DEFAULT_FRAME_WIDTH, DEFAULT_FRAME_HEIGHT);
 
         this.add(tilePanel);
     }
 
-
+    /**
+     * Updates the state of the component based on the given event type.
+     *
+     * @param  eventType  the type of event that occurred
+     */
     @Override
     public void update(EventType eventType) {
         if (eventType == EventType.PLAYER_MOVED) {

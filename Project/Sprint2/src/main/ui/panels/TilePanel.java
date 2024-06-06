@@ -58,7 +58,14 @@ public class TilePanel extends JPanel {
         drawCaveTiles(g, centerX, centerY, this.tileKeeper.getVolcanoCardIterable());
     }
 
-
+    /**
+     * Draws volcano tiles on the provided Graphics object at the specified center coordinates.
+     *
+     * @param  g       the Graphics object used for painting
+     * @param  centerX the x-coordinate of the center point
+     * @param  centerY the y-coordinate of the center point
+     * @param  volcanoCardIterable an iterable of VolcanoCard objects representing the volcano tiles
+     */
     private void drawVolcanoTiles(Graphics g, int centerX, int centerY, VolcanoCardIterable volcanoCardIterable) {
         long numTiles = (long) Settings.getSetting("BoardSize");
         double angleIncrement = 2 * Math.PI / numTiles;
@@ -89,7 +96,14 @@ public class TilePanel extends JPanel {
         }
     }
 
-
+    /**
+     * Draws cave tiles on the provided Graphics object at the specified center coordinates.
+     *
+     * @param  g           the Graphics object used for painting
+     * @param  centerX     the x-coordinate of the center point
+     * @param  centerY     the y-coordinate of the center point
+     * @param  volcanoCardIterable an iterable of VolcanoCard objects representing the volcano tiles
+     */
     private void drawCaveTiles(Graphics g, int centerX, int centerY, VolcanoCardIterable volcanoCardIterable) {
         long numTiles = (long) Settings.getSetting("BoardSize");
 

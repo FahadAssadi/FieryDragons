@@ -21,13 +21,28 @@ public abstract class CharacterDragonCard extends DragonCard {
         this.amount = amount;
     }
 
+    /**
+     * Returns an abstract DragonCardCommand associated with this CharacterDragonCard.
+     *
+     * @return  an abstract DragonCardCommand
+     */
     @Override
     public abstract DragonCardCommand getDragonCardCommand();
 
+    /**
+     * Returns the creature associated with this CharacterDragonCard.
+     *
+     * @return  the creature associated with this CharacterDragonCard
+     */
     public Creature getCreature() {
         return creature;
     }
 
+    /**
+     * Returns the amount associated with this CharacterDragonCard.
+     *
+     * @return the amount associated with this CharacterDragonCard
+     */
     public int getAmount() {
         return amount;
     }

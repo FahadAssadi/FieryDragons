@@ -48,6 +48,11 @@ public class CreatureIterable implements Iterable<Creature> {
         }
     }
 
+    /**
+     * Returns an iterator over the elements in this CreatureIterable.
+     *
+     * @return  an Iterator object for iterating over the elements in this CreatureIterable
+     */
     @Override
     public Iterator<Creature> iterator() {
         return creatures.iterator();

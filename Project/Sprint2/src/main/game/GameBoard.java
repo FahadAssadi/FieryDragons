@@ -59,6 +59,11 @@ public class GameBoard implements Memento {
         return map;
     }
 
+    /**
+     * The main function that initializes a GameBoard object using a saved state from a YAML file.
+     *
+     * @param  args  the command line arguments (not used in this function)
+     */
     public static void main(String[] args) {
         Map<String, Object> map = Utility.readYamlFile("save_10.yml");
 

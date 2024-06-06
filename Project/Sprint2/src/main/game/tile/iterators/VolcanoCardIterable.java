@@ -130,7 +130,12 @@ public class VolcanoCardIterable implements Iterable<VolcanoCard>, Memento {
         return new VolcanoCardIterator();
     }
 
-
+    /**
+     * Saves the VolcanoCard objects in the iterable to a map.
+     *
+     * @param  map  the map to save the VolcanoCard objects to
+     * @return      the map containing the saved VolcanoCard objects
+     */
     @Override
     public Map<String, Object> save(Map<String, Object> map) {
         int count = 0;

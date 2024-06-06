@@ -8,5 +8,11 @@ import main.game.GameBoard;
  * This class provides a blueprint for specific types of commands related to dragon cards.
  */
 public abstract class DragonCardCommand {
+
+    /**
+     * Executes the abstract method for the DragonCardCommand class.
+     *
+     * @param  gameBoard  the GameBoard object representing the current state of the game
+     */
     public abstract void execute(GameBoard gameBoard);
 }
