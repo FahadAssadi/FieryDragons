@@ -1,16 +1,17 @@
 package main.game.chit.commands;
 
 import main.game.GameBoard;
+import main.game.chit.DragonCard;
 import main.game.chit.type.PirateDragonCard;
 import main.game.event.EventManager;
 import main.game.event.EventType;
 import main.game.tile.TileNode;
 
 public class BackwardsDragonCardCommand extends DragonCardCommand{
-    private final PirateDragonCard pirateDragonCard;
+    private final DragonCard dragonCard;
 
-    public BackwardsDragonCardCommand(PirateDragonCard pirateDragonCard) {
-        this.pirateDragonCard = pirateDragonCard;
+    public BackwardsDragonCardCommand(DragonCard dragonCard) {
+        this.dragonCard = dragonCard;
     }
 
     @Override
