@@ -22,7 +22,7 @@ public class CreatureDragonCard extends CharacterDragonCard{
     public Map<String , Object> save(Map<String , Object> map) {
         Map<String , Object> creatureDragonCardMap = new HashMap<>();
 
-        creatureDragonCardMap.put("creature", this.getCreature().getCreatureName());
+        creatureDragonCardMap.put("creature", this.getCreature().getCreatureID());
         creatureDragonCardMap.put("amount", this.getAmount());
         return creatureDragonCardMap;
     }

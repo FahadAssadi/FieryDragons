@@ -1,14 +1,16 @@
 package main.game.tile;
 
-import main.exceptions.FilledTileException;
 import main.exceptions.UndefinedMoveException;
 import main.game.player.Player;
-import main.game.tile.collision.TicTacToeModel;
+import main.game.snapshot.Memento;
 import main.game.tile.type.TileType;
 import main.misc.Settings;
 import main.ui.frames.TicTacToeGameFrame;
 
-public class TileNode {
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+public class TileNode implements Memento {
     private final TileType type;
     private int tempID;
 
@@ -128,5 +130,25 @@ public class TileNode {
                 "tempID=" + tempID +
                 ", type=" + type +
                 '}';
+    }
+
+    @Override
+    public Map<String, Object> save(Map<String, Object> map) {
+        map.put("ID", this.getTempID());
+        map.put("Creature", this.getType().getCreature().getCreatureID());
+        Player player = this.getType().getPlayer();
+
+        if (player == null) {
+            map.put("Player", null);
+        } else {
+            map.put("Player", this.getType().getPlayer().save(new LinkedHashMap<>()));
+        }
+
+        return map;
+    }
+
+    @Override
+    public Map<String, Object> load(Map<String, Object> map) {
+        return Map.of();
     }
 }

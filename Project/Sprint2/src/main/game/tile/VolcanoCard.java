@@ -1,14 +1,18 @@
 package main.game.tile;
 
+import main.game.snapshot.Memento;
 import main.misc.Settings;
 
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Represents a linked list of volcano cards, each containing a chain of tile nodes.
  * This class also provides an iterator to traverse through the nodes of a single card.
  */
-public class VolcanoCard implements Iterable<TileNode>{
+public class VolcanoCard implements Iterable<TileNode>, Memento {
     private final TileNode startTileNode;
     private VolcanoCard nextVolcanoCard;
 
@@ -58,6 +62,21 @@ public class VolcanoCard implements Iterable<TileNode>{
     @Override
     public Iterator<TileNode> iterator() {
         return new volcanoCardIterator();
+    }
+
+    @Override
+    public Map<String, Object> save(Map<String, Object> map) {
+        int count = 0;
+        for (TileNode tileNode : this) {
+            map.put("tileNode" + count++, tileNode.save(new LinkedHashMap<>()));
+        }
+
+        return map;
+    }
+
+    @Override
+    public Map<String, Object> load(Map<String, Object> map) {
+        return Map.of();
     }
 
     /**

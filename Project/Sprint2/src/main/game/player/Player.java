@@ -4,13 +4,16 @@ import main.game.event.EventListener;
 import main.game.event.EventManager;
 import main.game.event.EventType;
 import main.game.player.behaviour.BehaviourStrategy;
+import main.game.snapshot.Memento;
 import main.misc.Settings;
+
+import java.util.Map;
 
 /**
  * The Player class represents a player in the main.game.
  * It contains information such as behaviour, position, and total moves of the player.
  */
-public class Player implements EventListener {
+public class Player implements EventListener, Memento {
     // The behaviour strategy of the player
     private final BehaviourStrategy behaviour;
 
@@ -78,5 +81,17 @@ public class Player implements EventListener {
             }
         }
 
+    }
+
+    @Override
+    public Map<String, Object> save(Map<String, Object> map) {
+        map.put("colour", this.getColour());
+        map.put("totalMoves", this.getTotalMoves());
+        return map;
+    }
+
+    @Override
+    public Map<String, Object> load(Map<String, Object> map) {
+        return Map.of();
     }
 }

@@ -10,9 +10,7 @@ import main.misc.Utility;
 import org.json.simple.JSONArray;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Represents an iterable collection of VolcanoCards.
@@ -131,7 +129,12 @@ public class VolcanoCardIterable implements Iterable<VolcanoCard>, Memento {
 
     @Override
     public Map<String, Object> save(Map<String, Object> map) {
-        return Map.of();
+        int count = 0;
+        for (VolcanoCard volcanoCard : this) {
+            map.put("volcanoCard" + count++, volcanoCard.save(new LinkedHashMap<>()));
+        }
+
+        return map;
     }
 
     @Override

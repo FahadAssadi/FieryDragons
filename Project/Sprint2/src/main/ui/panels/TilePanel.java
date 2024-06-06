@@ -4,14 +4,12 @@ import main.game.tile.TileKeeper;
 import main.game.tile.TileNode;
 import main.game.tile.VolcanoCard;
 import main.game.tile.iterators.VolcanoCardIterable;
-import main.game.tile.iterators.VolcanoTileIterable;
 import main.misc.Settings;
 import main.ui.shapes.TileHexagon;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * The TilePanel class represents a panel for displaying game tiles in the UI.
@@ -26,8 +24,8 @@ public class TilePanel extends JPanel {
     private static final int yOffset = 0;
     private static final int TILE_SIZE = 36;
     private static final int RING_RADIUS = 270;
-    private static final Color DEFAULT_COLOR = new Color(142, 68, 61, 244);
-    private static final Color ALTERNATE_COLOR = new Color(84, 36, 32, 244);
+    private static final Color DEFAULT_COLOR = new Color(207, 108, 21, 244);
+    private static final Color ALTERNATE_COLOR = new Color(211, 175, 30, 244);
     private static final Color CAVE_COLOR = new Color(48, 48, 48, 244);
 
 

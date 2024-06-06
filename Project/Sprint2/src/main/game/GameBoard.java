@@ -7,6 +7,7 @@ import main.game.tile.TileKeeper;
 import main.misc.Utility;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 
@@ -44,8 +45,8 @@ public class GameBoard implements Memento {
      */
     @Override
     public Map<String , Object> save(Map<String , Object> map) {
-        map.put("dragonCardKeeper", this.dragonCardKeeper.save(new HashMap<>()));
-        map.put("tileKeeper", this.tileKeeper.save(new HashMap<>()));
+        map.put("dragonCardKeeper", this.dragonCardKeeper.save(new LinkedHashMap<>()));
+        map.put("tileKeeper", this.tileKeeper.save(new LinkedHashMap<>()));
         return map;
     }
 
