@@ -44,9 +44,11 @@ public class BackwardsDragonCardCommand extends DragonCardCommand{
 
         try {
             nextTileNode = currPlayerTileNode.traverseBackward(steps);
-            currPlayerTileNode.movePlayerToTile(nextTileNode, steps);
+//            currPlayerTileNode.movePlayerToTile(nextTileNode, steps);
+            currPlayerTileNode.movePlayerToTile(nextTileNode.getAdjacentTile(), steps - 1);
 
-            nextTileNode.movePlayerToTile(nextTileNode.getAdjacentTile(), -1);
+            System.out.println(nextTileNode.getAdjacentTile().getType().getPlayer());
+//            nextTileNode.movePlayerToTile(nextTileNode.getAdjacentTile(), -1);
 
         } catch (Exception e) {
             EventManager.getInstance().notify(EventType.PLAYER_TURN_END);
