@@ -13,6 +13,11 @@ public class PirateDragonCardCommand extends DragonCardCommand{
         this.pirateDragonCard = pirateDragonCard;
     }
 
+    /**
+     * Executes the PirateDragonCardCommand by moving the player on the game board.
+     *
+     * @param  gameBoard  the game board on which the command is executed
+     */
     @Override
     public void execute(GameBoard gameBoard) {
         TileNode currPlayerTileNode = gameBoard.getTileKeeper().getPlayerTileQueue().getCurrPlayerTileNode();

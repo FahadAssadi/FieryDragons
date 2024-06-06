@@ -18,6 +18,11 @@ public class CreatureDragonCardCommand extends DragonCardCommand {
         this.creatureDragonCard = creatureDragonCard;
     }
 
+    /**
+     * Executes the command on the given GameBoard.
+     *
+     * @param  gameBoard  the GameBoard on which the command is executed
+     */
     @Override
     public void execute(GameBoard gameBoard) {
         // Get the tile the player is standing on

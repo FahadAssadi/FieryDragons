@@ -37,6 +37,12 @@ public class PlayerTileQueue implements EventListener, Memento {
         this.currIndex = (int) saveMap.get("currIndex");
     }
 
+    /**
+     * Constructs cave tiles for the player based on the given tileable creature iterator and volcano card iterator.
+     *
+     * @param  tileableCreatureIterable  an iterator over tileable creatures
+     * @param  volcanoCardIterable      an iterator over volcano cards
+     */
     public void constructCaveTiles(TileableCreatureIterable tileableCreatureIterable, VolcanoCardIterable volcanoCardIterable){
         int playerDistance = (int) Settings.getSetting("PlayerDistance");
 
@@ -86,6 +92,11 @@ public class PlayerTileQueue implements EventListener, Memento {
         }
     }
 
+    /**
+     * Loads the player tile queue from the given saved map.
+     *
+     * @param  saveMap  a map containing the saved player tile information
+     */
     public void loadPlayerTileQueue(Map<String, Object> saveMap) {
         for (int i = 0; i < this.playerTileList.size(); i++) {
             Map<String, Object> playerTileNodeMap = (Map<String, Object>) saveMap.get("Player" + i);
@@ -110,14 +121,30 @@ public class PlayerTileQueue implements EventListener, Memento {
         }
     }
 
+    /**
+     * Increments the current index and wraps around to the beginning of the player tile list if the current index exceeds the size of the list.
+     *
+     * @return void
+     */
     public void queueNextTurn(){
         this.currIndex = (++this.currIndex) % this.playerTileList.size();
     }
 
+    /**
+     * Retrieves the current player tile node from the player tile list.
+     *
+     * @return  the current player tile node
+     */
     public TileNode getCurrPlayerTileNode(){
         return this.playerTileList.get(currIndex);
     }
 
+    /**
+     * Updates the state of the object based on the given event type. If the event type is PLAYER_TURN_END,
+     * it calls the queueNextTurn() method to increment the current index and wrap around to the beginning of the player tile list.
+     *
+     * @param  eventType  the type of event that occurred
+     */
     @Override
     public void update(EventType eventType) {
         if (eventType == EventType.PLAYER_TURN_END) {
@@ -125,19 +152,40 @@ public class PlayerTileQueue implements EventListener, Memento {
         }
     }
 
+    /**
+     * Updates the current player tile node in the player tile list.
+     *
+     * @param  tileNode  the new tile node to be set at the current index
+     */
     public void updateCurrPlayerTileNode(TileNode tileNode) {
         this.playerTileList.set(this.currIndex, tileNode);
     }
 
+    /**
+     * Returns the number of elements in the playerTileList.
+     *
+     * @return the number of elements in the playerTileList
+     */
     public int size() {
         return this.playerTileList.size();
     }
 
+    /**
+     * Returns a string representation of the playerTileList.
+     *
+     * @return         a string representation of the playerTileList
+     */
     @Override
     public String toString() {
         return this.playerTileList.toString();
     }
 
+    /**
+     * Saves the current state of the object into a map.
+     *
+     * @param  map  the map to store the saved state
+     * @return      the map containing the saved state
+     */
     @Override
     public Map<String, Object> save(Map<String, Object> map) {
         map.put("currIndex", this.currIndex);

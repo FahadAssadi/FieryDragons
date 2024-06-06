@@ -29,6 +29,11 @@ public class Game implements EventListener {
         EventManager.getInstance().subscribe(EventType.LOAD, this);
     }
 
+    /**
+     * Starts the save process by saving the current game state to a YAML file.
+     *
+     * @return  void
+     */
     public void startSaveProcess() {
         Map<String, Object> map = this.gameBoard.save(new LinkedHashMap<>());
 
@@ -36,6 +41,11 @@ public class Game implements EventListener {
         Utility.writeYamlFile(map, path);
     }
 
+    /**
+     * Starts the load process by loading the game state from a YAML file.
+     *
+     * @return  void
+     */
     public void startLoadProcess() {
         String path = "save_" + 10 + ".yml";
         Map<String, Object> map = Utility.readYamlFile(path);
@@ -48,6 +58,11 @@ public class Game implements EventListener {
         System.out.println("LOADED GAME");
     }
 
+    /**
+     * Updates the state of the object based on the given event type.
+     *
+     * @param  eventType  the type of event that occurred
+     */
     @Override
     public void update(EventType eventType) {
         if (eventType == EventType.SAVE) {
@@ -59,9 +74,6 @@ public class Game implements EventListener {
 
     public static void main(String[] args) {
         Game game = new Game();
-
-//         Display the main.ui
-//        game.gameUI.displayGameUI();
         game.gameUI.displayStartGameUI();
     }
 }
