@@ -69,6 +69,9 @@ public class GameFrame extends JFrame implements EventListener {
         public void actionPerformed(ActionEvent e) {
             // Save game 1 functionality to be implemented
             System.out.println("Save Game 1 button clicked!");
+
+            LoadAndSave.getInstance().setSaveFileNumber(1);
+            EventManager.getInstance().notify(EventType.SAVE);
         }
     }
 
@@ -77,6 +80,9 @@ public class GameFrame extends JFrame implements EventListener {
         public void actionPerformed(ActionEvent e) {
             // Save game 2 functionality to be implemented
             System.out.println("Save Game 2 button clicked!");
+
+            LoadAndSave.getInstance().setSaveFileNumber(2);
+            EventManager.getInstance().notify(EventType.SAVE);
         }
     }
 
@@ -85,6 +91,9 @@ public class GameFrame extends JFrame implements EventListener {
         public void actionPerformed(ActionEvent e) {
             // Save game 3 functionality to be implemented
             System.out.println("Save Game 3 button clicked!");
+
+            LoadAndSave.getInstance().setSaveFileNumber(3);
+            EventManager.getInstance().notify(EventType.SAVE);
         }
     }
 
