@@ -16,8 +16,30 @@ public class PirateDragonCardCommand extends DragonCardCommand{
     @Override
     public void execute(GameBoard gameBoard) {
         TileNode currPlayerTileNode = gameBoard.getTileKeeper().getPlayerTileQueue().getCurrPlayerTileNode();
-        int steps = -1 * this.pirateDragonCard.getAmount();
         TileNode nextTileNode;
+
+
+        boolean caveFound = false;
+        int stepsToCave = 0;
+        TileNode currNode = currPlayerTileNode;
+
+        if (currNode.getPreviousTile() != null) {
+            while (!caveFound) {
+                stepsToCave++;
+                // If Tile is next to Cave
+                if (currNode.getAdjacentTile() != null) {
+                    TileNode caveNode = currNode.getAdjacentTile();
+                    // If no player is at cave
+                    if (caveNode.getType().getPlayer() == null) {
+                        System.out.println(caveNode.toString() + ", steps to this cave: " + stepsToCave);
+                        caveFound = true;
+                    }
+                }
+                currNode = currNode.getPreviousTile();
+            }
+        }
+
+        int steps = -1 * stepsToCave + 1;
 
         try {
             nextTileNode = currPlayerTileNode.traverseBackward(steps);
@@ -30,6 +52,6 @@ public class PirateDragonCardCommand extends DragonCardCommand{
 
         gameBoard.getTileKeeper().getPlayerTileQueue().updateCurrPlayerTileNode(nextTileNode);
         EventManager.getInstance().notify(EventType.PLAYER_MOVED);
-        EventManager.getInstance().notify(EventType.PLAYER_TURN_END);
+        // EventManager.getInstance().notify(EventType.PLAYER_TURN_END);
     }
 }
