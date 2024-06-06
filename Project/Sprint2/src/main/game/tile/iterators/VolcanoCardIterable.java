@@ -32,6 +32,10 @@ public class VolcanoCardIterable implements Iterable<VolcanoCard>, Memento {
         constructVolcanoTiles(tileableCreatureIterable);
     }
 
+    public VolcanoCardIterable(Map<String , Object> saveMap, TileableCreatureIterable tileableCreatureIterable) {
+        constructVolcanoTiles(tileableCreatureIterable);
+    }
+
     /**
      * Constructs volcano tiles and organizes them into a linked list of VolcanoCards.
      * Each card is populated using the creatures from the provided iterable.

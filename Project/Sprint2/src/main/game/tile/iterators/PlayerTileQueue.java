@@ -30,6 +30,13 @@ public class PlayerTileQueue implements EventListener, Memento {
         EventManager.getInstance().subscribe(EventType.PLAYER_TURN_END, this);
     }
 
+    public PlayerTileQueue(Map<String, Object> saveMap, TileableCreatureIterable tileableCreatureIterable, VolcanoCardIterable volcanoCardIterable) {
+        this.currIndex = (int) saveMap.get("currIndex");
+        this.constructCaveTiles(tileableCreatureIterable, volcanoCardIterable);
+        this.loadPlayerTileQueue(saveMap);
+        System.out.println();
+    }
+
     public void constructCaveTiles(TileableCreatureIterable tileableCreatureIterable, VolcanoCardIterable volcanoCardIterable){
         int playerDistance = (int) Settings.getSetting("PlayerDistance");
 
@@ -79,6 +86,27 @@ public class PlayerTileQueue implements EventListener, Memento {
         }
     }
 
+    public void loadPlayerTileQueue(Map<String, Object> saveMap) {
+        for (int i = 0; i < this.playerTileList.size(); i++) {
+            Map<String, Object> playerTileNodeMap = (Map<String, Object>) saveMap.get("Player" + i);
+            int playerSteps = (int) playerTileNodeMap.get("totalMoves");
+
+            TileNode currPlayerTileNode = this.playerTileList.get(i);
+            TileNode nextTileNode = null;
+
+            // Move the player to that tile
+            try {
+                nextTileNode = currPlayerTileNode.traverseForward(playerSteps, playerSteps);
+                currPlayerTileNode.movePlayerToTile(nextTileNode, playerSteps);
+            } catch (Exception _) {
+                // this will never cause an exception
+            }
+
+            updateCurrPlayerTileNode(nextTileNode);
+            queueNextTurn();
+        }
+    }
+
     public void queueNextTurn(){
         this.currIndex = (++this.currIndex) % this.playerTileList.size();
     }
@@ -105,6 +133,7 @@ public class PlayerTileQueue implements EventListener, Memento {
 
     @Override
     public Map<String, Object> save(Map<String, Object> map) {
+        map.put("currIndex", this.currIndex);
         int count = 0;
         for (TileNode tileNode: this.playerTileList) {
             map.put("Player"+ count++, tileNode.getType().getPlayer().save(new LinkedHashMap<>()));

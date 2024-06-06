@@ -17,6 +17,15 @@ public class TileKeeper implements Memento {
         this.playerTileQueue = new PlayerTileQueue(tileableCreatureIterable, volcanoCardIterable);
     }
 
+    public TileKeeper(Map<String , Object> saveMap, TileableCreatureIterable tileableCreatureIterable) {
+
+        Map<String, Object> volcanoCardIterableSaveMap = (Map<String, Object>) saveMap.get("volcanoCardIterable");
+        this.volcanoCardIterable = new VolcanoCardIterable(volcanoCardIterableSaveMap, tileableCreatureIterable);
+
+        Map<String, Object> playerTileQueueSaveMap = (Map<String, Object>) saveMap.get("Players");
+        this.playerTileQueue = new PlayerTileQueue(playerTileQueueSaveMap, tileableCreatureIterable, volcanoCardIterable);
+    }
+
     public VolcanoCardIterable getVolcanoCardIterable() {
         return this.volcanoCardIterable;
     }

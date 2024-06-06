@@ -34,7 +34,7 @@ public class GameBoard implements Memento {
         this.dragonCardKeeper = new DragonCardKeeper(dragonKeeperSaveMap, creatureKeeper.getCreatureIterable());
 
         Map<String, Object> tileKeeperSaveMap = (Map<String, Object>) saveMap.get("tileKeeper");
-        this.tileKeeper = new TileKeeper(creatureKeeper.getTileableCreatureIterable());
+        this.tileKeeper = new TileKeeper(tileKeeperSaveMap, creatureKeeper.getTileableCreatureIterable());
     }
 
     // Getters only used by UI elements and command classes
