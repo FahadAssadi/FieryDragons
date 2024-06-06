@@ -31,9 +31,10 @@ public class PlayerTileQueue implements EventListener, Memento {
     }
 
     public PlayerTileQueue(Map<String, Object> saveMap, TileableCreatureIterable tileableCreatureIterable, VolcanoCardIterable volcanoCardIterable) {
-        this.currIndex = (int) saveMap.get("currIndex");
         this.constructCaveTiles(tileableCreatureIterable, volcanoCardIterable);
         this.loadPlayerTileQueue(saveMap);
+
+        this.currIndex = (int) saveMap.get("currIndex");
         System.out.println();
     }
 
