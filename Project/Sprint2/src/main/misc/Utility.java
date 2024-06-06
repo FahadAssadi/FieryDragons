@@ -10,7 +10,6 @@ import org.yaml.snakeyaml.Yaml;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
-import java.net.URL;
 import java.util.*;
 
 /**
@@ -75,6 +74,33 @@ public class Utility {
         JSONObject jsonObject = (JSONObject) jsonArray.get(index);
 
         return Utility.getDictionaryFromObj(jsonObject);
+    }
+
+    /**
+     * Increments a value in a JSON file and updates the file with the new value.
+     *
+     * @param inputStream The input stream of the JSON file.
+     * @param key         The key whose value needs to be incremented.
+     */
+    public static void incrementValueInJSONFile(InputStream inputStream, String key) {
+        try {
+            // Read JSON file and parse its content
+            JSONObject jsonObject = (JSONObject) new JSONParser().parse(new InputStreamReader(inputStream));
+
+            // Increment the value of the specified key
+            long value = (long) jsonObject.getOrDefault(key, 0L);
+            jsonObject.put(key, value + 1);
+
+            // Write the updated JSON back to the file
+            try (FileWriter file = new FileWriter(Utility.class.getClassLoader().getResource("data/").getPath())) {
+                file.write(jsonObject.toJSONString());
+                file.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
