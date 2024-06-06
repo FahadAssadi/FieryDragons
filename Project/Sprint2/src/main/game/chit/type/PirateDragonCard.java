@@ -26,8 +26,4 @@ public class PirateDragonCard extends CharacterDragonCard {
         return map;
     }
 
-    @Override
-    public Map<String , Object> load(Map<String , Object> map) {
-        return Map.of();
-    }
 }

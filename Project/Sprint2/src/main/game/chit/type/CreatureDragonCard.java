@@ -26,9 +26,4 @@ public class CreatureDragonCard extends CharacterDragonCard{
         creatureDragonCardMap.put("amount", this.getAmount());
         return creatureDragonCardMap;
     }
-
-    @Override
-    public Map<String , Object> load(Map<String , Object> map) {
-        return Map.of();
-    }
 }

@@ -30,19 +30,20 @@ public class Game implements EventListener {
     }
 
     public void startSaveProcess() {
-        Settings.getInstance().incrementSaveCount();
-        long saveNumber = (long) Settings.getSetting("Saves");
+//        Settings.getInstance().incrementSaveCount();
+//        long saveNumber = (long) Settings.getSetting("Saves");
 
         Map<String, Object> map = this.gameBoard.save(new LinkedHashMap<>());
 
-        String path = "save_" + saveNumber + ".yml";
+        String path = "save_" + 10 + ".yml";
         Utility.writeYamlFile(map, path);
     }
 
     public void startLoadProcess() {
-        String path = "save_";
+        String path = "save_" + 10 + ".yml";
+        Map<String, Object> map = Utility.readYamlFile(path);
 
-        this.gameBoard.load(null);
+        this.gameBoard.load(map);
     }
 
     @Override
@@ -59,7 +60,6 @@ public class Game implements EventListener {
         Game game = new Game();
 
         // Display the main.ui
-//        game.gameUI.displayGameUI();
-        game.startSaveProcess();
+        game.gameUI.displayGameUI();
     }
 }

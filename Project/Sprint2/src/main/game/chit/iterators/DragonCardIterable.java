@@ -63,11 +63,6 @@ public class DragonCardIterable implements Iterable<DragonCard>, Memento {
         return map;
     }
 
-    @Override
-    public Map<String , Object> load(Map<String , Object> map) {
-        return Map.of();
-    }
-
     public static void main(String[] args) {
         DragonCardIterable dragonCardIterable = new DragonCardIterable(new CreatureIterable());
 

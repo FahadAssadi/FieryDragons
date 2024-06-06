@@ -32,8 +32,4 @@ public class TileKeeper implements Memento {
         return map;
     }
 
-    @Override
-    public Map<String , Object> load(Map map) {
-        return Map.of();
-    }
 }

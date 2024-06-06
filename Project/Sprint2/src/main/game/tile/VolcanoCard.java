@@ -74,10 +74,6 @@ public class VolcanoCard implements Iterable<TileNode>, Memento {
         return map;
     }
 
-    @Override
-    public Map<String, Object> load(Map<String, Object> map) {
-        return Map.of();
-    }
 
     /**
      * Internal iterator to navigate through the TileNodes of a VolcanoCard.

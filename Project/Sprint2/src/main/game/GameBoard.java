@@ -4,10 +4,8 @@ import main.game.chit.DragonCardKeeper;
 import main.game.creature.CreatureKeeper;
 import main.game.snapshot.Memento;
 import main.game.tile.TileKeeper;
-import main.misc.Settings;
 import main.misc.Utility;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -49,11 +47,6 @@ public class GameBoard implements Memento {
         map.put("dragonCardKeeper", this.dragonCardKeeper.save(new LinkedHashMap<>()));
         map.put("tileKeeper", this.tileKeeper.save(new LinkedHashMap<>()));
         return map;
-    }
-
-    @Override
-    public Map<String , Object> load(Map<String , Object> map) {
-        return Map.of();
     }
 
 
