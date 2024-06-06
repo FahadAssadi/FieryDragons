@@ -1,5 +1,8 @@
 package main.game.creature;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * The Creature class represents a creature in the main.game.
  */

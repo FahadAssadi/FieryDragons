@@ -1,7 +1,7 @@
 package main.game.event;
 
 /**
- * The EventType enum represents different types of main.game events.
+ * The EventType enum represents different types of game events.
  */
 public enum EventType {
     /**
@@ -17,7 +17,11 @@ public enum EventType {
     SHUFFLE_CARDS,
 
     /**
-     * Indicates the main.game over event.
+     * Indicates the game over event.
      */
-    GAME_OVER
+    GAME_OVER,
+
+    SAVE,
+
+    LOAD
 }

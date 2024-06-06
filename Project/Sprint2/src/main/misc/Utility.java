@@ -4,15 +4,13 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.yaml.snakeyaml.DumperOptions;
+import org.yaml.snakeyaml.Yaml;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.Dictionary;
-import java.util.Hashtable;
+import java.io.*;
+import java.util.*;
 
 /**
  * The Utility class provides various utility methods for common tasks.
@@ -79,6 +77,33 @@ public class Utility {
     }
 
     /**
+     * Increments a value in a JSON file and updates the file with the new value.
+     *
+     * @param inputStream The input stream of the JSON file.
+     * @param key         The key whose value needs to be incremented.
+     */
+    public static void incrementValueInJSONFile(InputStream inputStream, String key) {
+        try {
+            // Read JSON file and parse its content
+            JSONObject jsonObject = (JSONObject) new JSONParser().parse(new InputStreamReader(inputStream));
+
+            // Increment the value of the specified key
+            long value = (long) jsonObject.getOrDefault(key, 0L);
+            jsonObject.put(key, value + 1);
+
+            // Write the updated JSON back to the file
+            try (FileWriter file = new FileWriter(Utility.class.getClassLoader().getResource("data/").getPath())) {
+                file.write(jsonObject.toJSONString());
+                file.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
      * Scales an ImageIcon to the specified width and height.
      *
      * @param imageIcon The ImageIcon to scale.
@@ -92,7 +117,46 @@ public class Utility {
         return new ImageIcon(scaledImage);
     }
 
+    public static void writeYamlFile(Map<String, Object> data, String fileName) {
+        final DumperOptions options = new DumperOptions();
+        options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
+        options.setPrettyFlow(true);
+
+        final Yaml yaml = new Yaml(options);
+
+        try {
+            String resourcesPath = Utility.class.getClassLoader().getResource("data/").getPath();
+
+            String filePath = resourcesPath + fileName;
+
+            FileWriter writer = new FileWriter(filePath);
+            yaml.dump(data, writer);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static Map<String, Object> readYamlFile(String fileName) {
+        Yaml yaml = new Yaml();
+
+        String filePath = "/data/" + fileName;
+
+        InputStream inputStream = Utility.class.getResourceAsStream(filePath);
+
+        return yaml.load(inputStream);
+    }
+
     public static void main(String[] args) {
-        System.out.println(Utility.class.getResource("/main/resources/data/config.json"));
+        Map<String, Object> data = new LinkedHashMap<>();
+        data.put("name", "Silenthand Olleander");
+        data.put("race", "Human");
+        data.put("traits", new String[] { "ONE_HAND", "ONE_EYE" });
+
+        String filename = "save_1.yml";
+
+        writeYamlFile(data, filename);
+
+        System.out.println(readYamlFile(filename));
     }
 }

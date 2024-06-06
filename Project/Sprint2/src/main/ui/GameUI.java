@@ -1,5 +1,7 @@
 package main.ui;
 
+import java.util.List;
+import java.util.ArrayList;
 import main.game.GameBoard;
 import main.game.event.EventListener;
 import main.game.event.EventManager;
@@ -7,6 +9,11 @@ import main.game.event.EventType;
 import main.game.player.Player;
 import main.ui.frames.GameFrame;
 import main.ui.frames.GameOverFrame;
+import main.ui.frames.LoadGameFrame;
+import main.ui.frames.StartGameFrame;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * The GameUI class manages the user interface of the main.game.
@@ -36,6 +43,11 @@ public class GameUI implements EventListener {
         EventManager.getInstance().subscribe(EventType.GAME_OVER, this);
     }
 
+    public void displayStartGameUI() {
+        StartGameFrame startGameFrame = new StartGameFrame(new StartNewGameListener(), new LoadGameListener());
+        startGameFrame.setVisible(true);
+    }
+
     /**
      * Displays the game user interface by setting the game frame visible.
      */
@@ -51,13 +63,67 @@ public class GameUI implements EventListener {
      */
     @Override
     public void update(EventType eventType) {
-        // Get the winning player
-        Player winningPlayer = gameBoard.getTileKeeper().getPlayerTileQueue().getCurrPlayerTileNode().getType().getPlayer();
+        // Get number of players
+        int numPlayers = gameBoard.getTileKeeper().getPlayerTileQueue().size();
 
-        System.out.println(winningPlayer);
+        // Get list of players
+        List<Player> players = new ArrayList<>();
+        for (int i = 0; i < numPlayers; i++) {
+            Player player = gameBoard.getTileKeeper().getPlayerTileQueue().getCurrPlayerTileNode().getType().getPlayer();
+            gameBoard.getTileKeeper().getPlayerTileQueue().queueNextTurn();
+            players.add(player);
+        }
 
         // Create and display the Game Over frame
-        GameOverFrame gameOverFrame = new GameOverFrame(winningPlayer);
+        GameOverFrame gameOverFrame = new GameOverFrame(players);
         gameOverFrame.setVisible(true);
+    }
+
+    /**
+     * Returns the game frame containing the user interface components.
+     *
+     * @return the game frame
+     */
+    public GameFrame getGameFrame() {
+        return gameFrame;
+    }
+
+    private class StartNewGameListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            displayGameUI();
+        }
+    }
+
+    private class LoadGameListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            LoadGameFrame loadGameFrame = new LoadGameFrame(new LoadGame1Listener(), new LoadGame2Listener(), new LoadGame3Listener());
+            loadGameFrame.setVisible(true);
+        }
+    }
+
+    private class LoadGame1Listener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // Load game 1 functionality to be implemented
+            EventManager.getInstance().notify(EventType.LOAD);
+        }
+    }
+
+    private class LoadGame2Listener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // Load game 2 functionality to be implemented
+            System.out.println("Load Game 2 button clicked!");
+        }
+    }
+
+    private class LoadGame3Listener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // Load game 3 functionality to be implemented
+            System.out.println("Load Game 3 button clicked!");
+        }
     }
 }

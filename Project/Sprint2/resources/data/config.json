@@ -1,7 +1,10 @@
 {
+  "Saves": 0,
   "Creatures": 5,
   "DragonCard": 16,
   "VolcanoTile": 24,
+  "VolcanoCards": 8,
+  "VolcanoCardAnimals": 3,
   "HumanPlayers": 4,
   "AIPlayers": 0
 }
