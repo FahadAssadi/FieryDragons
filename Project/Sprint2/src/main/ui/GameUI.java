@@ -7,6 +7,7 @@ import main.game.event.EventType;
 import main.game.player.Player;
 import main.ui.frames.GameFrame;
 import main.ui.frames.GameOverFrame;
+import main.ui.frames.LoadGameFrame;
 import main.ui.frames.StartGameFrame;
 
 import java.awt.event.ActionEvent;
@@ -89,8 +90,32 @@ public class GameUI implements EventListener {
     private class LoadGameListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            // Load game functionality to be implemented
-            System.out.println("Load Game button clicked!");
+            LoadGameFrame loadGameFrame = new LoadGameFrame(new LoadGame1Listener(), new LoadGame2Listener(), new LoadGame3Listener());
+            loadGameFrame.setVisible(true);
+        }
+    }
+
+    private class LoadGame1Listener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // Load game 1 functionality to be implemented
+            System.out.println("Load Game 1 button clicked!");
+        }
+    }
+
+    private class LoadGame2Listener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // Load game 2 functionality to be implemented
+            System.out.println("Load Game 2 button clicked!");
+        }
+    }
+
+    private class LoadGame3Listener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // Load game 3 functionality to be implemented
+            System.out.println("Load Game 3 button clicked!");
         }
     }
 }
