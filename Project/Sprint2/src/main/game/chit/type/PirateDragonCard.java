@@ -13,12 +13,22 @@ public class PirateDragonCard extends CharacterDragonCard {
         super(dragonCardImage, creature, amount);
     }
 
+    /**
+     * Returns a DragonCardCommand associated with this PirateDragonCard.
+     *
+     * @return  a DragonCardCommand
+     */
     @Override
     public DragonCardCommand getDragonCardCommand() {
         return new PirateDragonCardCommand(this);
     }
 
-
+    /**
+     * Saves the data related to the PirateDragonCard into a Map.
+     *
+     * @param  map  the Map to save data into
+     * @return      the updated Map containing saved data
+     */
     @Override
     public Map<String , Object> save(Map<String , Object> map) {
         map.put("hasCreature", true);

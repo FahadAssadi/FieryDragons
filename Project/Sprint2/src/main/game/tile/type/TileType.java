@@ -15,18 +15,38 @@ public abstract class TileType {
         this.creature = creature;
     }
 
+    /**
+     * Sets the player for this TileType.
+     *
+     * @param  player  the player to be set
+     */
     public void setPlayer(Player player) {
         this.player = player;
     }
 
+    /**
+     * Returns the ImageIcon associated with this TileType.
+     *
+     * @return the ImageIcon representing this TileType
+     */
     public ImageIcon getImageIcon() {
         return imageIcon;
     }
 
+    /**
+     * Returns the Creature associated with this TileType.
+     *
+     * @return the Creature representing this TileType
+     */
     public Creature getCreature() {
         return creature;
     }
 
+    /**
+     * Returns the Player associated with this TileType.
+     *
+     * @return the Player representing this TileType
+     */
     public Player getPlayer() {
         return player;
     }

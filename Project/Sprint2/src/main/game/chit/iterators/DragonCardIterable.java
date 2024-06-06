@@ -26,6 +26,11 @@ public class DragonCardIterable implements Iterable<DragonCard>, Memento {
         loadCreatureRelatedDragonCards(dragonCardArray, creatureIterable);
     }
 
+    /**
+     * Returns an iterator over the dragon cards in this DragonCardIterable.
+     *
+     * @return an iterator over the dragon cards
+     */
     @Override
     public Iterator<DragonCard> iterator() {
         return dragonCards.iterator();
@@ -68,6 +73,12 @@ public class DragonCardIterable implements Iterable<DragonCard>, Memento {
         }
     }
 
+    /**
+     * Loads creature-related dragon cards from the provided list of dragon card save maps and adds them to the dragonCards list.
+     *
+     * @param  dragonCardArray   a list of maps representing dragon card saves, each containing the creature ID and amount
+     * @param  creatureIterable  an iterable of creatures to loop through and match with the dragon cards
+     */
     private void loadCreatureRelatedDragonCards(List<Map<String, Object>> dragonCardArray, CreatureIterable creatureIterable) {
         for (Map<String, Object> dragonCardSaveMap : dragonCardArray) {
             boolean hasCreature = (boolean) dragonCardSaveMap.get("hasCreature");
@@ -103,6 +114,13 @@ public class DragonCardIterable implements Iterable<DragonCard>, Memento {
 
     }
 
+    /**
+     * Saves the individual dragon cards by calling the save method for each dragon card and adds the resulting maps to a list.
+     * The list is then added to the provided map under the key "dragonCards".
+     *
+     * @param  map  the map to which the dragon cards will be added
+     * @return      the updated map with the dragon cards added under the key "dragonCards"
+     */
     @Override
     public Map<String , Object> save(Map<String , Object> map) {
         // Create a loop that calls the save for the individual dragon cards

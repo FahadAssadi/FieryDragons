@@ -9,19 +9,23 @@ public enum EventType {
      */
     PLAYER_TURN_END,
 
-    PLAYER_MOVED,
-
     /**
-     * Indicates the event to shuffle cards.
+     * Indicates the event to move a player.
      */
-    SHUFFLE_CARDS,
+    PLAYER_MOVED,
 
     /**
      * Indicates the game over event.
      */
     GAME_OVER,
 
+    /**
+     * Indicates the event to save the game.
+     */
     SAVE,
 
+    /**
+     * Indicates the event to load the game.
+     */
     LOAD
 }
